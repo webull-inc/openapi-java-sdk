@@ -1,0 +1,33 @@
+syntax = "proto3";
+package grpc.trade.event;
+
+option java_package = "com.webull.openapi.trade.events.internal.proto";
+
+service EventService {
+	rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse) {}
+}
+
+message SubscribeRequest {
+	uint32 subscribeType = 1; // Subscription type
+	int64 timestamp = 2; // Timestamp
+	string contentType = 3; // Content type
+	string payload = 4; // Content
+	repeated string accounts = 5; // Account ID
+}
+
+message SubscribeResponse {
+	EventType eventType = 1; // Event type
+	uint32 subscribeType = 2; // Subscription type
+	string contentType = 3; // Subscription type
+	string payload = 4; // Content
+	string requestId = 5; // Request id
+	int64  timestamp = 6; // Timestamp
+}
+
+enum EventType {
+	SubscribeSuccess = 0; // Subscription succeeded
+	Ping = 1; // Heartbeat information
+	AuthError = 2; // Authentication error
+	NumOfConnExceed = 3; // Connection limit exceeded
+	SubscribeExpired = 4; // Subscription expired
+}

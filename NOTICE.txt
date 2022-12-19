@@ -1,0 +1,54 @@
+Webull OpenAPI Java SDK
+Copyright 2022 Webull Technologies Pte. Ltd.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+There are some license terms of the components that this product depends on.
+Please refer to the separate license files in the 'licenses' directory.
+
+=======================================================================
+
+This product has a dependency on 'OkHttp':
+
+  * LICENSE: licenses/LICENSE.okhttp.txt (Apache License 2.0)
+  * HOMEPAGE: https://square.github.io/okhttp/
+
+This product has a dependency on 'Gson':
+
+  * LICENSE: licenses/LICENSE.gson.txt (Apache License 2.0)
+  * HOMEPAGE: https://sites.google.com/site/gson/
+
+This product contains a modified portion of 'SLF4J':
+
+  * LICENSE: licenses/LICENSE.slf4j.txt (MIT License)
+  * HOMEPAGE: https://www.slf4j.org/
+
+This product has an optional dependency on 'Apache Log4J':
+
+  * LICENSE: licenses/LICENSE.log4j.txt (Apache License 2.0)
+  * HOMEPAGE: https://logging.apache.org/log4j/
+
+This product has an optional dependency on 'Apache Commons Logging':
+
+  * LICENSE: licenses/LICENSE.commons-logging.txt (Apache License 2.0)
+  * HOMEPAGE: https://commons.apache.org/logging/
+
+This product has a dependency on 'Java gRPC implementation':
+
+  * LICENSE: licenses/LICENSE.grpc.txt (Apache License 2.0)
+  * HOMEPAGE: https://grpc.io/
+
+This product has a dependency on 'HiveMQ MQTT Client':
+
+  * LICENSE: licenses/LICENSE.hivemq-mqtt-client.txt (Apache License 2.0)
+  * HOMEPAGE: https://hivemq.github.io/hivemq-mqtt-client/

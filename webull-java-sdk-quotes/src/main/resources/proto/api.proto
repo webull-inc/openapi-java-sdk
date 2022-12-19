@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+package api;
+
+option java_package = "com.webull.openapi.quotes.internal.grpc.proto";
+
+message InstrumentRequest {
+  string symbols = 1;
+  string category = 2;
+}
+
+message InstrumentResponse {
+  repeated Instrument result = 1;
+}
+
+message Instrument {
+  string name = 1;
+  string symbol = 2;
+  string instrument_id = 3;
+  string exchange_code = 4;
+  string currency = 5;
+}
+
+message BarsRequest {
+  string symbol = 1;
+  string category = 2;
+  string timespan = 3;
+  string count = 4;
+}
+
+message BarsResponse {
+  string symbol = 1;
+  string instrument_id = 2;
+  repeated Bar result = 3;
+}
+
+message Bar {
+  string time = 1;
+  string open = 2;
+  string close = 3;
+  string high = 4;
+  string low = 5;
+  string volume = 6;
+}
+
+message SnapshotRequest {
+  string symbols = 1;
+  string category = 2;
+}
+
+message SnapshotResponse {
+  repeated Snapshot result = 1;
+}
+
+message Snapshot {
+  string symbol = 1;
+  string instrument_id = 2;
+  string trade_time = 3;
+  string price = 4;
+  string open = 5;
+  string high = 6;
+  string low = 7;
+  string pre_close = 8;
+  string volume = 9;
+  string change = 10;
+  string change_ratio = 11;
+}
+
+message QuoteRequest {
+  string symbol = 1;
+  string category = 2;
+}
+
+message QuoteResponse {
+  string symbol = 1;
+  string instrument_id = 2;
+  repeated AskBid asks = 3;
+  repeated AskBid bids = 4;
+}
+
+message AskBid {
+  string price = 1;
+  string size = 2;
+  repeated Order order = 3;
+  repeated Broker broker = 4;
+}
+
+message Order {
+  string mpid = 1;
+  string size = 2;
+}
+
+message Broker {
+  string bid = 1;
+  string name = 2;
+}
+
+message TickRequest {
+  string symbol = 1;
+  string category = 2;
+  string count = 3;
+}
+
+message TickResponse {
+  string symbol = 1;
+  string instrument_id = 2;
+  repeated Tick result = 3;
+}
+
+message Tick {
+  string time = 1;
+  string price = 2;
+  string volume = 3;
+  string side = 4;
+}
+
+message TokenResponse {
+  string token = 1;
+}
+
+message SubscribeRequest {
+  string token = 1;
+  repeated string symbols = 2;
+  string category = 3;
+  repeated string sub_types = 4;
+  string unsubscribe_all = 5;
+}
+
+message SubscribeResponse {
+}

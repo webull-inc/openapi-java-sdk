@@ -1,0 +1,23 @@
+# Log file
+*.log.*
+**/logs/**
+
+# Virtual machine crash logs
+hs_err_pid*
+
+# Build targets
+**/target/**
+
+# Operating system file
+*.DS_Store
+
+# Eclipse project files
+.project
+.classpath
+.settings/
+
+# IntelliJ IDEA project files and directories
+*.iml
+*.ipr
+*.iws
+**/.idea/**
