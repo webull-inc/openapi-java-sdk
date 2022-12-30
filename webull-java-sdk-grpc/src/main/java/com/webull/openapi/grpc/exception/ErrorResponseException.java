@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,11 +23,16 @@ public class ErrorResponseException extends ServerException {
     private final int responseCode;
 
     public ErrorResponseException(int responseCode, String errorMsg, String requestId) {
-        super(ErrorCode.UNKNOWN_SERVER_ERROR, errorMsg, requestId);
+        super(ErrorCode.UNKNOWN_SERVER_ERROR, errorMsg, formatDetailMessage(responseCode, errorMsg, requestId),
+                requestId, null);
         this.responseCode = responseCode;
     }
 
     public int getResponseCode() {
         return responseCode;
+    }
+
+    private static String formatDetailMessage(int responseCode, String errorMsg, String requestId) {
+        return String.format("responseCode=%d, errorMsg=%s, requestId=%s", responseCode, errorMsg, requestId);
     }
 }

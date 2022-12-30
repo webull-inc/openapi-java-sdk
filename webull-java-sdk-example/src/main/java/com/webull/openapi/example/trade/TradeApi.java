@@ -1,6 +1,5 @@
 package com.webull.openapi.example.trade;
 
-import com.webull.openapi.common.Region;
 import com.webull.openapi.common.dict.OrderSide;
 import com.webull.openapi.common.dict.OrderTIF;
 import com.webull.openapi.common.dict.OrderType;
@@ -36,7 +35,7 @@ public class TradeApi {
             HttpApiConfig apiConfig = HttpApiConfig.builder()
                     .appKey(Env.APP_KEY)
                     .appSecret(Env.APP_SECRET)
-                    .regionId(Region.hk.name())
+                    .regionId(Env.REGION_ID)
                     .build();
             TradeApiService apiService = new TradeHttpApiService(apiConfig);
 
@@ -68,12 +67,12 @@ public class TradeApi {
             String clientOrderId = GUID.get();
             StockOrder stockOrder = new StockOrder();
             stockOrder.setClientOrderId(clientOrderId);
-            stockOrder.setInstrumentId("913256409");
+            stockOrder.setInstrumentId("913256135");
             stockOrder.setSide(OrderSide.BUY.name());
             stockOrder.setTif(OrderTIF.DAY.name());
-            stockOrder.setOrderType(OrderType.AT_AUCTION.name());
+            stockOrder.setOrderType(OrderType.MARKET.name());
             stockOrder.setQty("100");
-            stockOrder.setExtendedHoursTrading("false");
+            stockOrder.setExtendedHoursTrading(false);
 
             OrderResponse placeOrderResponse = apiService.placeOrder(accountId, stockOrder);
             logger.info("Place order: {}", placeOrderResponse);
@@ -86,11 +85,11 @@ public class TradeApi {
             logger.info("Cancel order: {}", cancelOrderResponse);
 
             // day orders
-            Orders dayOrders = apiService.getDayOrders(accountId, 10, "");
+            Orders<? extends Order> dayOrders = apiService.getDayOrders(accountId, 10, "");
             logger.info("Day orders: {}", dayOrders);
 
             // opened orders
-            Orders openedOrders = apiService.getOpenedOrders(accountId, 10, "");
+            Orders<? extends Order> openedOrders = apiService.getOpenedOrders(accountId, 10, "");
             logger.info("Opened orders: {}", openedOrders);
 
             // order detail
@@ -98,7 +97,7 @@ public class TradeApi {
             logger.info("Order detail: {}", orderDetail);
 
             // instrument info
-            InstrumentInfo instrumentInfo = apiService.getTradeInstrument("913256409");
+            InstrumentInfo instrumentInfo = apiService.getTradeInstrument("913256135");
             logger.info("Instrument info: {}", instrumentInfo);
 
         } catch (ClientException ex) {

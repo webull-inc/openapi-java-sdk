@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ public class HttpServerException extends ServerException {
     private final int httpStatus;
 
     public HttpServerException(String errorCode, String errorMsg, int httpStatus, String requestId) {
-        super(errorCode, errorMsg, requestId);
+        super(errorCode, errorMsg, formatDetailMessage(httpStatus, errorCode, errorMsg, requestId), requestId, null);
         this.httpStatus = httpStatus;
     }
 
@@ -30,13 +30,8 @@ public class HttpServerException extends ServerException {
         return httpStatus;
     }
 
-    @Override
-    public String toString() {
-        return "HttpServerException{" +
-                "httpStatus=" + httpStatus +
-                ", errorCode='" + errorCode + '\'' +
-                ", errorMsg='" + errorMsg + '\'' +
-                ", requestId='" + requestId + '\'' +
-                '}';
+    private static String formatDetailMessage(int httpStatus, String errorCode, String errorMsg, String requestId) {
+        return String.format("httpStatus=%d, errorCode=%s, errorMsg=%s, requestId=%s",
+                httpStatus, errorCode, errorMsg, requestId);
     }
 }

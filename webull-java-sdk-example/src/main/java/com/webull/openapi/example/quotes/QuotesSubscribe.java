@@ -1,6 +1,5 @@
 package com.webull.openapi.example.quotes;
 
-import com.webull.openapi.common.Region;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.SubscribeType;
 import com.webull.openapi.example.config.Env;
@@ -29,7 +28,7 @@ public class QuotesSubscribe {
 
     public static void main(String[] args) {
         Set<String> symbols = new HashSet<>();
-        symbols.add("00700");
+        symbols.add("AAPL");
 
         Set<String> subTypes = new HashSet<>();
         subTypes.add(SubscribeType.SNAPSHOT.name());
@@ -37,9 +36,9 @@ public class QuotesSubscribe {
         try (QuotesSubsClient client = QuotesSubsClient.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
-                .regionId(Region.hk.name())
+                .regionId(Env.REGION_ID)
                 .onMessage(QuotesSubscribe::handleMarketData)
-                .addSubscription(symbols, Category.HK_STOCK.name(), subTypes)
+                .addSubscription(symbols, Category.US_STOCK.name(), subTypes)
                 .build()) {
 
             // subscribe blocking.

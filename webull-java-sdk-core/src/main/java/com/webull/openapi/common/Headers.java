@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ public final class Headers {
     private Headers() {
     }
 
-    public static final String REQUEST_ID = "X-Request-Id";
+    public static final String REQUEST_ID = "x-request-id";
     public static final String APP_KEY = "x-app-key";
     public static final String SIGNATURE = "x-signature";
     public static final String SIGN_ALGORITHM = "x-signature-algorithm";

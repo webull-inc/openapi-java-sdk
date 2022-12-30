@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.trade.events.internal.proto.Events;
 import com.webull.openapi.trade.events.subscribe.lifecycle.SubscribeInboundHandler;
 import com.webull.openapi.trade.events.subscribe.lifecycle.SubscribeSysEventHandler;
+import com.webull.openapi.trade.events.subscribe.message.SubscribeResponse;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,19 +47,30 @@ public class SubscribeHandlerProxyFactory implements HandlerProxyFactory<Events.
 
     @Override
     public List<SubStreamObserver<Events.SubscribeResponse>> create(GrpcHandler handler) {
-        List<SubStreamObserver<Events.SubscribeResponse>> result = new LinkedList<>();
+        return create(Collections.singletonList(handler));
+    }
+
+    @Override
+    public List<SubStreamObserver<Events.SubscribeResponse>> create(List<GrpcHandler> handlers) {
+        List<SubStreamObserver<SubscribeResponse>> proxies = new LinkedList<>();
+        handlers.forEach(handler -> this.addProxies(proxies, handler));
+        ComposeSubscribeHandlerProxy composeProxy = new ComposeSubscribeHandlerProxy(proxies);
+        return Collections.singletonList(composeProxy);
+    }
+
+    private void addProxies(List<SubStreamObserver<SubscribeResponse>> proxies, GrpcHandler handler) {
+        final int size = proxies.size();
         if (handler instanceof GrpcSessionHandler) {
-            result.add(new SubscribeSessionHandlerProxy((GrpcSessionHandler) handler));
+            proxies.add(new SubscribeSessionHandlerProxy((GrpcSessionHandler) handler));
         }
         if (handler instanceof SubscribeInboundHandler) {
-            result.add(new SubscribeInboundHandlerProxy((SubscribeInboundHandler) handler));
+            proxies.add(new SubscribeInboundHandlerProxy((SubscribeInboundHandler) handler));
         }
         if (handler instanceof SubscribeSysEventHandler) {
-            result.add(new SubscribeSysEventHandlerProxy((SubscribeSysEventHandler) handler));
+            proxies.add(new SubscribeSysEventHandlerProxy((SubscribeSysEventHandler) handler));
         }
-        if (result.isEmpty()) {
+        if (size == proxies.size()) {
             logger.warn("Incapable of creating proxy for handler type={}.", handler.getClass());
         }
-        return result;
     }
 }

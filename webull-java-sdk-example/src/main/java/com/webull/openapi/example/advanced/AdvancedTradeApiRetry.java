@@ -1,6 +1,5 @@
 package com.webull.openapi.example.advanced;
 
-import com.webull.openapi.common.Region;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
@@ -23,7 +22,7 @@ public class AdvancedTradeApiRetry {
             HttpApiConfig apiConfig = HttpApiConfig.builder()
                     .appKey(Env.APP_KEY)
                     .appSecret(Env.APP_SECRET)
-                    .regionId(Region.hk.name())
+                    .regionId(Env.REGION_ID)
 
                     // Set the maximum number of retries to 3
                     .autoRetry(true)

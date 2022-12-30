@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Orders {
+public class Orders<T extends Order> {
 
     @SerializedName("hasNext")
     private Boolean hasNext;
 
-    private List<Order> orders;
+    private List<T> orders;
 
     public Boolean getHasNext() {
         return hasNext;
@@ -34,11 +34,11 @@ public class Orders {
         this.hasNext = hasNext;
     }
 
-    public List<Order> getOrders() {
+    public List<T> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<T> orders) {
         this.orders = orders;
     }
 

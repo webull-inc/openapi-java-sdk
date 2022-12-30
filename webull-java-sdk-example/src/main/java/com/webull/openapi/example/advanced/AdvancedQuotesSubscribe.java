@@ -1,6 +1,5 @@
 package com.webull.openapi.example.advanced;
 
-import com.webull.openapi.common.Region;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
@@ -19,7 +18,7 @@ public class AdvancedQuotesSubscribe {
         try (QuotesSubsClient client = QuotesSubsClient.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
-                .regionId(Region.hk.name())
+                .regionId(Env.REGION_ID)
 
                 // Retry setting
                 .reconnectBy(new ExponentialBackoffStrategy())

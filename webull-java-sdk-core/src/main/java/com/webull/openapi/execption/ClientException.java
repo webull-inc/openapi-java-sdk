@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,24 +21,19 @@ public class ClientException extends RuntimeException {
     private final String message;
 
     public ClientException(String code) {
-        this.code = code;
-        this.message = null;
+        this(code, null, null);
     }
 
     public ClientException(String code, String message) {
-        super(message);
-        this.code = code;
-        this.message = message;
+        this(code, message, null);
     }
 
     public ClientException(String message, Throwable cause) {
-        super(message, cause);
-        this.code = null;
-        this.message = message;
+        this(null, message, cause);
     }
 
     public ClientException(String code, String message, Throwable cause) {
-        super(message, cause);
+        super(formatDetailMessage(code, message), cause);
         this.code = code;
         this.message = message;
     }
@@ -52,11 +47,7 @@ public class ClientException extends RuntimeException {
         return message;
     }
 
-    @Override
-    public String toString() {
-        return "ClientException{" +
-                "code='" + code + '\'' +
-                ", message='" + message + '\'' +
-                '}';
+    private static String formatDetailMessage(String code, String message) {
+        return String.format("code=%s, message=%s", code, message);
     }
 }

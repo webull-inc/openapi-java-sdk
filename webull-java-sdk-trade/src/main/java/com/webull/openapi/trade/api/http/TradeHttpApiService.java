@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,10 @@
 package com.webull.openapi.trade.api.http;
 
 import com.google.gson.reflect.TypeToken;
+import com.webull.openapi.common.Region;
 import com.webull.openapi.common.Versions;
+import com.webull.openapi.execption.ClientException;
+import com.webull.openapi.execption.ErrorCode;
 import com.webull.openapi.http.HttpApiClient;
 import com.webull.openapi.http.HttpApiConfig;
 import com.webull.openapi.http.HttpRequest;
@@ -27,13 +30,16 @@ import com.webull.openapi.trade.api.response.Account;
 import com.webull.openapi.trade.api.response.AccountBalance;
 import com.webull.openapi.trade.api.response.AccountDetail;
 import com.webull.openapi.trade.api.response.AccountPositions;
+import com.webull.openapi.trade.api.response.ComboOrder;
 import com.webull.openapi.trade.api.response.InstrumentInfo;
 import com.webull.openapi.trade.api.response.Order;
 import com.webull.openapi.trade.api.response.OrderResponse;
 import com.webull.openapi.trade.api.response.Orders;
+import com.webull.openapi.trade.api.response.SimpleOrder;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -56,13 +62,17 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String LAST_CLIENT_ORDER_ID_PARAM = "last_client_order_id";
     private static final String INSTRUMENT_ID_PARAM = "instrument_id";
 
+    private final Region region;
     private final HttpApiClient apiClient;
 
     public TradeHttpApiService(HttpApiConfig config) {
-        this.apiClient = new HttpApiClient(config);
+        this(new HttpApiClient(config));
     }
 
     public TradeHttpApiService(HttpApiClient apiClient) {
+        this.region = Region.of(apiClient.getConfig().getRegionId())
+                .orElseThrow(() -> new ClientException(ErrorCode.INVALID_PARAMETER,
+                        "Must set region id which defined in " + Region.class.getName() + " when using this service."));
         this.apiClient = apiClient;
     }
 
@@ -151,9 +161,18 @@ public class TradeHttpApiService implements TradeApiService {
 
 
     @Override
-    public Orders getDayOrders(String accountId, Integer pageSize, String lastClientOrderId) {
+    public <T extends Order> Orders<T> getDayOrders(String accountId, Integer pageSize, String lastClientOrderId) {
+        return this.getOrders("/trade/orders/list-today", accountId, pageSize, lastClientOrderId);
+    }
+
+    @Override
+    public <T extends Order> Orders<T> getOpenedOrders(String accountId, Integer pageSize, String lastClientOrderId) {
+        return this.getOrders("/trade/orders/list-open", accountId, pageSize, lastClientOrderId);
+    }
+
+    private <T extends Order> Orders<T> getOrders(String uri, String accountId, Integer pageSize, String lastClientOrderId) {
         Assert.notBlank(ACCOUNT_ID_ARG, accountId);
-        HttpRequest request = new HttpRequest("/trade/orders/list-today", Versions.V1, HttpMethod.GET);
+        HttpRequest request = new HttpRequest(uri, Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(PAGE_SIZE_PARAM, pageSize == null ? 10 : pageSize);
@@ -161,32 +180,22 @@ public class TradeHttpApiService implements TradeApiService {
             params.put(LAST_CLIENT_ORDER_ID_PARAM, lastClientOrderId);
         }
         request.setQuery(params);
-        return apiClient.request(request).responseType(Orders.class).doAction();
+        Type responseType = region == Region.hk ?
+                new TypeToken<Orders<SimpleOrder>>() {}.getType() :
+                new TypeToken<Orders<ComboOrder>>() {}.getType();
+        return apiClient.request(request).responseType(responseType).doAction();
     }
 
     @Override
-    public Orders getOpenedOrders(String accountId, Integer pageSize, String lastClientOrderId) {
-        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
-        HttpRequest request = new HttpRequest("/trade/orders/list-open", Versions.V1, HttpMethod.GET);
-        Map<String, Object> params = new HashMap<>();
-        params.put(ACCOUNT_ID_PARAM, accountId);
-        params.put(PAGE_SIZE_PARAM, pageSize == null ? 10 : pageSize);
-        if (StringUtils.isNotEmpty(lastClientOrderId)) {
-            params.put(LAST_CLIENT_ORDER_ID_PARAM, lastClientOrderId);
-        }
-        request.setQuery(params);
-        return apiClient.request(request).responseType(Orders.class).doAction();
-    }
-
-    @Override
-    public Order getOrderDetails(String accountId, String clientOrderId) {
+    public <T extends Order> T getOrderDetails(String accountId, String clientOrderId) {
         Assert.notBlank(Arrays.asList(ACCOUNT_ID_ARG, CLIENT_ORDER_ID_ARG), accountId, clientOrderId);
         HttpRequest request = new HttpRequest("/trade/order/detail", Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(CLIENT_ORDER_ID_PARAM, clientOrderId);
         request.setQuery(params);
-        return apiClient.request(request).responseType(Order.class).doAction();
+        Type responseType = region == Region.hk ? SimpleOrder.class : ComboOrder.class;
+        return apiClient.request(request).responseType(responseType).doAction();
     }
 
     @Override

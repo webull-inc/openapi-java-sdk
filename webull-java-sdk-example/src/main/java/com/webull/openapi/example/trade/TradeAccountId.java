@@ -1,6 +1,5 @@
 package com.webull.openapi.example.trade;
 
-import com.webull.openapi.common.Region;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
@@ -24,7 +23,7 @@ public class TradeAccountId {
             HttpApiConfig apiConfig = HttpApiConfig.builder()
                     .appKey(Env.APP_KEY)
                     .appSecret(Env.APP_SECRET)
-                    .regionId(Region.hk.name())
+                    .regionId(Env.REGION_ID)
                     .build();
             TradeApiService apiService = new TradeHttpApiService(apiConfig);
 

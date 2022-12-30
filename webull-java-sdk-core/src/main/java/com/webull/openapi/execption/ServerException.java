@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,19 @@ public class ServerException extends RuntimeException {
     protected final String requestId;
 
     public ServerException(String errorCode, String errorMsg, String requestId) {
-        super(errorMsg);
-        this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
-        this.requestId = requestId;
+        this(errorCode, errorMsg, formatDetailMessage(errorCode, errorMsg, requestId), requestId, null);
     }
 
     public ServerException(String errorCode, String errorMsg, String requestId, Throwable cause) {
-        super(errorMsg, cause);
+        this(errorCode, errorMsg, formatDetailMessage(errorCode, errorMsg, requestId), requestId, cause);
+    }
+
+    protected ServerException(String errorCode, String errorMsg, String detailMsg, String requestId) {
+        this(errorCode, errorMsg, detailMsg, requestId, null);
+    }
+
+    protected ServerException(String errorCode, String errorMsg, String detailMsg, String requestId, Throwable cause) {
+        super(detailMsg, cause);
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
         this.requestId = requestId;
@@ -47,12 +52,7 @@ public class ServerException extends RuntimeException {
         return requestId;
     }
 
-    @Override
-    public String toString() {
-        return "ServerException{" +
-                "errorCode='" + errorCode + '\'' +
-                ", errorMsg='" + errorMsg + '\'' +
-                ", requestId='" + requestId + '\'' +
-                '}';
+    private static String formatDetailMessage(String errorCode, String errorMsg, String requestId) {
+        return String.format("errorCode=%s, errorMsg=%s, requestId=%s", errorCode, errorMsg, requestId);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ public class StockOrder {
     private String qty;
     private String side;
     private String tif;
-    private String extendedHoursTrading;
+    private Boolean extendedHoursTrading;
     private String orderType;
     private String limitPrice;
     private String stopPrice;
@@ -69,11 +69,11 @@ public class StockOrder {
         this.tif = tif;
     }
 
-    public String getExtendedHoursTrading() {
+    public Boolean getExtendedHoursTrading() {
         return extendedHoursTrading;
     }
 
-    public void setExtendedHoursTrading(String extendedHoursTrading) {
+    public void setExtendedHoursTrading(Boolean extendedHoursTrading) {
         this.extendedHoursTrading = extendedHoursTrading;
     }
 

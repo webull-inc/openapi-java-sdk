@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,11 @@ public enum OrderType {
      * Stop Limit Order (U.S. Stock)
      */
     STOP_LOSS_LIMIT,
+
+    /**
+     * Trailing Stop Order (U.S. Stock)
+     */
+    TRAILING_STOP_LOSS,
 
     /**
      * Enhanced Limit Order (Hong Kong stocks)

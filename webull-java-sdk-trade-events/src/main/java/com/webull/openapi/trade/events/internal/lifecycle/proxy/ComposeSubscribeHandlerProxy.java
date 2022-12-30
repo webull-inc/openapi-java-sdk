@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,27 @@
  */
 package com.webull.openapi.trade.events.internal.lifecycle.proxy;
 
+import com.webull.openapi.grpc.lifecycle.ComposeSubStreamObserver;
 import com.webull.openapi.grpc.lifecycle.SubStreamObserver;
 import com.webull.openapi.trade.events.internal.proto.Events;
 import com.webull.openapi.trade.events.subscribe.message.SubscribeResponse;
 
-public abstract class AbstractSubscribeHandlerProxy implements SubStreamObserver<Events.SubscribeResponse> {
+import java.util.List;
+
+public class ComposeSubscribeHandlerProxy extends ComposeSubStreamObserver<Events.SubscribeResponse, SubscribeResponse> {
+
+    public ComposeSubscribeHandlerProxy(List<SubStreamObserver<SubscribeResponse>> observers) {
+        super(observers);
+    }
 
     @Override
-    public void onNext(Events.SubscribeResponse value) {
-        SubscribeResponse response = new SubscribeResponse(
+    protected SubscribeResponse decodeForSubs(Events.SubscribeResponse value) {
+        return new SubscribeResponse(
                 value.getEventTypeValue(),
                 value.getSubscribeType(),
                 value.getContentType(),
                 value.getPayload(),
                 value.getRequestId(),
                 value.getTimestamp());
-        this.onResponse(response);
     }
-
-    abstract void onResponse(SubscribeResponse response);
 }

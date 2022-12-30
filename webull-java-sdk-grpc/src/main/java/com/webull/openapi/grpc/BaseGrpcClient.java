@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import java.io.Closeable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public abstract class BaseGrpcClient<RespT> implements GrpcClient, Closeable {
 
@@ -71,8 +70,7 @@ public abstract class BaseGrpcClient<RespT> implements GrpcClient, Closeable {
         this.retryPolicy = retryPolicy != null ? retryPolicy : RetryPolicy.never();
         this.enableTls = enableTls;
         if (CollectionUtils.isNotEmpty(handlers)) {
-            this.subObservers = handlers.stream().flatMap(handler -> handlerProxyFactory.create(handler).stream())
-                    .collect(Collectors.toCollection(LinkedList::new));
+            this.subObservers = new LinkedList<>(handlerProxyFactory.create(handlers));
         } else {
             this.subObservers = new LinkedList<>();
         }

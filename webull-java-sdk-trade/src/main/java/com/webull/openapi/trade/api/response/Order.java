@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,231 +15,19 @@
  */
 package com.webull.openapi.trade.api.response;
 
-public class Order {
-    private String accountId;
-    private String category;
-    private String currency;
-    private String clientOrderId;
-    private Boolean extendedHoursTrading;
-    private String filledPrice;
-    private String filledQty;
-    private String instrumentId;
-    private String lastFilledTime;
-    private String limitPrice;
-    private String orderId;
-    private String orderStatus;
-    private String orderType;
-    private String placeTime;
-    private String qty;
-    private String side ;
-    private String stopPrice;
-    private String symbol;
-    private String shortName;
-    private String tif;
-    private String trailingStopStep;
-    private String trailingType;
+import java.util.List;
 
-    public String getAccountId() {
-        return accountId;
-    }
+public interface Order {
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
+    String getAccountId();
 
-    public String getCategory() {
-        return category;
-    }
+    String getClientOrderId();
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    String getOrderId();
 
-    public String getCurrency() {
-        return currency;
-    }
+    Boolean getExtendedHoursTrading();
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
+    String getTif();
 
-    public String getClientOrderId() {
-        return clientOrderId;
-    }
-
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
-    }
-
-    public Boolean getExtendedHoursTrading() {
-        return extendedHoursTrading;
-    }
-
-    public void setExtendedHoursTrading(Boolean extendedHoursTrading) {
-        this.extendedHoursTrading = extendedHoursTrading;
-    }
-
-    public String getFilledPrice() {
-        return filledPrice;
-    }
-
-    public void setFilledPrice(String filledPrice) {
-        this.filledPrice = filledPrice;
-    }
-
-    public String getFilledQty() {
-        return filledQty;
-    }
-
-    public void setFilledQty(String filledQty) {
-        this.filledQty = filledQty;
-    }
-
-    public String getInstrumentId() {
-        return instrumentId;
-    }
-
-    public void setInstrumentId(String instrumentId) {
-        this.instrumentId = instrumentId;
-    }
-
-    public String getLastFilledTime() {
-        return lastFilledTime;
-    }
-
-    public void setLastFilledTime(String lastFilledTime) {
-        this.lastFilledTime = lastFilledTime;
-    }
-
-    public String getLimitPrice() {
-        return limitPrice;
-    }
-
-    public void setLimitPrice(String limitPrice) {
-        this.limitPrice = limitPrice;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public String getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
-    }
-
-    public String getPlaceTime() {
-        return placeTime;
-    }
-
-    public void setPlaceTime(String placeTime) {
-        this.placeTime = placeTime;
-    }
-
-    public String getQty() {
-        return qty;
-    }
-
-    public void setQty(String qty) {
-        this.qty = qty;
-    }
-
-    public String getSide() {
-        return side;
-    }
-
-    public void setSide(String side) {
-        this.side = side;
-    }
-
-    public String getStopPrice() {
-        return stopPrice;
-    }
-
-    public void setStopPrice(String stopPrice) {
-        this.stopPrice = stopPrice;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getTif() {
-        return tif;
-    }
-
-    public void setTif(String tif) {
-        this.tif = tif;
-    }
-
-    public String getTrailingStopStep() {
-        return trailingStopStep;
-    }
-
-    public void setTrailingStopStep(String trailingStopStep) {
-        this.trailingStopStep = trailingStopStep;
-    }
-
-    public String getTrailingType() {
-        return trailingType;
-    }
-
-    public void setTrailingType(String trailingType) {
-        this.trailingType = trailingType;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "accountId='" + accountId + '\'' +
-                ", category='" + category + '\'' +
-                ", currency='" + currency + '\'' +
-                ", clientOrderId='" + clientOrderId + '\'' +
-                ", extendedHoursTrading=" + extendedHoursTrading +
-                ", filledPrice='" + filledPrice + '\'' +
-                ", filledQty='" + filledQty + '\'' +
-                ", instrumentId='" + instrumentId + '\'' +
-                ", lastFilledTime='" + lastFilledTime + '\'' +
-                ", limitPrice='" + limitPrice + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", orderStatus='" + orderStatus + '\'' +
-                ", orderType='" + orderType + '\'' +
-                ", placeTime='" + placeTime + '\'' +
-                ", qty='" + qty + '\'' +
-                ", side='" + side + '\'' +
-                ", stopPrice='" + stopPrice + '\'' +
-                ", symbol='" + symbol + '\'' +
-                ", shortName='" + shortName + '\'' +
-                ", tif='" + tif + '\'' +
-                ", trailingStopStep='" + trailingStopStep + '\'' +
-                ", trailingType='" + trailingType + '\'' +
-                '}';
-    }
+    List<OrderItem> getItems();
 }

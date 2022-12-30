@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,4 +23,6 @@ import java.util.List;
 public interface HandlerProxyFactory<RespT> {
 
     List<SubStreamObserver<RespT>> create(GrpcHandler handler);
+
+    List<SubStreamObserver<RespT>> create(List<GrpcHandler> handlers);
 }

@@ -1,6 +1,5 @@
 package com.webull.openapi.example.quotes;
 
-import com.webull.openapi.common.Region;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.Timespan;
 import com.webull.openapi.example.config.Env;
@@ -25,26 +24,26 @@ public class QuotesHttpApi {
 
     public static void main(String[] args) {
         Set<String> symbols = new HashSet<>();
-        symbols.add("00700");
-        symbols.add("00981");
+        symbols.add("AAPL");
+        symbols.add("TSLA");
 
         HttpApiConfig apiConfig = HttpApiConfig.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
-                .regionId(Region.hk.name())
+                .regionId(Env.REGION_ID)
                 .build();
 
         try (QuotesApiClient quotesApiClient = new HttpQuotesApiClient(apiConfig)) {
             // get bars
-            List<Bar> bars = quotesApiClient.getBars("00700", Category.HK_STOCK.name(), Timespan.D.name(), 200);
+            List<Bar> bars = quotesApiClient.getBars("AAPL", Category.US_STOCK.name(), Timespan.D.name(), 200);
             logger.info("Bars: {}", bars);
 
             // get snapshots
-            List<Snapshot> snapshots = quotesApiClient.getSnapshots(symbols, Category.HK_STOCK.name());
+            List<Snapshot> snapshots = quotesApiClient.getSnapshots(symbols, Category.US_STOCK.name());
             logger.info("Snapshots: {}", snapshots);
 
             // get instruments
-            List<Instrument> instruments = quotesApiClient.getInstruments(symbols, Category.HK_STOCK.name());
+            List<Instrument> instruments = quotesApiClient.getInstruments(symbols, Category.US_STOCK.name());
             logger.info("Instruments: {}", instruments);
 
         } catch (ClientException ex) {

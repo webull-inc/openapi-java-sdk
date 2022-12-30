@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,11 +43,11 @@ public interface TradeApiService {
 
     OrderResponse cancelOrder(String accountId, String clientOrderId);
 
-    Orders getDayOrders(String accountId, Integer pageSize, String lastClientOrderId);
+    <T extends Order> Orders<T> getDayOrders(String accountId, Integer pageSize, String lastClientOrderId);
 
-    Orders getOpenedOrders(String accountId, Integer pageSize, String lastClientOrderId);
+    <T extends Order> Orders<T> getOpenedOrders(String accountId, Integer pageSize, String lastClientOrderId);
 
-    Order getOrderDetails(String accountId, String clientOrderId);
+    <T extends Order> T getOrderDetails(String accountId, String clientOrderId);
 
     InstrumentInfo getTradeInstrument(String instrumentId);
 

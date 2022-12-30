@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,43 @@ package com.webull.openapi.common.dict;
 
 public enum Category {
 
-    /** China Connect Stocks */
+    /**
+     * China Connect Stocks
+     */
     CN_STOCK,
 
-    /** Hong Kong stocks */
+    /**
+     * Hong Kong stocks
+     */
     HK_STOCK,
 
-    /** Hong Kong ETFs */
+    /**
+     * Hong Kong ETFs
+     */
     HK_ETF,
 
-    /** US Stocks */
-    US_STOCK
+    /**
+     * US Stocks
+     */
+    US_STOCK,
+
+    /**
+     * U.S. Options
+     */
+    US_OPTION,
+
+    /**
+     * Cryptocurrency
+     */
+    CRYPTO,
+
+    /**
+     * NFTs
+     */
+    NFT,
+
+    /**
+     * Stock/ETF CFDs
+     */
+    US_CFDONSTOCK
 }

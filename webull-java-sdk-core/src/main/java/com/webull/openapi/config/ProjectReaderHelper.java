@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ public class ProjectReaderHelper {
 
     private static final String APPLICATION_VERSION = "application.version";
 
-    private static final String DEFAULT_APPLICATION_VERSION = "0.1.0";
+    private static final String DEFAULT_APPLICATION_VERSION = "0.2.0";
 
     private static final String APPLICATION_NAME = "application.name";
 

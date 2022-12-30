@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,11 @@ package com.webull.openapi.trade.events.internal.lifecycle.proxy;
 import com.webull.openapi.grpc.lifecycle.GrpcFailedContextAdapter;
 import com.webull.openapi.grpc.lifecycle.GrpcSessionHandler;
 import com.webull.openapi.grpc.lifecycle.GrpcSuccessContextAdapter;
+import com.webull.openapi.grpc.lifecycle.SubStreamObserver;
 import com.webull.openapi.trade.events.subscribe.message.EventType;
 import com.webull.openapi.trade.events.subscribe.message.SubscribeResponse;
 
-public class SubscribeSessionHandlerProxy extends AbstractSubscribeHandlerProxy {
+public class SubscribeSessionHandlerProxy implements SubStreamObserver<SubscribeResponse> {
 
     private final GrpcSessionHandler sessionHandler;
 
@@ -30,7 +31,7 @@ public class SubscribeSessionHandlerProxy extends AbstractSubscribeHandlerProxy 
     }
 
     @Override
-    public void onResponse(SubscribeResponse response) {
+    public void onNext(SubscribeResponse response) {
         if (EventType.SubscribeSuccess.getCode() == response.getEventType()) {
             this.sessionHandler.onSuccess(GrpcSuccessContextAdapter.of(response));
         }

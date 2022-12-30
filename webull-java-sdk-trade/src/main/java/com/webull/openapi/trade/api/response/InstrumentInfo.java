@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ public class InstrumentInfo {
     private String buyUnit;
     private String tradePolicy;
     private String marginRatio;
+    private String canMargin;
 
     public String getInstrumentId() {
         return instrumentId;
@@ -80,6 +81,14 @@ public class InstrumentInfo {
         this.marginRatio = marginRatio;
     }
 
+    public String getCanMargin() {
+        return canMargin;
+    }
+
+    public void setCanMargin(String canMargin) {
+        this.canMargin = canMargin;
+    }
+
     @Override
     public String toString() {
         return "InstrumentInfo{" +
@@ -90,6 +99,7 @@ public class InstrumentInfo {
                 ", buyUnit='" + buyUnit + '\'' +
                 ", tradePolicy='" + tradePolicy + '\'' +
                 ", marginRatio='" + marginRatio + '\'' +
+                ", canMargin='" + canMargin + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,5 +31,12 @@ public class DefaultHandlerProxyFactory<RespT> implements HandlerProxyFactory<Re
             result.add(new GrpcSessionHandlerProxy<>((GrpcSessionHandler) handler));
         }
         return result;
+    }
+
+    @Override
+    public List<SubStreamObserver<RespT>> create(List<GrpcHandler> handlers) {
+        List<SubStreamObserver<RespT>> results = new LinkedList<>();
+        handlers.forEach(handler -> results.addAll(this.create(handler)));
+        return results;
     }
 }

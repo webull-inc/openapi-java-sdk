@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package com.webull.openapi.trade.events.internal.lifecycle.proxy;
 
+import com.webull.openapi.grpc.lifecycle.SubStreamObserver;
 import com.webull.openapi.trade.events.subscribe.lifecycle.SubscribeSysEventHandler;
 import com.webull.openapi.trade.events.subscribe.message.EventType;
 import com.webull.openapi.trade.events.subscribe.message.SubscribeResponse;
 
-public class SubscribeSysEventHandlerProxy extends AbstractSubscribeHandlerProxy {
+public class SubscribeSysEventHandlerProxy implements SubStreamObserver<SubscribeResponse> {
 
     private final SubscribeSysEventHandler sysEventHandler;
 
@@ -28,7 +29,7 @@ public class SubscribeSysEventHandlerProxy extends AbstractSubscribeHandlerProxy
     }
 
     @Override
-    public void onResponse(SubscribeResponse response) {
+    public void onNext(SubscribeResponse response) {
         if (EventType.Ping.getCode() == response.getEventType()) {
             this.sysEventHandler.onPing(response);
         } else if (EventType.AuthError.getCode() == response.getEventType()) {
