@@ -15,9 +15,9 @@
  */
 package com.webull.openapi.quotes.internal.grpc.lifecycle.channel;
 
+import com.webull.openapi.quotes.api.lifecycle.ReplyMessage;
 import com.webull.openapi.quotes.internal.grpc.lifecycle.IdleStateHandler;
 import com.webull.openapi.quotes.internal.grpc.proto.Gateway;
-import com.webull.openapi.quotes.subsribe.lifecycle.ReplyMessage;
 import com.webull.openapi.utils.GUID;
 import io.grpc.stub.StreamObserver;
 

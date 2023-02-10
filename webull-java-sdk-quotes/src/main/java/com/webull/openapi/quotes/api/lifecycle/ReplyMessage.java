@@ -13,13 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.quotes.subsribe.lifecycle;
+package com.webull.openapi.quotes.api.lifecycle;
 
-public interface Mailbox<SendT, RecvT> {
+import java.io.Closeable;
+import java.util.concurrent.TimeUnit;
 
-    void send(SendT value);
+public interface ReplyMessage<RecvT> extends Closeable {
 
-    ReplyMessage<RecvT> exchange(SendT value);
+    boolean isDone();
 
-    void receive(RecvT response);
+    RecvT get();
+
+    RecvT get(long timeout, TimeUnit timeUnit);
+
+    boolean receive(RecvT receive);
+
+    boolean completeExceptionally(Throwable ex);
+
+    default void close() {
+        // cover IOException
+    }
 }

@@ -28,6 +28,7 @@ import com.webull.openapi.grpc.retry.SynchronousGrpcRetryable;
 import com.webull.openapi.logger.Logger;
 import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.quotes.api.QuotesApiClient;
+import com.webull.openapi.quotes.api.lifecycle.ReplyMessage;
 import com.webull.openapi.quotes.domain.AskBid;
 import com.webull.openapi.quotes.domain.Bar;
 import com.webull.openapi.quotes.domain.Broker;
@@ -48,7 +49,6 @@ import com.webull.openapi.quotes.internal.grpc.lifecycle.proxy.ApiHandlerProxyFa
 import com.webull.openapi.quotes.internal.grpc.proto.Api;
 import com.webull.openapi.quotes.internal.grpc.proto.Gateway;
 import com.webull.openapi.quotes.internal.grpc.proto.QuoteGrpc;
-import com.webull.openapi.quotes.subsribe.lifecycle.ReplyMessage;
 import com.webull.openapi.retry.RetryPolicy;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.CollectionUtils;

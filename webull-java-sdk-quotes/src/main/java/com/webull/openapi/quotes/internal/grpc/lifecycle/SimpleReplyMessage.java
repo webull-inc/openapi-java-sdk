@@ -17,7 +17,7 @@ package com.webull.openapi.quotes.internal.grpc.lifecycle;
 
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
-import com.webull.openapi.quotes.subsribe.lifecycle.ReplyMessage;
+import com.webull.openapi.quotes.api.lifecycle.ReplyMessage;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

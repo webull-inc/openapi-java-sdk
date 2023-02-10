@@ -13,21 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.quotes.internal.grpc.lifecycle.channel;
+package com.webull.openapi.quotes.api.lifecycle;
 
-import com.webull.openapi.quotes.api.lifecycle.Mailbox;
-import io.grpc.stub.StreamObserver;
+public interface Mailbox<SendT, RecvT> {
 
-import java.io.Closeable;
+    void send(SendT value);
 
-public interface GrpcChannel<ReqT, RespT> extends Mailbox<ReqT, RespT>, Closeable {
+    ReplyMessage<RecvT> exchange(SendT value);
 
-    String id();
-
-    @Override
-    default void close() {
-        // cover IOException
-    }
-
-    void init(StreamObserver<ReqT> requestStreamObserver);
+    void receive(RecvT response);
 }

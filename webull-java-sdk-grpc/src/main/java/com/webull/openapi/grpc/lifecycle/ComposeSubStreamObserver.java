@@ -21,7 +21,7 @@ import java.util.List;
 
 public abstract class ComposeSubStreamObserver<I, O> implements SubStreamObserver<I> {
 
-    private List<SubStreamObserver<O>> subObservers;
+    private final List<SubStreamObserver<O>> subObservers;
 
     protected ComposeSubStreamObserver(List<SubStreamObserver<O>> observers) {
         Assert.notNull("observers", observers);

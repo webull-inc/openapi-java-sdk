@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull
+ * Copyright 2022 Webull Technologies Pte. Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.quotes.internal.grpc.lifecycle.channel;
+package com.webull.openapi.common.dict;
 
-import com.webull.openapi.quotes.api.lifecycle.Mailbox;
-import io.grpc.stub.StreamObserver;
+public enum TradingDateType {
 
-import java.io.Closeable;
+    /**
+     * Full day
+     */
+    FULL_DAY,
 
-public interface GrpcChannel<ReqT, RespT> extends Mailbox<ReqT, RespT>, Closeable {
-
-    String id();
-
-    @Override
-    default void close() {
-        // cover IOException
-    }
-
-    void init(StreamObserver<ReqT> requestStreamObserver);
+    /**
+     * Half day
+     */
+    HALF_DAY
 }

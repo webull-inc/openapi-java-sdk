@@ -24,6 +24,7 @@ import com.webull.openapi.trade.api.response.InstrumentInfo;
 import com.webull.openapi.trade.api.response.Order;
 import com.webull.openapi.trade.api.response.OrderResponse;
 import com.webull.openapi.trade.api.response.Orders;
+import com.webull.openapi.trade.api.response.TradeCalendar;
 
 import java.util.List;
 
@@ -51,4 +52,5 @@ public interface TradeApiService {
 
     InstrumentInfo getTradeInstrument(String instrumentId);
 
+    List<TradeCalendar> getTradeCalendar(String market, String start, String end);
 }

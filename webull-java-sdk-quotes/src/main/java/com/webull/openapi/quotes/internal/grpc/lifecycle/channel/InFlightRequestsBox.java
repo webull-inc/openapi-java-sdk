@@ -17,10 +17,10 @@ package com.webull.openapi.quotes.internal.grpc.lifecycle.channel;
 
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
+import com.webull.openapi.quotes.api.lifecycle.Mailbox;
+import com.webull.openapi.quotes.api.lifecycle.ReplyMessage;
 import com.webull.openapi.quotes.internal.grpc.lifecycle.SimpleReplyMessage;
 import com.webull.openapi.quotes.internal.grpc.proto.Gateway;
-import com.webull.openapi.quotes.subsribe.lifecycle.Mailbox;
-import com.webull.openapi.quotes.subsribe.lifecycle.ReplyMessage;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 

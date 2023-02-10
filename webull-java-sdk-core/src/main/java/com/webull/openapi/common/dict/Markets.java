@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.quotes.subsribe.lifecycle;
+package com.webull.openapi.common.dict;
 
-import java.io.Closeable;
-import java.util.concurrent.TimeUnit;
+public enum Markets {
+    /**
+     * US market
+     */
+    US,
 
-public interface ReplyMessage<RecvT> extends Closeable {
-
-    boolean isDone();
-
-    RecvT get();
-
-    RecvT get(long timeout, TimeUnit timeUnit);
-
-    boolean receive(RecvT receive);
-
-    boolean completeExceptionally(Throwable ex);
-
-    default void close() {
-        // cover IOException
-    }
+    /**
+     * HK market
+     */
+    HK
 }

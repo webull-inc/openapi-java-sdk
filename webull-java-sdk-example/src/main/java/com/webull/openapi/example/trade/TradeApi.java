@@ -1,5 +1,6 @@
 package com.webull.openapi.example.trade;
 
+import com.webull.openapi.common.dict.Markets;
 import com.webull.openapi.common.dict.OrderSide;
 import com.webull.openapi.common.dict.OrderTIF;
 import com.webull.openapi.common.dict.OrderType;
@@ -20,6 +21,7 @@ import com.webull.openapi.trade.api.response.InstrumentInfo;
 import com.webull.openapi.trade.api.response.Order;
 import com.webull.openapi.trade.api.response.OrderResponse;
 import com.webull.openapi.trade.api.response.Orders;
+import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.utils.CollectionUtils;
 import com.webull.openapi.utils.GUID;
 import com.webull.openapi.utils.StringUtils;
@@ -99,6 +101,10 @@ public class TradeApi {
             // instrument info
             InstrumentInfo instrumentInfo = apiService.getTradeInstrument("913256135");
             logger.info("Instrument info: {}", instrumentInfo);
+
+            // trade calendar
+            List<TradeCalendar> tradeCalendars = apiService.getTradeCalendar(Markets.US.name(), "2023-01-01", "2023-01-10");
+            logger.info("Trade calendars: {}", tradeCalendars);
 
         } catch (ClientException ex) {
             logger.error("Client error", ex);

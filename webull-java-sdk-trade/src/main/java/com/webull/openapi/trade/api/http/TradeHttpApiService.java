@@ -36,6 +36,7 @@ import com.webull.openapi.trade.api.response.Order;
 import com.webull.openapi.trade.api.response.OrderResponse;
 import com.webull.openapi.trade.api.response.Orders;
 import com.webull.openapi.trade.api.response.SimpleOrder;
+import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
@@ -51,6 +52,9 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String STOCK_ORDER_ARG = "stockOrder";
     private static final String CLIENT_ORDER_ID_ARG = "clientOrderId";
     private static final String INSTRUMENT_ID_ARG = "instrumentId";
+    private static final String MARKET_ARG = "market";
+    private static final String START_ARG = "start";
+    private static final String END_ARG = "end";
 
     private static final String ACCOUNT_ID_PARAM = "account_id";
     private static final String PAGE_SIZE_PARAM = "page_size";
@@ -61,6 +65,9 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String CLIENT_ORDER_ID_PARAM = "client_order_id";
     private static final String LAST_CLIENT_ORDER_ID_PARAM = "last_client_order_id";
     private static final String INSTRUMENT_ID_PARAM = "instrument_id";
+    private static final String MARKET_PARAM = MARKET_ARG;
+    private static final String START_PARAM = START_ARG;
+    private static final String END_PARAM = END_ARG;
 
     private final Region region;
     private final HttpApiClient apiClient;
@@ -206,5 +213,17 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(INSTRUMENT_ID_PARAM, instrumentId);
         request.setQuery(params);
         return apiClient.request(request).responseType(InstrumentInfo.class).doAction();
+    }
+
+    @Override
+    public List<TradeCalendar> getTradeCalendar(String market, String start, String end) {
+        Assert.notBlank(Arrays.asList(MARKET_ARG, START_ARG, END_ARG), market, start, end);
+        HttpRequest request = new HttpRequest("/trade/calendar", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        params.put(MARKET_PARAM, market);
+        params.put(START_PARAM, start);
+        params.put(END_PARAM, end);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(new TypeToken<List<TradeCalendar>>() {}.getType()).doAction();
     }
 }
