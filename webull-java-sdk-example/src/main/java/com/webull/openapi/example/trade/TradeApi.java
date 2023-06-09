@@ -11,6 +11,14 @@ import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.http.TradeHttpApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
 import com.webull.openapi.trade.api.response.*;
+import com.webull.openapi.trade.api.response.Account;
+import com.webull.openapi.trade.api.response.AccountDetail;
+import com.webull.openapi.trade.api.response.AccountPositions;
+import com.webull.openapi.trade.api.response.InstrumentInfo;
+import com.webull.openapi.trade.api.response.Order;
+import com.webull.openapi.trade.api.response.OrderResponse;
+import com.webull.openapi.trade.api.response.Orders;
+import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.utils.CollectionUtils;
 import com.webull.openapi.utils.GUID;
 import com.webull.openapi.utils.StringUtils;
@@ -44,7 +52,7 @@ public class TradeApi {
             }
 
             // get account balance
-            AccountBalance accountBalance = apiService.getAccountBalance(accountId, "");
+            BalanceBase accountBalance = apiService.getAccountBalance(accountId, "");
             logger.info("Account balance: {}", accountBalance);
 
             AccountDetail accountDetail = apiService.getAccountDetail(accountId);
@@ -98,6 +106,10 @@ public class TradeApi {
             // security info
             InstrumentInfo securityInfo = apiService.getSecurityInfo("SPX", Markets.US.name(), InstrumentSuperType.OPTION.name(), "CALL_OPTION", "3400", "2024-12-20" );
             logger.info("Security info: {}", securityInfo);
+
+            // tradeable instruments
+            TradableInstruments tradeableInstruments = apiService.getTradeableInstruments("", 10);
+            logger.info("Tradeable instruments info: {}", tradeableInstruments);
 
         } catch (ClientException ex) {
             logger.error("Client error", ex);

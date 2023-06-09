@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.common;
+package com.webull.openapi.common.dict;
 
-import java.util.Optional;
+public enum MarginType {
 
-public enum Region {
+    /**
+     * The customer's open position needs to be closed on the same day.
+     * That's the intraday margin.
+     */
+    ONE_DAY,
 
-    us, hk, jp;
-
-    public static Optional<Region> of(String name) {
-        for (Region region : Region.values()) {
-            if (region.name().equals(name)) {
-                return Optional.of(region);
-            }
-        }
-        return Optional.empty();
-    }
+    /**
+     * Customers can open positions overnight using unlimited margin.
+     */
+    INDEFINITE
 }

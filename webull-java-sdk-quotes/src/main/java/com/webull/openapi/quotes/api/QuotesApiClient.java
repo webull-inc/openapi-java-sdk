@@ -20,6 +20,9 @@ import com.webull.openapi.quotes.domain.Instrument;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
 import com.webull.openapi.quotes.domain.Tick;
+import com.webull.openapi.quotes.domain.EodBars;
+import com.webull.openapi.quotes.domain.CorpAction;
+import com.webull.openapi.quotes.domain.CorpActionRequest;
 import com.webull.openapi.quotes.internal.grpc.GrpcQuotesApiClientBuilder;
 
 import java.io.Closeable;
@@ -34,11 +37,26 @@ public interface QuotesApiClient extends Closeable {
 
     List<Instrument> getInstruments(Set<String> symbols, String category);
 
+    /**
+     * Only for Webull JP
+     */
+    List<Instrument> queryPageInstruments(Integer lastInstrumentId, Integer pageSize);
+
     default List<Bar> getBars(String symbol, String category, String timespan) {
         return getBars(symbol, category, timespan, 200);
     }
 
     List<Bar> getBars(String symbol, String category, String timespan, int count);
+
+    /**
+     * Only for Webull JP
+     */
+    List<EodBars> getEodBars(Set<String> instrumentIds, String date, Integer count);
+
+    /**
+     * Only for Webull JP
+     */
+    List<CorpAction> getCorpAction(CorpActionRequest action);
 
     Quote getQuote(String symbol, String category);
 

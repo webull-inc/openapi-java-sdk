@@ -13,20 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.common;
+package com.webull.openapi.common.dict;
 
-import java.util.Optional;
+public enum EventSource {
 
-public enum Region {
+    /**
+     * IHS
+     */
+    IHS,
 
-    us, hk, jp;
+    /**
+     * EDI
+     */
+    EDI,
 
-    public static Optional<Region> of(String name) {
-        for (Region region : Region.values()) {
-            if (region.name().equals(name)) {
-                return Optional.of(region);
-            }
-        }
-        return Optional.empty();
-    }
+    /**
+     * ICE
+     */
+    ICE,
+
+    /**
+     * Webull artificial
+     */
+    WEBULL_ARTIFICIAL,
+
+    /**
+     * OTC official web
+     */
+    OTC_OFFICIAL_WEB,
+
+    /**
+     * CCASS
+     */
+    SOURCE,
+
+    /**
+     * Webull auditor
+     */
+    WEBULL_AUDITOR,
+
+    /**
+     * JYDB
+     */
+    SOURCE_NAME_JY_DB,
+
+    /**
+     * Other
+     */
+    WEB
 }

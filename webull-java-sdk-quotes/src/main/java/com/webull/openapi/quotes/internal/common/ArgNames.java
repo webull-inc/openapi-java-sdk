@@ -27,4 +27,13 @@ public final class ArgNames {
     public static final String COUNT = "count";
     public static final String SUBTYPES = "subTypes";
     public static final String TOKEN = "token";
+    public static final String INSTRUMENT_IDS = "instrument_ids";
+    public static final String LAST_INSTRUMENT_ID = "last_instrument_id";
+    public static final String DATE = "date";
+    public static final String START_DATE = "start_date";
+    public static final String END_DATE = "end_date";
+    public static final String EVENT_TYPES = "event_types";
+    public static final String LAST_UPDATE_TIME = "last_update_time";
+    public static final String PAGE_NUMBER = "page_number";
+    public static final String PAGE_SIZE = "page_size";
 }

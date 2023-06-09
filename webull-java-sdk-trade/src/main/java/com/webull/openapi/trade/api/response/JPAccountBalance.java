@@ -17,21 +17,23 @@ package com.webull.openapi.trade.api.response;
 
 import java.util.List;
 
-public class AccountBalance implements BalanceBase{
+public class JPAccountBalance implements BalanceBase{
 
     private String accountId;
 
     private String totalAssetCurrency;
 
-    private String totalAsset;
-
     private String totalMarketValue;
-
-    private String totalCashBalance;
 
     private String marginUtilizationRate;
 
-    private List<AccountAsset> accountCurrencyAssets;
+    private String totalCollateralValue;
+
+    private String oneDayMarginPower;
+
+    private String infiniteMarginPower;
+
+    private List<JPAccountAsset> accountCurrencyAssets;
 
     @Override
     public String getAccountId() {
@@ -51,14 +53,6 @@ public class AccountBalance implements BalanceBase{
         this.totalAssetCurrency = totalAssetCurrency;
     }
 
-    public String getTotalAsset() {
-        return totalAsset;
-    }
-
-    public void setTotalAsset(String totalAsset) {
-        this.totalAsset = totalAsset;
-    }
-
     @Override
     public String getTotalMarketValue() {
         return totalMarketValue;
@@ -66,14 +60,6 @@ public class AccountBalance implements BalanceBase{
 
     public void setTotalMarketValue(String totalMarketValue) {
         this.totalMarketValue = totalMarketValue;
-    }
-
-    public String getTotalCashBalance() {
-        return totalCashBalance;
-    }
-
-    public void setTotalCashBalance(String totalCashBalance) {
-        this.totalCashBalance = totalCashBalance;
     }
 
     @Override
@@ -85,11 +71,35 @@ public class AccountBalance implements BalanceBase{
         this.marginUtilizationRate = marginUtilizationRate;
     }
 
-    public List<AccountAsset> getAccountCurrencyAssets() {
+    public String getTotalCollateralValue() {
+        return totalCollateralValue;
+    }
+
+    public void setTotalCollateralValue(String totalCollateralValue) {
+        this.totalCollateralValue = totalCollateralValue;
+    }
+
+    public String getOneDayMarginPower() {
+        return oneDayMarginPower;
+    }
+
+    public void setOneDayMarginPower(String oneDayMarginPower) {
+        this.oneDayMarginPower = oneDayMarginPower;
+    }
+
+    public String getInfiniteMarginPower() {
+        return infiniteMarginPower;
+    }
+
+    public void setInfiniteMarginPower(String infiniteMarginPower) {
+        this.infiniteMarginPower = infiniteMarginPower;
+    }
+
+    public List<JPAccountAsset> getAccountCurrencyAssets() {
         return accountCurrencyAssets;
     }
 
-    public void setAccountCurrencyAssets(List<AccountAsset> accountCurrencyAssets) {
+    public void setAccountCurrencyAssets(List<JPAccountAsset> accountCurrencyAssets) {
         this.accountCurrencyAssets = accountCurrencyAssets;
     }
 
@@ -98,10 +108,11 @@ public class AccountBalance implements BalanceBase{
         return "AccountBalance{" +
                 "accountId='" + accountId + '\'' +
                 ", totalAssetCurrency='" + totalAssetCurrency + '\'' +
-                ", totalAsset='" + totalAsset + '\'' +
                 ", totalMarketValue='" + totalMarketValue + '\'' +
-                ", totalCashBalance='" + totalCashBalance + '\'' +
                 ", marginUtilizationRate='" + marginUtilizationRate + '\'' +
+                ", totalCollateralValue='" + totalCollateralValue + '\'' +
+                ", oneDayMarginPower='" + oneDayMarginPower + '\'' +
+                ", infiniteMarginPower='" + infiniteMarginPower + '\'' +
                 ", accountCurrencyAssets=" + accountCurrencyAssets +
                 '}';
     }

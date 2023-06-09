@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.common;
+package com.webull.openapi.trade.api.response;
 
-import java.util.Optional;
+public interface BalanceBase {
 
-public enum Region {
+    String getAccountId();
 
-    us, hk, jp;
+    String getTotalAssetCurrency();
 
-    public static Optional<Region> of(String name) {
-        for (Region region : Region.values()) {
-            if (region.name().equals(name)) {
-                return Optional.of(region);
-            }
-        }
-        return Optional.empty();
-    }
+    String getTotalMarketValue();
+
+    String getMarginUtilizationRate();
 }

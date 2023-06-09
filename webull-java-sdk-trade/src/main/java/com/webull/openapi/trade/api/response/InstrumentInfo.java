@@ -15,9 +15,7 @@
  */
 package com.webull.openapi.trade.api.response;
 
-public class InstrumentInfo {
-    private String instrumentId;
-    private String symbol;
+public class InstrumentInfo extends InstrumentBasic{
     private String instrumentType;
     private String instrumentSuperType;
     private String shortName;
@@ -32,22 +30,6 @@ public class InstrumentInfo {
     private String marginable;
     private String shortable;
     private String fractionalTrading;
-
-    public String getInstrumentId() {
-        return instrumentId;
-    }
-
-    public void setInstrumentId(String instrumentId) {
-        this.instrumentId = instrumentId;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
 
     public String getInstrumentType() {
         return instrumentType;

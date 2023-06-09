@@ -13,20 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.common;
+package com.webull.openapi.common.dict;
 
-import java.util.Optional;
+public enum EventStatus {
 
-public enum Region {
+    /**
+     * Valid
+     */
+    I,
 
-    us, hk, jp;
+    /**
+     * Valid
+     */
+    U,
 
-    public static Optional<Region> of(String name) {
-        for (Region region : Region.values()) {
-            if (region.name().equals(name)) {
-                return Optional.of(region);
-            }
-        }
-        return Optional.empty();
-    }
+    /**
+     * Cancellation,invalid
+     */
+    C,
+
+    /**
+     * Deletion,invalid
+     */
+    D
 }

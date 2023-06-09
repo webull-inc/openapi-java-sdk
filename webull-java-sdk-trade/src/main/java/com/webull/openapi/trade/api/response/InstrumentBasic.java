@@ -13,20 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.common;
+package com.webull.openapi.trade.api.response;
 
-import java.util.Optional;
+public abstract class InstrumentBasic {
 
-public enum Region {
+    protected String symbol;
+    protected String instrumentId;
 
-    us, hk, jp;
+    public String getSymbol() {
+        return symbol;
+    }
 
-    public static Optional<Region> of(String name) {
-        for (Region region : Region.values()) {
-            if (region.name().equals(name)) {
-                return Optional.of(region);
-            }
-        }
-        return Optional.empty();
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getInstrumentId() {
+        return instrumentId;
+    }
+
+    public void setInstrumentId(String instrumentId) {
+        this.instrumentId = instrumentId;
     }
 }

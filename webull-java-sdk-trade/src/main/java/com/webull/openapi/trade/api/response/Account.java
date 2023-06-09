@@ -25,6 +25,8 @@ public class Account {
 
     private String accountNumber;
 
+    private String accountType;
+
     public String getSubscriptionId() {
         return subscriptionId;
     }
@@ -57,6 +59,14 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -64,6 +74,7 @@ public class Account {
                 ", userId='" + userId + '\'' +
                 ", accountId='" + accountId + '\'' +
                 ", accountNumber='" + accountNumber + '\'' +
+                ", accountType='" + accountType + '\'' +
                 '}';
     }
 }
