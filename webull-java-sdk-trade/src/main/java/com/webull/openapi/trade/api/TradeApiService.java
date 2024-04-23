@@ -16,15 +16,7 @@
 package com.webull.openapi.trade.api;
 
 import com.webull.openapi.trade.api.request.StockOrder;
-import com.webull.openapi.trade.api.response.Account;
-import com.webull.openapi.trade.api.response.AccountBalance;
-import com.webull.openapi.trade.api.response.AccountDetail;
-import com.webull.openapi.trade.api.response.AccountPositions;
-import com.webull.openapi.trade.api.response.InstrumentInfo;
-import com.webull.openapi.trade.api.response.Order;
-import com.webull.openapi.trade.api.response.OrderResponse;
-import com.webull.openapi.trade.api.response.Orders;
-import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.*;
 
 import java.util.List;
 
@@ -53,4 +45,6 @@ public interface TradeApiService {
     InstrumentInfo getTradeInstrument(String instrumentId);
 
     List<TradeCalendar> getTradeCalendar(String market, String start, String end);
+
+    InstrumentInfo getSecurityInfo(String symbol, String market, String instrumentSuperType, String instrumentType, String strikePrice, String initExpDate);
 }

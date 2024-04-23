@@ -19,11 +19,19 @@ public class InstrumentInfo {
     private String instrumentId;
     private String symbol;
     private String instrumentType;
+    private String instrumentSuperType;
     private String shortName;
     private String buyUnit;
     private String tradePolicy;
     private String marginRatio;
-    private String canMargin;
+    private String market;
+    private String cusip;
+    private String exchangeCode;
+    private String listStatus;
+    private String currency;
+    private String marginable;
+    private String shortable;
+    private String fractionalTrading;
 
     public String getInstrumentId() {
         return instrumentId;
@@ -47,6 +55,14 @@ public class InstrumentInfo {
 
     public void setInstrumentType(String instrumentType) {
         this.instrumentType = instrumentType;
+    }
+
+    public String getInstrumentSuperType() {
+        return instrumentSuperType;
+    }
+
+    public void setInstrumentSuperType(String instrumentSuperType) {
+        this.instrumentSuperType = instrumentSuperType;
     }
 
     public String getShortName() {
@@ -81,12 +97,68 @@ public class InstrumentInfo {
         this.marginRatio = marginRatio;
     }
 
-    public String getCanMargin() {
-        return canMargin;
+    public String getMarket() {
+        return market;
     }
 
-    public void setCanMargin(String canMargin) {
-        this.canMargin = canMargin;
+    public void setMarket(String market) {
+        this.market = market;
+    }
+
+    public String getCusip() {
+        return cusip;
+    }
+
+    public void setCusip(String cusip) {
+        this.cusip = cusip;
+    }
+
+    public String getExchangeCode() {
+        return exchangeCode;
+    }
+
+    public void setExchangeCode(String exchangeCode) {
+        this.exchangeCode = exchangeCode;
+    }
+
+    public String getListStatus() {
+        return listStatus;
+    }
+
+    public void setListStatus(String listStatus) {
+        this.listStatus = listStatus;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getMarginable() {
+        return marginable;
+    }
+
+    public void setMarginable(String marginable) {
+        this.marginable = marginable;
+    }
+
+    public String getShortable() {
+        return shortable;
+    }
+
+    public void setShortable(String shortable) {
+        this.shortable = shortable;
+    }
+
+    public String getFractionalTrading() {
+        return fractionalTrading;
+    }
+
+    public void setFractionalTrading(String fractionalTrading) {
+        this.fractionalTrading = fractionalTrading;
     }
 
     @Override
@@ -95,11 +167,19 @@ public class InstrumentInfo {
                 "instrumentId='" + instrumentId + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", instrumentType='" + instrumentType + '\'' +
+                ", instrumentSuperType='" + instrumentSuperType + '\'' +
                 ", shortName='" + shortName + '\'' +
                 ", buyUnit='" + buyUnit + '\'' +
                 ", tradePolicy='" + tradePolicy + '\'' +
                 ", marginRatio='" + marginRatio + '\'' +
-                ", canMargin='" + canMargin + '\'' +
+                ", market='" + market + '\'' +
+                ", cusip='" + cusip + '\'' +
+                ", exchangeCode='" + exchangeCode + '\'' +
+                ", listStatus='" + listStatus + '\'' +
+                ", currency='" + currency + '\'' +
+                ", marginable='" + marginable + '\'' +
+                ", shortable='" + shortable + '\'' +
+                ", fractionalTrading='" + fractionalTrading + '\'' +
                 '}';
     }
 }
