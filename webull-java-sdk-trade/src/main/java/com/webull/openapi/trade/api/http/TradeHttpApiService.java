@@ -18,6 +18,7 @@ package com.webull.openapi.trade.api.http;
 import com.google.gson.reflect.TypeToken;
 import com.webull.openapi.common.Region;
 import com.webull.openapi.common.Versions;
+import com.webull.openapi.common.dict.InstrumentSuperType;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
 import com.webull.openapi.http.HttpApiClient;
@@ -26,17 +27,7 @@ import com.webull.openapi.http.HttpRequest;
 import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
-import com.webull.openapi.trade.api.response.Account;
-import com.webull.openapi.trade.api.response.AccountBalance;
-import com.webull.openapi.trade.api.response.AccountDetail;
-import com.webull.openapi.trade.api.response.AccountPositions;
-import com.webull.openapi.trade.api.response.ComboOrder;
-import com.webull.openapi.trade.api.response.InstrumentInfo;
-import com.webull.openapi.trade.api.response.Order;
-import com.webull.openapi.trade.api.response.OrderResponse;
-import com.webull.openapi.trade.api.response.Orders;
-import com.webull.openapi.trade.api.response.SimpleOrder;
-import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.*;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
@@ -55,6 +46,11 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String MARKET_ARG = "market";
     private static final String START_ARG = "start";
     private static final String END_ARG = "end";
+    private static final String SYMBOL_ARG = "symbol";
+    private static final String INSTRUMENT_SUPER_TYPE_ARG = "instrumentSuperType";
+    private static final String INSTRUMENT_TYPE_ARG = "instrumentType";
+    private static final String STRIKE_PRICE_ARG = "strikePrice";
+    private static final String INIT_EXP_DATE_ARG = "initExpDate";
 
     private static final String ACCOUNT_ID_PARAM = "account_id";
     private static final String PAGE_SIZE_PARAM = "page_size";
@@ -68,6 +64,11 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String MARKET_PARAM = MARKET_ARG;
     private static final String START_PARAM = START_ARG;
     private static final String END_PARAM = END_ARG;
+    private static final String SYMBOL_PARAM = SYMBOL_ARG;
+    private static final String INSTRUMENT_SUPER_TYPE_PARAM = "instrument_super_type";
+    private static final String INSTRUMENT_TYPE_PARAM = "instrument_type";
+    private static final String STRIKE_PRICE_PARAM = "strike_price";
+    private static final String INIT_EXP_DATE_PARAM = "init_exp_date";
 
     private final Region region;
     private final HttpApiClient apiClient;
@@ -225,5 +226,23 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(END_PARAM, end);
         request.setQuery(params);
         return apiClient.request(request).responseType(new TypeToken<List<TradeCalendar>>() {}.getType()).doAction();
+    }
+
+    @Override
+    public InstrumentInfo getSecurityInfo(String symbol, String market, String instrumentSuperType, String instrumentType, String strikePrice, String initExpDate) {
+        Assert.notBlank(Arrays.asList(SYMBOL_ARG, MARKET_ARG, INSTRUMENT_SUPER_TYPE_ARG) , symbol, market, instrumentSuperType);
+        Map<String, Object> params = new HashMap<>();
+        if (instrumentSuperType.equals(InstrumentSuperType.OPTION.name())) {
+            Assert.notBlank(Arrays.asList(INSTRUMENT_TYPE_ARG, STRIKE_PRICE_ARG, INIT_EXP_DATE_ARG), instrumentType, strikePrice, initExpDate);
+            params.put(INSTRUMENT_TYPE_PARAM, instrumentType);
+            params.put(STRIKE_PRICE_PARAM, strikePrice);
+            params.put(INIT_EXP_DATE_PARAM, initExpDate);
+        }
+        HttpRequest request = new HttpRequest("/trade/security", Versions.V1, HttpMethod.GET);
+        params.put(SYMBOL_PARAM, symbol);
+        params.put(MARKET_PARAM, market);
+        params.put(INSTRUMENT_SUPER_TYPE_PARAM, instrumentSuperType);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(InstrumentInfo.class).doAction();
     }
 }

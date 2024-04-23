@@ -1,9 +1,6 @@
 package com.webull.openapi.example.trade;
 
-import com.webull.openapi.common.dict.Markets;
-import com.webull.openapi.common.dict.OrderSide;
-import com.webull.openapi.common.dict.OrderTIF;
-import com.webull.openapi.common.dict.OrderType;
+import com.webull.openapi.common.dict.*;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
@@ -13,15 +10,7 @@ import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.http.TradeHttpApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
-import com.webull.openapi.trade.api.response.Account;
-import com.webull.openapi.trade.api.response.AccountBalance;
-import com.webull.openapi.trade.api.response.AccountDetail;
-import com.webull.openapi.trade.api.response.AccountPositions;
-import com.webull.openapi.trade.api.response.InstrumentInfo;
-import com.webull.openapi.trade.api.response.Order;
-import com.webull.openapi.trade.api.response.OrderResponse;
-import com.webull.openapi.trade.api.response.Orders;
-import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.*;
 import com.webull.openapi.utils.CollectionUtils;
 import com.webull.openapi.utils.GUID;
 import com.webull.openapi.utils.StringUtils;
@@ -105,6 +94,10 @@ public class TradeApi {
             // trade calendar
             List<TradeCalendar> tradeCalendars = apiService.getTradeCalendar(Markets.US.name(), "2023-01-01", "2023-01-10");
             logger.info("Trade calendars: {}", tradeCalendars);
+
+            // security info
+            InstrumentInfo securityInfo = apiService.getSecurityInfo("SPX", Markets.US.name(), InstrumentSuperType.OPTION.name(), "CALL_OPTION", "3400", "2024-12-20" );
+            logger.info("Security info: {}", securityInfo);
 
         } catch (ClientException ex) {
             logger.error("Client error", ex);
