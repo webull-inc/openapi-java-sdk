@@ -18,7 +18,7 @@ package com.webull.openapi.common.dict;
 public enum Currency {
 
     /** RMB */
-    CNY,
+    CNH,
 
     /** Hong Kong dollar */
     HKD,
