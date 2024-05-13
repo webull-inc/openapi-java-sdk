@@ -25,7 +25,7 @@ public class HoldingInfo {
     private String currency;
     private String unitCost;
 
-    private Integer qty;
+    private String qty;
     private String totalCost;
     private String lastPrice;
     private String marketValue;
@@ -81,11 +81,11 @@ public class HoldingInfo {
         this.unitCost = unitCost;
     }
 
-    public Integer getQty() {
+    public String getQty() {
         return qty;
     }
 
-    public void setQty(Integer qty) {
+    public void setQty(String qty) {
         this.qty = qty;
     }
 
