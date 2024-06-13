@@ -56,4 +56,14 @@ public enum OrderType {
      * At-auction limit order (Hong Kong stocks)
      */
     AT_AUCTION_LIMIT,
+
+    /**
+     * Market On Open order (U.S. Stock)
+     */
+    MARKET_ON_OPEN,
+
+    /**
+     * Market On Close order (U.S. Stock)
+     */
+    MARKET_ON_CLOSE,
 }
