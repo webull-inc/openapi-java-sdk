@@ -33,4 +33,4 @@ jobs:
             ]
           output_file: /home/runner/.m2/settings.xml
       - name: publish package
-        run: mvn --batch-mode -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy -P release
+        run: mvn --batch-mode -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} clean deploy -P release -pl '!webull-java-sdk-example'
