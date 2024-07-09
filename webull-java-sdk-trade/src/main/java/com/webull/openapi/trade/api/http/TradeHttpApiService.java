@@ -141,7 +141,7 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(STOCK_ORDER_PARAM, stockOrder);
         request.setBody(params);
-        return apiClient.request(request).responseType(OrderResponse.class).doAction();
+        return apiClient.request(request).responseType(getTradeOrderResponseType()).doAction();
     }
 
     @Override
@@ -153,7 +153,7 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(STOCK_ORDER_PARAM, stockOrder);
         request.setBody(params);
-        return apiClient.request(request).responseType(OrderResponse.class).doAction();
+        return apiClient.request(request).responseType(getTradeOrderResponseType()).doAction();
     }
 
     @Override
@@ -164,7 +164,13 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(CLIENT_ORDER_ID_PARAM, clientOrderId);
         request.setBody(params);
-        return apiClient.request(request).responseType(OrderResponse.class).doAction();
+        return apiClient.request(request).responseType(getTradeOrderResponseType()).doAction();
+    }
+
+    private Type getTradeOrderResponseType(){
+        return region == Region.hk ?
+                new TypeToken<ComboOrderResponse>() {}.getType() :
+                new TypeToken<SimpleOrderResponse>() {}.getType();
     }
 
 

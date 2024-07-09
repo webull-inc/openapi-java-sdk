@@ -15,48 +15,16 @@
  */
 package com.webull.openapi.trade.api.response;
 
-public class OrderResponse {
+public interface OrderResponse {
 
-    private Integer code;
+    Integer getCode();
 
-    private String msg;
+    String getMsg();
 
-    private OrderClientId data;
+    OrderClientId getData();
 
-    public Integer getCode() {
-        return code;
-    }
+    Boolean isSuccess();
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
+    String getClientOrderId();
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public OrderClientId getData() {
-        return data;
-    }
-
-    public void setData(OrderClientId data) {
-        this.data = data;
-    }
-
-    public boolean isSuccess() {
-        return code != null && code == 200;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderResponse{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
-    }
 }
