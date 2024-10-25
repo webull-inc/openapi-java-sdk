@@ -78,7 +78,7 @@ public class DefaultSignatureComposer {
             signString = signString + PARAMS_JOIN + payload;
         }
         try {
-            return URLEncoder.encode(signString, StandardCharsets.UTF_8.toString());
+            return URLEncoder.encode(signString, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20");
         } catch (UnsupportedEncodingException e) {
             throw new ClientException(ErrorCode.NOT_SUPPORT, e);
         }

@@ -27,14 +27,20 @@ import com.webull.openapi.quotes.domain.Instrument;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
 import com.webull.openapi.quotes.domain.Tick;
+import com.webull.openapi.quotes.domain.EodBars;
+import com.webull.openapi.quotes.domain.CorpAction;
+import com.webull.openapi.quotes.domain.CorpActionRequest;
 import com.webull.openapi.quotes.internal.common.ArgNames;
 import com.webull.openapi.utils.Assert;
+import com.webull.openapi.utils.StringUtils;
+import com.google.api.client.util.Sets;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Optional;
 
 public class HttpQuotesApiClient implements QuotesApiClient {
 
@@ -63,6 +69,16 @@ public class HttpQuotesApiClient implements QuotesApiClient {
     }
 
     @Override
+    public List<Instrument> queryPageInstruments(Integer lastInstrumentId, Integer pageSize){
+        HttpRequest request = new HttpRequest("/instrument/query-page", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        params.put(ArgNames.LAST_INSTRUMENT_ID, lastInstrumentId == null ? 0 : lastInstrumentId);
+        params.put(ArgNames.PAGE_SIZE, pageSize == null ? 20 : pageSize);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(new TypeToken<List<Instrument>>() {}.getType()).doAction();
+    }
+
+    @Override
     public List<Bar> getBars(String symbol, String category, String timespan, int count) {
         Assert.notBlank(Arrays.asList(ArgNames.SYMBOL, ArgNames.CATEGORY, ArgNames.TIMESPAN), symbol, category, timespan);
         HttpRequest request = new HttpRequest("/market-data/bars", Versions.V1, HttpMethod.GET);
@@ -74,6 +90,37 @@ public class HttpQuotesApiClient implements QuotesApiClient {
         request.setQuery(params);
         return apiClient.request(request).responseType(new TypeToken<List<Bar>>() {}.getType()).doAction();
     }
+
+    @Override
+    public List<EodBars> getEodBars(Set<String> instrumentIds, String date, Integer count){
+        Assert.notEmpty(ArgNames.INSTRUMENT_IDS, instrumentIds);
+        HttpRequest request = new HttpRequest("/market-data/eod-bars", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        params.put(ArgNames.INSTRUMENT_IDS, String.join(",", instrumentIds));
+        if(StringUtils.isNotEmpty(date)){
+            params.put(ArgNames.DATE, date);
+        }
+        params.put(ArgNames.COUNT, count == null ? 1 : count);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(new TypeToken<List<EodBars>>() {}.getType()).doAction();
+    }
+
+    @Override
+    public List<CorpAction> getCorpAction(CorpActionRequest action){
+        HttpRequest request = new HttpRequest("/instrument/corp-action", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        Assert.notEmpty(ArgNames.EVENT_TYPES, action.getEventTypes());
+        params.put(ArgNames.EVENT_TYPES, String.join(",", action.getEventTypes()));
+        Optional.ofNullable(action.getInstrumentIds()).filter(StringUtils::isNotEmpty).ifPresent(instrumentIds -> params.put(ArgNames.INSTRUMENT_IDS, String.join(",", instrumentIds)));
+        Optional.ofNullable(action.getStartDate()).filter(StringUtils::isNotEmpty).ifPresent(startDate -> params.put(ArgNames.START_DATE, startDate));
+        Optional.ofNullable(action.getEndDate()).filter(StringUtils::isNotEmpty).ifPresent(endDate -> params.put(ArgNames.END_DATE, endDate));
+        Optional.ofNullable(action.getLastUpdateTime()).filter(StringUtils::isNotEmpty).ifPresent(lastUpdateTime -> params.put(ArgNames.LAST_UPDATE_TIME, lastUpdateTime));
+        Optional.ofNullable(action.getPageNumber()).filter(StringUtils::isNotEmpty).ifPresent(pageNumber -> params.put(ArgNames.PAGE_NUMBER, pageNumber));
+        Optional.ofNullable(action.getPageSize()).filter(StringUtils::isNotEmpty).ifPresent(pageSize -> params.put(ArgNames.PAGE_SIZE, pageSize));
+        request.setQuery(params);
+        return apiClient.request(request).responseType(new TypeToken<List<CorpAction>>() {}.getType()).doAction();
+    }
+
 
     @Override
     public Quote getQuote(String symbol, String category) {

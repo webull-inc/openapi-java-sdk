@@ -37,6 +37,9 @@ import com.webull.openapi.quotes.domain.Order;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
 import com.webull.openapi.quotes.domain.Tick;
+import com.webull.openapi.quotes.domain.EodBars;
+import com.webull.openapi.quotes.domain.CorpAction;
+import com.webull.openapi.quotes.domain.CorpActionRequest;
 import com.webull.openapi.quotes.internal.common.ArgNames;
 import com.webull.openapi.quotes.internal.grpc.lifecycle.ApiLoggingHandler;
 import com.webull.openapi.quotes.internal.grpc.lifecycle.channel.ApiGrpcChannel;
@@ -63,6 +66,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> implements QuotesApiClient {
+
+    private static final String NOT_SUPPORT_MSG = "Grpc client not support for this method, please use default http client.";
 
     private static final Logger logger = LoggerFactory.getLogger(GrpcQuotesApiClient.class);
 
@@ -191,6 +196,21 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
         } catch (InvalidProtocolBufferException e) {
             throw new ClientException("Deserialize bar response error.", e);
         }
+    }
+
+    @Override
+    public List<EodBars> getEodBars(Set<String> instrumentIds, String date, Integer count) {
+        throw new UnsupportedOperationException(NOT_SUPPORT_MSG);
+    }
+
+    @Override
+    public List<Instrument> queryPageInstruments(Integer lastInstrumentId, Integer pageSize){
+        throw new UnsupportedOperationException(NOT_SUPPORT_MSG);
+    }
+
+    @Override
+    public List<CorpAction> getCorpAction(CorpActionRequest action){
+        throw new UnsupportedOperationException(NOT_SUPPORT_MSG);
     }
 
     @Override

@@ -15,8 +15,11 @@
  */
 package com.webull.openapi.trade.api.response;
 
+import java.util.List;
+
 public class HoldingInfo {
 
+    private String id;
     private String instrumentId;
     private String symbol;
     private String instrumentType;
@@ -32,6 +35,18 @@ public class HoldingInfo {
     private String unrealizedProfitLoss;
     private String unrealizedProfitLossRate;
     private String holdingProportion;
+    private String accountTaxType;
+
+    private List<ContractPosition> positions;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getInstrumentId() {
         return instrumentId;
@@ -137,10 +152,27 @@ public class HoldingInfo {
         this.holdingProportion = holdingProportion;
     }
 
+    public String getAccountTaxType() {
+        return accountTaxType;
+    }
+
+    public void setAccountTaxType(String accountTaxType) {
+        this.accountTaxType = accountTaxType;
+    }
+
+    public List<ContractPosition> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(List<ContractPosition> positions) {
+        this.positions = positions;
+    }
+
     @Override
     public String toString() {
         return "HoldingInfo{" +
-                "instrumentId='" + instrumentId + '\'' +
+                "id='" + id + '\'' +
+                ", instrumentId='" + instrumentId + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", instrumentType='" + instrumentType + '\'' +
                 ", shortName='" + shortName + '\'' +
@@ -153,6 +185,8 @@ public class HoldingInfo {
                 ", unrealizedProfitLoss='" + unrealizedProfitLoss + '\'' +
                 ", unrealizedProfitLossRate='" + unrealizedProfitLossRate + '\'' +
                 ", holdingProportion='" + holdingProportion + '\'' +
+                ", accountTaxType='" + accountTaxType + '\'' +
+                ", positions=" + positions +
                 '}';
     }
 }

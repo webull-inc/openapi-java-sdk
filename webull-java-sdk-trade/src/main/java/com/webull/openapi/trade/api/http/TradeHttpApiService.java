@@ -28,6 +28,20 @@ import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
 import com.webull.openapi.trade.api.response.*;
+import com.webull.openapi.trade.api.response.Account;
+import com.webull.openapi.trade.api.response.AccountBalance;
+import com.webull.openapi.trade.api.response.AccountDetail;
+import com.webull.openapi.trade.api.response.AccountPositions;
+import com.webull.openapi.trade.api.response.ComboOrder;
+import com.webull.openapi.trade.api.response.InstrumentInfo;
+import com.webull.openapi.trade.api.response.Order;
+import com.webull.openapi.trade.api.response.OrderResponse;
+import com.webull.openapi.trade.api.response.Orders;
+import com.webull.openapi.trade.api.response.SimpleOrder;
+import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.BalanceBase;
+import com.webull.openapi.trade.api.response.JPAccountBalance;
+import com.webull.openapi.trade.api.response.TradableInstruments;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
@@ -61,6 +75,7 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String CLIENT_ORDER_ID_PARAM = "client_order_id";
     private static final String LAST_CLIENT_ORDER_ID_PARAM = "last_client_order_id";
     private static final String INSTRUMENT_ID_PARAM = "instrument_id";
+    private static final String LAST_SECURITY_ID = "last_security_id";
     private static final String MARKET_PARAM = MARKET_ARG;
     private static final String START_PARAM = START_ARG;
     private static final String END_PARAM = END_ARG;
@@ -106,7 +121,7 @@ public class TradeHttpApiService implements TradeApiService {
     }
 
     @Override
-    public AccountBalance getAccountBalance(String accountId, String totalAssetCurrency) {
+    public <T extends BalanceBase>T getAccountBalance(String accountId, String totalAssetCurrency){
         Assert.notBlank(ACCOUNT_ID_ARG, accountId);
         HttpRequest request = new HttpRequest("/account/balance", Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
@@ -115,18 +130,19 @@ public class TradeHttpApiService implements TradeApiService {
             params.put(TOTAL_ASSET_CURRENCY_PARAM, totalAssetCurrency);
         }
         request.setQuery(params);
-        return apiClient.request(request).responseType(AccountBalance.class).doAction();
+        Type responseType = region == Region.jp ? JPAccountBalance.class : AccountBalance.class;
+        return apiClient.request(request).responseType(responseType).doAction();
     }
 
     @Override
-    public AccountPositions getAccountPositions(String accountId, Integer pageSize, String lastInstrumentId) {
+    public AccountPositions getAccountPositions(String accountId, Integer pageSize, String lastId) {
         Assert.notBlank(ACCOUNT_ID_ARG, accountId);
         HttpRequest request = new HttpRequest("/account/positions", Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(PAGE_SIZE_PARAM, pageSize == null ? 10 : pageSize);
-        if (StringUtils.isNotEmpty(lastInstrumentId)) {
-            params.put(LAST_INSTRUMENT_ID_PARAM, lastInstrumentId);
+        if (StringUtils.isNotEmpty(lastId)) {
+            params.put(LAST_INSTRUMENT_ID_PARAM, lastId);
         }
         request.setQuery(params);
         return apiClient.request(request).responseType(AccountPositions.class).doAction();
@@ -168,9 +184,9 @@ public class TradeHttpApiService implements TradeApiService {
     }
 
     private Type getTradeOrderResponseType(){
-        return region == Region.hk ?
-                new TypeToken<ComboOrderResponse>() {}.getType() :
-                new TypeToken<SimpleOrderResponse>() {}.getType();
+        return region == Region.us ?
+                new TypeToken<SimpleOrderResponse>() {}.getType() :
+                new TypeToken<ComboOrderResponse>() {}.getType();
     }
 
 
@@ -194,9 +210,9 @@ public class TradeHttpApiService implements TradeApiService {
             params.put(LAST_CLIENT_ORDER_ID_PARAM, lastClientOrderId);
         }
         request.setQuery(params);
-        Type responseType = region == Region.hk ?
-                new TypeToken<Orders<SimpleOrder>>() {}.getType() :
-                new TypeToken<Orders<ComboOrder>>() {}.getType();
+        Type responseType = region == Region.us ?
+                new TypeToken<Orders<ComboOrder>>() {}.getType() :
+                new TypeToken<Orders<SimpleOrder>>() {}.getType();
         return apiClient.request(request).responseType(responseType).doAction();
     }
 
@@ -208,7 +224,7 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(CLIENT_ORDER_ID_PARAM, clientOrderId);
         request.setQuery(params);
-        Type responseType = region == Region.hk ? SimpleOrder.class : ComboOrder.class;
+        Type responseType = region == Region.us ? ComboOrder.class : SimpleOrder.class;
         return apiClient.request(request).responseType(responseType).doAction();
     }
 
@@ -220,6 +236,18 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(INSTRUMENT_ID_PARAM, instrumentId);
         request.setQuery(params);
         return apiClient.request(request).responseType(InstrumentInfo.class).doAction();
+    }
+
+    @Override
+    public TradableInstruments getTradeableInstruments(String lastSecurityId, Integer pageSize){
+        HttpRequest request = new HttpRequest("/trade/instrument/tradable/list", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        if(StringUtils.isNotEmpty(lastSecurityId)){
+            params.put(LAST_SECURITY_ID, lastSecurityId);
+        }
+        params.put(PAGE_SIZE_PARAM, pageSize == null ? 10 : pageSize);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(TradableInstruments.class).doAction();
     }
 
     @Override

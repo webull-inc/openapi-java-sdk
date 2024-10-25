@@ -15,6 +15,8 @@
  */
 package com.webull.openapi.trade.api.request;
 
+import java.util.List;
+
 public class StockOrder {
 
     private String clientOrderId;
@@ -28,6 +30,11 @@ public class StockOrder {
     private String stopPrice;
     private String trailingType;
     private String trailingStopStep;
+    private String tradeCurrency;
+    private String accountTaxType;
+    private String marginType;
+    private List<CloseContract> closeContracts;
+
 
     public String getClientOrderId() {
         return clientOrderId;
@@ -117,6 +124,38 @@ public class StockOrder {
         this.trailingStopStep = trailingStopStep;
     }
 
+    public String getTradeCurrency() {
+        return tradeCurrency;
+    }
+
+    public void setTradeCurrency(String tradeCurrency) {
+        this.tradeCurrency = tradeCurrency;
+    }
+
+    public String getAccountTaxType() {
+        return accountTaxType;
+    }
+
+    public void setAccountTaxType(String accountTaxType) {
+        this.accountTaxType = accountTaxType;
+    }
+
+    public String getMarginType() {
+        return marginType;
+    }
+
+    public void setMarginType(String marginType) {
+        this.marginType = marginType;
+    }
+
+    public List<CloseContract> getCloseContracts() {
+        return closeContracts;
+    }
+
+    public void setCloseContracts(List<CloseContract> closeContracts) {
+        this.closeContracts = closeContracts;
+    }
+
     @Override
     public String toString() {
         return "StockOrder{" +
@@ -125,12 +164,16 @@ public class StockOrder {
                 ", qty='" + qty + '\'' +
                 ", side='" + side + '\'' +
                 ", tif='" + tif + '\'' +
-                ", extendedHoursTrading='" + extendedHoursTrading + '\'' +
+                ", extendedHoursTrading=" + extendedHoursTrading +
                 ", orderType='" + orderType + '\'' +
                 ", limitPrice='" + limitPrice + '\'' +
                 ", stopPrice='" + stopPrice + '\'' +
                 ", trailingType='" + trailingType + '\'' +
                 ", trailingStopStep='" + trailingStopStep + '\'' +
+                ", tradeCurrency='" + tradeCurrency + '\'' +
+                ", accountTaxType='" + accountTaxType + '\'' +
+                ", marginType='" + marginType + '\'' +
+                ", closeContracts=" + closeContracts +
                 '}';
     }
 }

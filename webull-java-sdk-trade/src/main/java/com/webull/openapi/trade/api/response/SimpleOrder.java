@@ -15,6 +15,8 @@
  */
 package com.webull.openapi.trade.api.response;
 
+import com.webull.openapi.trade.api.request.CloseContract;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class SimpleOrder extends OrderItem implements Order {
     private String orderId;
     private Boolean extendedHoursTrading;
     private String tif;
+    private String accountTaxType;
+    private String marginType;
+    private List<CloseContract> closeContracts;
 
     @Override
     public String getAccountId() {
@@ -76,6 +81,30 @@ public class SimpleOrder extends OrderItem implements Order {
         this.tif = tif;
     }
 
+    public String getAccountTaxType() {
+        return accountTaxType;
+    }
+
+    public void setAccountTaxType(String accountTaxType) {
+        this.accountTaxType = accountTaxType;
+    }
+
+    public String getMarginType() {
+        return marginType;
+    }
+
+    public void setMarginType(String marginType) {
+        this.marginType = marginType;
+    }
+
+    public List<CloseContract> getCloseContracts() {
+        return closeContracts;
+    }
+
+    public void setCloseContracts(List<CloseContract> closeContracts) {
+        this.closeContracts = closeContracts;
+    }
+
     @Override
     public String toString() {
         return "SimpleOrder{" +
@@ -101,6 +130,9 @@ public class SimpleOrder extends OrderItem implements Order {
                 ", instrumentId='" + instrumentId + '\'' +
                 ", currency='" + currency + '\'' +
                 ", symbol='" + symbol + '\'' +
+                ", accountTaxType='" + accountTaxType + '\'' +
+                ", marginType='" + marginType + '\'' +
+                ", closeContracts=" + closeContracts +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.webull.openapi.example.quotes;
 
 import com.webull.openapi.common.dict.Category;
+import com.webull.openapi.common.dict.EventType;
 import com.webull.openapi.common.dict.Timespan;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
@@ -9,9 +10,7 @@ import com.webull.openapi.http.HttpApiConfig;
 import com.webull.openapi.logger.Logger;
 import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.quotes.api.QuotesApiClient;
-import com.webull.openapi.quotes.domain.Bar;
-import com.webull.openapi.quotes.domain.Instrument;
-import com.webull.openapi.quotes.domain.Snapshot;
+import com.webull.openapi.quotes.domain.*;
 import com.webull.openapi.quotes.internal.http.HttpQuotesApiClient;
 
 import java.util.HashSet;
@@ -26,6 +25,14 @@ public class QuotesHttpApi {
         Set<String> symbols = new HashSet<>();
         symbols.add("AAPL");
         symbols.add("TSLA");
+
+        Set<String> instrumentIds = new HashSet<>();
+        instrumentIds.add("913303964");
+        instrumentIds.add("913256135");
+
+        Set<String> eventTypes = new HashSet<>();
+        eventTypes.add(EventType.Reverse_Stock_Split.getCode());
+        eventTypes.add(EventType.Stock_Split.getCode());
 
         HttpApiConfig apiConfig = HttpApiConfig.builder()
                 .appKey(Env.APP_KEY)
@@ -46,6 +53,21 @@ public class QuotesHttpApi {
             List<Instrument> instruments = quotesApiClient.getInstruments(symbols, Category.US_STOCK.name());
             logger.info("Instruments: {}", instruments);
 
+            // get instruments page
+            List<Instrument> pageInstruments = quotesApiClient.queryPageInstruments(913303964, 10);
+            logger.info("Page Instruments: {}", pageInstruments);
+
+            // get end of day market
+            List<EodBars> eodBars = quotesApiClient.getEodBars(instrumentIds, "2023-01-01", 10);
+            logger.info("Eod bars: {}", eodBars);
+
+            // get corp action
+            CorpActionRequest corpActionReq = new CorpActionRequest();
+            corpActionReq.setEventTypes(eventTypes);
+            corpActionReq.setInstrumentIds(instrumentIds);
+            List<CorpAction> corpAction = quotesApiClient.getCorpAction(corpActionReq);
+            logger.info("Corp action: {}", corpAction);
+            
         } catch (ClientException ex) {
             logger.error("Client error", ex);
         } catch (ServerException ex) {

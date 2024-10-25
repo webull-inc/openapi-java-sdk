@@ -19,7 +19,7 @@
     <parent>
         <groupId>com.webull.openapi</groupId>
         <artifactId>webull-java-sdk</artifactId>
-        <version>0.2.6</version>
+        <version>0.2.7</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
