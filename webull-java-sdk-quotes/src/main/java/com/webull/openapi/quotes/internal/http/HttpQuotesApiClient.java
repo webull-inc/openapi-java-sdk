@@ -69,16 +69,6 @@ public class HttpQuotesApiClient implements QuotesApiClient {
     }
 
     @Override
-    public List<Instrument> queryPageInstruments(Integer lastInstrumentId, Integer pageSize){
-        HttpRequest request = new HttpRequest("/instrument/query-page", Versions.V1, HttpMethod.GET);
-        Map<String, Object> params = new HashMap<>();
-        params.put(ArgNames.LAST_INSTRUMENT_ID, lastInstrumentId == null ? 0 : lastInstrumentId);
-        params.put(ArgNames.PAGE_SIZE, pageSize == null ? 20 : pageSize);
-        request.setQuery(params);
-        return apiClient.request(request).responseType(new TypeToken<List<Instrument>>() {}.getType()).doAction();
-    }
-
-    @Override
     public List<Bar> getBars(String symbol, String category, String timespan, int count) {
         Assert.notBlank(Arrays.asList(ArgNames.SYMBOL, ArgNames.CATEGORY, ArgNames.TIMESPAN), symbol, category, timespan);
         HttpRequest request = new HttpRequest("/market-data/bars", Versions.V1, HttpMethod.GET);

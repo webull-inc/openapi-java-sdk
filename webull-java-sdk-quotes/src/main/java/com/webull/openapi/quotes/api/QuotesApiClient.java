@@ -37,11 +37,6 @@ public interface QuotesApiClient extends Closeable {
 
     List<Instrument> getInstruments(Set<String> symbols, String category);
 
-    /**
-     * Only for Webull JP
-     */
-    List<Instrument> queryPageInstruments(Integer lastInstrumentId, Integer pageSize);
-
     default List<Bar> getBars(String symbol, String category, String timespan) {
         return getBars(symbol, category, timespan, 200);
     }

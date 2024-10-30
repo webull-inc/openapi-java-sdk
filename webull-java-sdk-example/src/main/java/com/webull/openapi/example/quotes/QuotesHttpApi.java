@@ -53,10 +53,6 @@ public class QuotesHttpApi {
             List<Instrument> instruments = quotesApiClient.getInstruments(symbols, Category.US_STOCK.name());
             logger.info("Instruments: {}", instruments);
 
-            // get instruments page
-            List<Instrument> pageInstruments = quotesApiClient.queryPageInstruments(913303964, 10);
-            logger.info("Page Instruments: {}", pageInstruments);
-
             // get end of day market
             List<EodBars> eodBars = quotesApiClient.getEodBars(instrumentIds, "2023-01-01", 10);
             logger.info("Eod bars: {}", eodBars);
