@@ -204,11 +204,6 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
     }
 
     @Override
-    public List<Instrument> queryPageInstruments(Integer lastInstrumentId, Integer pageSize){
-        throw new UnsupportedOperationException(NOT_SUPPORT_MSG);
-    }
-
-    @Override
     public List<CorpAction> getCorpAction(CorpActionRequest action){
         throw new UnsupportedOperationException(NOT_SUPPORT_MSG);
     }
