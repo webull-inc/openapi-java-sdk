@@ -15,33 +15,44 @@
  */
 package com.webull.openapi.trade.api.response;
 
-public class OrderClientId {
 
-    private String clientOrderId;
 
-    private String orderId;
+public class CommonPositionInfo {
 
-    public String getClientOrderId() {
-        return clientOrderId;
-    }
+    /**
+     * 单腿ID
+     */
+    private String itemId;
 
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
-    }
 
-    public String getOrderId() {
-        return orderId;
-    }
+    /**
+     * 方向：买为BUY，卖为SELL
+     */
+    private String side;
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+    /**
+     * 数量
+     */
+    private String quantity;
 
-    @Override
-    public String toString() {
-        return "OrderClientId{" +
-                "clientOrderId='" + clientOrderId + '\'' +
-                ", orderId='" + orderId + '\'' +
-                '}';
-    }
+    /**
+     * symbol
+     */
+    private String symbol;
+
+    /**
+     * 成本价
+     */
+    private String costPrice;
+
+    /**
+     * 持仓盈亏
+     */
+    private String unrealizedProfitLoss;
+
+    /**
+     * 税收类型，非通用，日本地区，枚举类型【GENERAL】
+     * JP
+     */
+    private String accountTaxType;
 }

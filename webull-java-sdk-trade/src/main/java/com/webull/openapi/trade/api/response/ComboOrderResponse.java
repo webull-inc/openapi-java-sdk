@@ -53,6 +53,11 @@ public class ComboOrderResponse implements Serializable, OrderResponse {
         return null;
     }
 
+    @Override
+    public String getOrderId() {
+        return "";
+    }
+
     public void setCode(Integer code) {
         this.code = code;
     }

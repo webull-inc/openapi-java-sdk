@@ -15,33 +15,39 @@
  */
 package com.webull.openapi.trade.api.response;
 
-public class OrderClientId {
+import java.util.List;
 
-    private String clientOrderId;
 
-    private String orderId;
+public class JPAccountPositionsInfo {
 
-    public String getClientOrderId() {
-        return clientOrderId;
-    }
+    /**
+     * 持仓id
+     */
+    private String positionId;
 
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
-    }
 
-    public String getOrderId() {
-        return orderId;
-    }
+    /**
+     * 数量
+     */
+    private String quantity;
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+    /**
+     * 成本价
+     */
+    private String costPrice;
 
-    @Override
-    public String toString() {
-        return "OrderClientId{" +
-                "clientOrderId='" + clientOrderId + '\'' +
-                ", orderId='" + orderId + '\'' +
-                '}';
-    }
+    /**
+     * 持仓盈亏
+     */
+    private String unrealizedProfitLoss;
+
+    /**
+     * 浮动盈亏率 scale = 4
+     */
+    private String unrealizedProfitLossRate;
+
+    /**
+     * 持仓明细
+     */
+    private List<CommonPositionInfo> items;
 }
