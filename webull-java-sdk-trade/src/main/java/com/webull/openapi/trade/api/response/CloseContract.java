@@ -15,33 +15,33 @@
  */
 package com.webull.openapi.trade.api.response;
 
-public class OrderClientId {
+public class CloseContract {
 
-    private String clientOrderId;
+    private String contractId;
 
-    private String orderId;
+    private String qty;
 
-    public String getClientOrderId() {
-        return clientOrderId;
+    public String getContractId() {
+        return contractId;
     }
 
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getQty() {
+        return qty;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setQty(String qty) {
+        this.qty = qty;
     }
 
     @Override
     public String toString() {
-        return "OrderClientId{" +
-                "clientOrderId='" + clientOrderId + '\'' +
-                ", orderId='" + orderId + '\'' +
+        return "CloseContract{" +
+                "contractId='" + contractId + '\'' +
+                ", qty='" + qty + '\'' +
                 '}';
     }
 }

@@ -19,13 +19,13 @@ import com.webull.openapi.trade.api.request.StockOrder;
 import com.webull.openapi.trade.api.response.Account;
 import com.webull.openapi.trade.api.response.AccountDetail;
 import com.webull.openapi.trade.api.response.AccountPositions;
+import com.webull.openapi.trade.api.response.BalanceBase;
 import com.webull.openapi.trade.api.response.InstrumentInfo;
 import com.webull.openapi.trade.api.response.Order;
 import com.webull.openapi.trade.api.response.OrderResponse;
 import com.webull.openapi.trade.api.response.Orders;
-import com.webull.openapi.trade.api.response.TradeCalendar;
-import com.webull.openapi.trade.api.response.BalanceBase;
 import com.webull.openapi.trade.api.response.TradableInstruments;
+import com.webull.openapi.trade.api.response.TradeCalendar;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public interface TradeApiService {
 
     AccountDetail getAccountDetail(String accountId);
 
-    <T extends BalanceBase>T getAccountBalance(String accountId, String totalAssetCurrency);
+    <T extends BalanceBase> T getAccountBalance(String accountId, String totalAssetCurrency);
 
     AccountPositions getAccountPositions(String accountId, Integer pageSize, String lastId);
 

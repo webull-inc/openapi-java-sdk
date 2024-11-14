@@ -1,0 +1,146 @@
+/*
+ * Copyright 2022 Webull Technologies Pte. Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.webull.openapi.trade.api.response;
+
+public class NOrderItem {
+
+    private String clientOrderId;
+    private String symbol;
+    private String side;
+    private String orderType;
+    private String timeInForce;
+    private String stopPrice;
+    private String limitPrice;
+    private String quantity;
+    private String filledQuantity;
+    private String filledPrice;
+    private String status;
+    private String accountTaxType;
+
+    public String getClientOrderId() {
+        return clientOrderId;
+    }
+
+    public void setClientOrderId(String clientOrderId) {
+        this.clientOrderId = clientOrderId;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getSide() {
+        return side;
+    }
+
+    public void setSide(String side) {
+        this.side = side;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
+    public String getTimeInForce() {
+        return timeInForce;
+    }
+
+    public void setTimeInForce(String timeInForce) {
+        this.timeInForce = timeInForce;
+    }
+
+    public String getStopPrice() {
+        return stopPrice;
+    }
+
+    public void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
+    }
+
+    public String getLimitPrice() {
+        return limitPrice;
+    }
+
+    public void setLimitPrice(String limitPrice) {
+        this.limitPrice = limitPrice;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getFilledQuantity() {
+        return filledQuantity;
+    }
+
+    public void setFilledQuantity(String filledQuantity) {
+        this.filledQuantity = filledQuantity;
+    }
+
+    public String getFilledPrice() {
+        return filledPrice;
+    }
+
+    public void setFilledPrice(String filledPrice) {
+        this.filledPrice = filledPrice;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getAccountTaxType() {
+        return accountTaxType;
+    }
+
+    public void setAccountTaxType(String accountTaxType) {
+        this.accountTaxType = accountTaxType;
+    }
+
+    @Override
+    public String toString() {
+        return "NOrderItem{" +
+                "clientOrderId='" + clientOrderId + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", side='" + side + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", timeInForce='" + timeInForce + '\'' +
+                ", stopPrice='" + stopPrice + '\'' +
+                ", limitPrice='" + limitPrice + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", filledQuantity='" + filledQuantity + '\'' +
+                ", filledPrice='" + filledPrice + '\'' +
+                ", status='" + status + '\'' +
+                ", accountTaxType='" + accountTaxType + '\'' +
+                '}';
+    }
+}

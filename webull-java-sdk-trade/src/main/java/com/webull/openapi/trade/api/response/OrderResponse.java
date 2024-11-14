@@ -27,4 +27,6 @@ public interface OrderResponse {
 
     String getClientOrderId();
 
+    String getOrderId();
+
 }

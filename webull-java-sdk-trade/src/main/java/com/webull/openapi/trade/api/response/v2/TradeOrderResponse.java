@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull
+ * Copyright 2022 Webull Technologies Pte. Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,53 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.trade.api.response;
+package com.webull.openapi.trade.api.response.v2;
 
-import java.io.Serializable;
-
-public class SimpleOrderResponse implements Serializable, OrderResponse {
-
-    private static final long serialVersionUID = 6695412497588538012L;
+public class TradeOrderResponse {
 
     private String clientOrderId;
 
     private String orderId;
 
-    @Override
-    @Deprecated
-    public Integer getCode() {
-        return null;
-    }
-
-    @Override
-    @Deprecated
-    public String getMsg() {
-        return null;
-    }
-
-    @Override
-    @Deprecated
-    public OrderClientId getData() {
-        return null;
-    }
-
-    @Override
-    @Deprecated
-    public Boolean isSuccess() {
-        return null;
-    }
-
-    @Override
-    public String getClientOrderId() {
-        return clientOrderId;
-    }
-
-
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
-    }
-
-    @Override
     public String getOrderId() {
         return orderId;
     }
@@ -68,9 +29,17 @@ public class SimpleOrderResponse implements Serializable, OrderResponse {
         this.orderId = orderId;
     }
 
+    public String getClientOrderId() {
+        return clientOrderId;
+    }
+
+    public void setClientOrderId(String clientOrderId) {
+        this.clientOrderId = clientOrderId;
+    }
+
     @Override
     public String toString() {
-        return "SimpleOrderResponse{" +
+        return "TradeOrderResponse{" +
                 "clientOrderId='" + clientOrderId + '\'' +
                 ", orderId='" + orderId + '\'' +
                 '}';
