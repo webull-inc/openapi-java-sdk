@@ -29,6 +29,8 @@ public class ContractPosition {
 
     private String marginType;
 
+    private String accountTaxType;
+
     public String getContractId() {
         return contractId;
     }
@@ -77,6 +79,14 @@ public class ContractPosition {
         this.marginType = marginType;
     }
 
+    public String getAccountTaxType() {
+        return accountTaxType;
+    }
+
+    public void setAccountTaxType(String accountTaxType) {
+        this.accountTaxType = accountTaxType;
+    }
+
     @Override
     public String toString() {
         return "ContractPosition{" +
@@ -86,6 +96,7 @@ public class ContractPosition {
                 ", unrealizedProfitLoss='" + unrealizedProfitLoss + '\'' +
                 ", marketValue='" + marketValue + '\'' +
                 ", marginType='" + marginType + '\'' +
+                ", accountTaxType='" + accountTaxType + '\'' +
                 '}';
     }
 }

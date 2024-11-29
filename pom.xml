@@ -21,7 +21,7 @@
     <groupId>com.webull.openapi</groupId>
     <artifactId>webull-java-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>0.2.8</version>
+    <version>0.2.9</version>
 
     <name>webull-java-sdk</name>
     <url>https://github.com/webull-inc/openapi-java-sdk/</url>
