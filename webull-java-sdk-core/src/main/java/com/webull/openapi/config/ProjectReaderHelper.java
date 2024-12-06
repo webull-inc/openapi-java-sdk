@@ -24,7 +24,7 @@ public class ProjectReaderHelper {
 
     private static final String APPLICATION_VERSION = "application.version";
 
-    private static final String DEFAULT_APPLICATION_VERSION = "0.2.8";
+    private static final String DEFAULT_APPLICATION_VERSION = "0.2.9";
 
     private static final String APPLICATION_NAME = "application.name";
 
