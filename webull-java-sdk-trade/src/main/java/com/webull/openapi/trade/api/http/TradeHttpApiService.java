@@ -27,21 +27,22 @@ import com.webull.openapi.http.HttpRequest;
 import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
-import com.webull.openapi.trade.api.response.*;
 import com.webull.openapi.trade.api.response.Account;
 import com.webull.openapi.trade.api.response.AccountBalance;
 import com.webull.openapi.trade.api.response.AccountDetail;
 import com.webull.openapi.trade.api.response.AccountPositions;
+import com.webull.openapi.trade.api.response.BalanceBase;
 import com.webull.openapi.trade.api.response.ComboOrder;
+import com.webull.openapi.trade.api.response.ComboOrderResponse;
 import com.webull.openapi.trade.api.response.InstrumentInfo;
+import com.webull.openapi.trade.api.response.JPAccountBalance;
 import com.webull.openapi.trade.api.response.Order;
 import com.webull.openapi.trade.api.response.OrderResponse;
 import com.webull.openapi.trade.api.response.Orders;
 import com.webull.openapi.trade.api.response.SimpleOrder;
-import com.webull.openapi.trade.api.response.TradeCalendar;
-import com.webull.openapi.trade.api.response.BalanceBase;
-import com.webull.openapi.trade.api.response.JPAccountBalance;
+import com.webull.openapi.trade.api.response.SimpleOrderResponse;
 import com.webull.openapi.trade.api.response.TradableInstruments;
+import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
@@ -55,6 +56,9 @@ public class TradeHttpApiService implements TradeApiService {
 
     private static final String ACCOUNT_ID_ARG = "accountId";
     private static final String STOCK_ORDER_ARG = "stockOrder";
+    private static final String TRADE_ORDER_ARG = "tradeOrder";
+    private static final String NEW_ORDERS_ARG = "newOrders";
+    private static final String MODIFY_ORDERS_ARG = "modifyOrders";
     private static final String CLIENT_ORDER_ID_ARG = "clientOrderId";
     private static final String INSTRUMENT_ID_ARG = "instrumentId";
     private static final String MARKET_ARG = "market";
@@ -84,6 +88,7 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String INSTRUMENT_TYPE_PARAM = "instrument_type";
     private static final String STRIKE_PRICE_PARAM = "strike_price";
     private static final String INIT_EXP_DATE_PARAM = "init_exp_date";
+    private static final String START_TIME_PARAM = "start_date";
 
     private final Region region;
     private final HttpApiClient apiClient;
@@ -94,8 +99,8 @@ public class TradeHttpApiService implements TradeApiService {
 
     public TradeHttpApiService(HttpApiClient apiClient) {
         this.region = Region.of(apiClient.getConfig().getRegionId())
-                .orElseThrow(() -> new ClientException(ErrorCode.INVALID_PARAMETER,
-                        "Must set region id which defined in " + Region.class.getName() + " when using this service."));
+            .orElseThrow(() -> new ClientException(ErrorCode.INVALID_PARAMETER,
+                "Must set region id which defined in " + Region.class.getName() + " when using this service."));
         this.apiClient = apiClient;
     }
 
@@ -107,7 +112,8 @@ public class TradeHttpApiService implements TradeApiService {
             params.put(SUBSCRIPTION_ID_PARAM, subscriptionId);
         }
         request.setQuery(params);
-        return apiClient.request(request).responseType(new TypeToken<List<Account>>() {}.getType()).doAction();
+        return apiClient.request(request).responseType(new TypeToken<List<Account>>() {
+        }.getType()).doAction();
     }
 
     @Override
@@ -120,8 +126,9 @@ public class TradeHttpApiService implements TradeApiService {
         return apiClient.request(request).responseType(AccountDetail.class).doAction();
     }
 
+    @Deprecated
     @Override
-    public <T extends BalanceBase>T getAccountBalance(String accountId, String totalAssetCurrency){
+    public <T extends BalanceBase> T getAccountBalance(String accountId, String totalAssetCurrency) {
         Assert.notBlank(ACCOUNT_ID_ARG, accountId);
         HttpRequest request = new HttpRequest("/account/balance", Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
@@ -177,7 +184,6 @@ public class TradeHttpApiService implements TradeApiService {
         Assert.notBlank(Arrays.asList(ACCOUNT_ID_ARG, CLIENT_ORDER_ID_ARG), accountId, clientOrderId);
         HttpRequest request = new HttpRequest("/trade/order/cancel", Versions.V1, HttpMethod.POST);
         Map<String, Object> params = new HashMap<>();
-        params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(CLIENT_ORDER_ID_PARAM, clientOrderId);
         request.setBody(params);
         return apiClient.request(request).responseType(getTradeOrderResponseType()).doAction();
@@ -279,4 +285,5 @@ public class TradeHttpApiService implements TradeApiService {
         request.setQuery(params);
         return apiClient.request(request).responseType(InstrumentInfo.class).doAction();
     }
+
 }
