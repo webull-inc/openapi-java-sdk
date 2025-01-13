@@ -86,6 +86,13 @@ public interface TradeApiV2Service {
      * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
      * but support will be gradually introduced in the future.
      */
-    List<OrderHistory> listOrders(String accountId, Integer pageSize, String startDate, String lastClientOrderId);
+    List<OrderHistory> listOrders(String accountId, Integer pageSize, String startDate, String endDate, String lastClientOrderId);
+
+    /**
+     * This interface is exclusively available for Webull Hong Kong brokerage clients.
+     * Currently, it does not support Webull Japan or Webull U.S. clients,
+     * but support will be gradually introduced in the future.
+     */
+    OrderHistory getOrderDetails(String accountId, String clientOrderId);
 
 }

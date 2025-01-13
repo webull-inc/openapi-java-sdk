@@ -13,24 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.trade.api.response.v2;
+package com.webull.openapi.common.dict;
 
-import com.webull.openapi.trade.api.response.CommonPositionInfo;
+public enum OptionStrategy {
 
-import java.util.List;
+    /** Single option **/
+    SINGLE,
 
+    /**  Buy writes  **/
+    COVERED_STOCK,
 
-public class AccountPositionsInfo {
+    /**  Straddle  **/
+    STRADDLE,
 
-    private String positionId;
+    /** Strangle **/
+    STRANGLE,
 
-    private String quantity;
+    /** Vertical **/
+    VERTICAL,
 
-    private String costPrice;
+    /** Calendar **/
+    CALENDAR,
 
-    private String unrealizedProfitLoss;
+    /**  Butterfly  **/
+    BUTTERFLY,
 
-    private String unrealizedProfitLossRate;
+    /** Condor **/
+    CONDOR,
 
-    private List<CommonPositionInfo> items;
+    /**  Collar with stock  **/
+    COLLAR_WITH_STOCK,
+
+    /**  Iron butterfly  **/
+    IRON_BUTTERFLY,
+
+    /**  Iron condor  **/
+    IRON_CONDOR,
+
+    /**  Diagonal  **/
+    DIAGONAL
+
 }

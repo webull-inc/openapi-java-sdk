@@ -76,7 +76,8 @@ public class TradeV2Api {
 
             PreviewOrderResponse previewOrderResponse = apiService.previewOrder(accountId, tradeOrder);
             logger.info("previewOrderResponse: {}", previewOrderResponse);
-            placeOne.setClientOrderId(GUID.get());
+            String clientOrderId = GUID.get();
+            placeOne.setClientOrderId(clientOrderId);
             TradeOrderResponse tradePlaceOrderResponse = apiService.placeOrder(accountId, tradeOrder);
             logger.info("tradePlaceOrderResponse: {}", tradePlaceOrderResponse);
             Thread.sleep(1000L);
@@ -96,8 +97,13 @@ public class TradeV2Api {
             TradeOrderResponse tradeCancelOrderResponse = apiService.cancelOrder(accountId, cancelTradeOrder);
             logger.info("tradeCancelOrderResponse: {}", tradeCancelOrderResponse);
 
-            List<OrderHistory> tradeOrderItems = apiService.listOrders(accountId, 10, "2024-09-25", "034Q784G9K6DT0KHKA8S000000");
+            List<OrderHistory> tradeOrderItems = apiService.listOrders(accountId, 10, "2024-09-25", null, null);
             logger.info("tradeOrderItems: {}", tradeOrderItems);
+
+            // Replace with the client_order_id to be queried.
+            OrderHistory orderDetailResponse = apiService.getOrderDetails(accountId, clientOrderId);
+            logger.info("orderDetailResponse: {}", orderDetailResponse);
+
         } catch (ClientException ex) {
             logger.error("Client error", ex);
         } catch (ServerException ex) {

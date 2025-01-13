@@ -19,40 +19,97 @@ package com.webull.openapi.trade.api.response;
 
 public class CommonPositionInfo {
 
-    /**
-     * 单腿ID
-     */
     private String itemId;
 
-
-    /**
-     * 方向：买为BUY，卖为SELL
-     */
     private String side;
 
-    /**
-     * 数量
-     */
     private String quantity;
 
-    /**
-     * symbol
-     */
+    private String availableQuantity;
+
     private String symbol;
 
-    /**
-     * 成本价
-     */
     private String costPrice;
 
-    /**
-     * 持仓盈亏
-     */
     private String unrealizedProfitLoss;
 
-    /**
-     * 税收类型，非通用，日本地区，枚举类型【GENERAL】
-     * JP
-     */
     private String accountTaxType;
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getSide() {
+        return side;
+    }
+
+    public void setSide(String side) {
+        this.side = side;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(String costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public String getUnrealizedProfitLoss() {
+        return unrealizedProfitLoss;
+    }
+
+    public void setUnrealizedProfitLoss(String unrealizedProfitLoss) {
+        this.unrealizedProfitLoss = unrealizedProfitLoss;
+    }
+
+    public String getAccountTaxType() {
+        return accountTaxType;
+    }
+
+    public void setAccountTaxType(String accountTaxType) {
+        this.accountTaxType = accountTaxType;
+    }
+
+    public String getAvailableQuantity() {
+        return availableQuantity;
+    }
+
+    public void setAvailableQuantity(String availableQuantity) {
+        this.availableQuantity = availableQuantity;
+    }
+
+    @Override
+    public String toString() {
+        return "CommonPositionInfo{" +
+                "itemId='" + itemId + '\'' +
+                ", side='" + side + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", availableQuantity='" + availableQuantity + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", costPrice='" + costPrice + '\'' +
+                ", unrealizedProfitLoss='" + unrealizedProfitLoss + '\'' +
+                ", accountTaxType='" + accountTaxType + '\'' +
+                '}';
+    }
 }

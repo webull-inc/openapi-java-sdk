@@ -16,6 +16,7 @@
 package com.webull.openapi.trade.api;
 
 import com.webull.openapi.trade.api.request.StockOrder;
+import com.webull.openapi.trade.api.request.v2.OptionOrder;
 import com.webull.openapi.trade.api.response.Account;
 import com.webull.openapi.trade.api.response.AccountDetail;
 import com.webull.openapi.trade.api.response.AccountPositions;
@@ -26,6 +27,8 @@ import com.webull.openapi.trade.api.response.OrderResponse;
 import com.webull.openapi.trade.api.response.Orders;
 import com.webull.openapi.trade.api.response.TradableInstruments;
 import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
+import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 
 import java.util.List;
 
@@ -61,4 +64,32 @@ public interface TradeApiService {
     List<TradeCalendar> getTradeCalendar(String market, String start, String end);
 
     InstrumentInfo getSecurityInfo(String symbol, String market, String instrumentSuperType, String instrumentType, String strikePrice, String initExpDate);
+
+    /**
+     * This interface is exclusively available for Webull Hong Kong brokerage clients.
+     * Currently, it does not support Webull Japan or Webull U.S. clients,
+     * but support will be gradually introduced in the future.
+     */
+    PreviewOrderResponse previewOption(String accountId, OptionOrder optionOrder);
+
+    /**
+     * This interface is exclusively available for Webull Hong Kong brokerage clients.
+     * Currently, it does not support Webull Japan or Webull U.S. clients,
+     * but support will be gradually introduced in the future.
+     */
+    TradeOrderResponse placeOption(String accountId, OptionOrder optionOrder);
+
+    /**
+     * This interface is exclusively available for Webull Hong Kong brokerage clients.
+     * Currently, it does not support Webull Japan or Webull U.S. clients,
+     * but support will be gradually introduced in the future.
+     */
+    TradeOrderResponse replaceOption(String accountId, OptionOrder optionOrder);
+
+    /**
+     * This interface is exclusively available for Webull Hong Kong brokerage clients.
+     * Currently, it does not support Webull Japan or Webull U.S. clients,
+     * but support will be gradually introduced in the future.
+     */
+    TradeOrderResponse cancelOption(String accountId, OptionOrder optionOrder);
 }

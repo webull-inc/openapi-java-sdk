@@ -29,6 +29,19 @@ public class NOrderItem {
     private String filledPrice;
     private String status;
     private String accountTaxType;
+    private String orderId;
+    private String instrumentType;
+    private String supportTradingSession;
+    private String entrustType;
+    private String totalQuantity;
+    private String remainQuantity;
+    private String placeTime;
+    private String filledTime;
+    private String optionType;
+    private String optionExpireDate;
+    private String optionExercisePrice;
+    private String optionCategory;
+    private String optionContractMultiplier;
 
     public String getClientOrderId() {
         return clientOrderId;
@@ -126,6 +139,110 @@ public class NOrderItem {
         this.accountTaxType = accountTaxType;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getInstrumentType() {
+        return instrumentType;
+    }
+
+    public void setInstrumentType(String instrumentType) {
+        this.instrumentType = instrumentType;
+    }
+
+    public String getSupportTradingSession() {
+        return supportTradingSession;
+    }
+
+    public void setSupportTradingSession(String supportTradingSession) {
+        this.supportTradingSession = supportTradingSession;
+    }
+
+    public String getEntrustType() {
+        return entrustType;
+    }
+
+    public void setEntrustType(String entrustType) {
+        this.entrustType = entrustType;
+    }
+
+    public String getTotalQuantity() {
+        return totalQuantity;
+    }
+
+    public void setTotalQuantity(String totalQuantity) {
+        this.totalQuantity = totalQuantity;
+    }
+
+    public String getRemainQuantity() {
+        return remainQuantity;
+    }
+
+    public void setRemainQuantity(String remainQuantity) {
+        this.remainQuantity = remainQuantity;
+    }
+
+    public String getPlaceTime() {
+        return placeTime;
+    }
+
+    public void setPlaceTime(String placeTime) {
+        this.placeTime = placeTime;
+    }
+
+    public String getFilledTime() {
+        return filledTime;
+    }
+
+    public void setFilledTime(String filledTime) {
+        this.filledTime = filledTime;
+    }
+
+    public String getOptionType() {
+        return optionType;
+    }
+
+    public void setOptionType(String optionType) {
+        this.optionType = optionType;
+    }
+
+    public String getOptionExpireDate() {
+        return optionExpireDate;
+    }
+
+    public void setOptionExpireDate(String optionExpireDate) {
+        this.optionExpireDate = optionExpireDate;
+    }
+
+    public String getOptionExercisePrice() {
+        return optionExercisePrice;
+    }
+
+    public void setOptionExercisePrice(String optionExercisePrice) {
+        this.optionExercisePrice = optionExercisePrice;
+    }
+
+    public String getOptionCategory() {
+        return optionCategory;
+    }
+
+    public void setOptionCategory(String optionCategory) {
+        this.optionCategory = optionCategory;
+    }
+
+    public String getOptionContractMultiplier() {
+        return optionContractMultiplier;
+    }
+
+    public void setOptionContractMultiplier(String optionContractMultiplier) {
+        this.optionContractMultiplier = optionContractMultiplier;
+    }
+
     @Override
     public String toString() {
         return "NOrderItem{" +
@@ -141,6 +258,19 @@ public class NOrderItem {
                 ", filledPrice='" + filledPrice + '\'' +
                 ", status='" + status + '\'' +
                 ", accountTaxType='" + accountTaxType + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", instrumentType='" + instrumentType + '\'' +
+                ", supportTradingSession='" + supportTradingSession + '\'' +
+                ", entrustType='" + entrustType + '\'' +
+                ", totalQuantity='" + totalQuantity + '\'' +
+                ", remainQuantity='" + remainQuantity + '\'' +
+                ", placeTime='" + placeTime + '\'' +
+                ", filledTime='" + filledTime + '\'' +
+                ", optionType='" + optionType + '\'' +
+                ", optionExpireDate='" + optionExpireDate + '\'' +
+                ", optionExercisePrice='" + optionExercisePrice + '\'' +
+                ", optionCategory='" + optionCategory + '\'' +
+                ", optionContractMultiplier='" + optionContractMultiplier + '\'' +
                 '}';
     }
 }

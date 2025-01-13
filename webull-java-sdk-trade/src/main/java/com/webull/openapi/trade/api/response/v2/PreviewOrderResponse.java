@@ -21,6 +21,8 @@ public class PreviewOrderResponse {
 
     private String estimatedTransactionFee;
 
+    private String currency;
+
     public String getEstimatedCost() {
         return estimatedCost;
     }
@@ -35,6 +37,14 @@ public class PreviewOrderResponse {
 
     public void setEstimatedTransactionFee(String estimatedTransactionFee) {
         this.estimatedTransactionFee = estimatedTransactionFee;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     @Override
