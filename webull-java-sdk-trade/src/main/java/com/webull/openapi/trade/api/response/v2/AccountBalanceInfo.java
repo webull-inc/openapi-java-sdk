@@ -20,25 +20,12 @@ import java.util.List;
 
 public class AccountBalanceInfo {
 
-    /**
-     * 总资产计价币种
-     */
     private String totalAssetCurrency;
 
-    /**
-     * 现金总额，币种为totalAssetCurrency字段值，单位元。
-     * totalCashBalance=sum(cashBalance*汇率)
-     */
     private String totalCashBalance;
 
-    /**
-     * 持仓盈亏
-     */
     private String totalUnrealizedProfitLoss;
 
-    /**
-     * 资产明细
-     */
     private List<JPAccountAssetInfo> accountCurrencyAssets;
 
     @Override

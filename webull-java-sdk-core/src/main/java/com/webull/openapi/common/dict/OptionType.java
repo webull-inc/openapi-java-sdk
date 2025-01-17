@@ -13,24 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.trade.api.response.v2;
+package com.webull.openapi.common.dict;
 
-import com.webull.openapi.trade.api.response.CommonPositionInfo;
+public enum OptionType {
 
-import java.util.List;
+    /** PUT **/
+    PUT,
 
+    /** CALL **/
+    CALL,
 
-public class AccountPositionsInfo {
-
-    private String positionId;
-
-    private String quantity;
-
-    private String costPrice;
-
-    private String unrealizedProfitLoss;
-
-    private String unrealizedProfitLossRate;
-
-    private List<CommonPositionInfo> items;
 }

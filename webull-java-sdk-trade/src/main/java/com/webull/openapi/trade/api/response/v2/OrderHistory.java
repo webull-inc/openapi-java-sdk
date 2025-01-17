@@ -22,6 +22,7 @@ import java.util.List;
 public class OrderHistory {
 
     private String clientOrderId;
+    private String orderId;
     private String side;
     private String orderType;
     private String timeInForce;
@@ -112,10 +113,19 @@ public class OrderHistory {
         this.items = items;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
         return "OrderHistory{" +
                 "clientOrderId='" + clientOrderId + '\'' +
+                ", orderId='" + orderId + '\'' +
                 ", side='" + side + '\'' +
                 ", orderType='" + orderType + '\'' +
                 ", timeInForce='" + timeInForce + '\'' +

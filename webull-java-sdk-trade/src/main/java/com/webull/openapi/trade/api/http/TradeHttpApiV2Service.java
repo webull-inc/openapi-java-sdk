@@ -27,16 +27,17 @@ import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiV2Service;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
 import com.webull.openapi.trade.api.response.AccountBalance;
-import com.webull.openapi.trade.api.response.v2.OrderHistory;
 import com.webull.openapi.trade.api.response.v2.Account;
 import com.webull.openapi.trade.api.response.v2.AccountBalanceInfo;
 import com.webull.openapi.trade.api.response.v2.AccountPositionsInfo;
+import com.webull.openapi.trade.api.response.v2.OrderHistory;
 import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,10 +54,13 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     private static final String NEW_ORDERS_ARG = "newOrders";
     private static final String MODIFY_ORDERS_ARG = "modifyOrders";
     private static final String CLIENT_ORDER_ID_ARG = "clientOrderId";
+
     private static final String PAGE_SIZE_PARAM = "page_size";
     private static final String START_TIME_PARAM = "start_date";
+    private static final String END_TIME_PARAM = "end_date";
     private static final String LAST_CLIENT_ORDER_ID_PARAM = "last_client_order_id";
     private static final String ACCOUNT_ID_PARAM = "account_id";
+    private static final String CLIENT_ORDER_ID_PARAM = "client_order_id";
 
     private final Region region;
     private final HttpApiClient apiClient;
@@ -195,7 +199,7 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
      * but support will be gradually introduced in the future.
      */
     @Override
-    public List<OrderHistory> listOrders(String accountId, Integer pageSize, String startDate, String lastClientOrderId) {
+    public List<OrderHistory> listOrders(String accountId, Integer pageSize, String startDate, String endDate, String lastClientOrderId) {
         Assert.notBlank(ACCOUNT_ID_ARG, accountId);
         HttpRequest request = new HttpRequest("/openapi/account/orders/history", Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
@@ -207,6 +211,22 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         if (StringUtils.isNotEmpty(startDate)) {
             params.put(START_TIME_PARAM, startDate);
         }
+        if (StringUtils.isNotEmpty(endDate)) {
+            params.put(END_TIME_PARAM, endDate);
+        }
         request.setQuery(params);
-        return apiClient.request(request).responseType(new TypeToken<List<OrderHistory>>() {}.getType()).doAction();    }
+        return apiClient.request(request).responseType(new TypeToken<List<OrderHistory>>() {}.getType()).doAction();
+    }
+
+
+    @Override
+    public OrderHistory getOrderDetails(String accountId, String clientOrderId) {
+        Assert.notBlank(Arrays.asList(ACCOUNT_ID_ARG, CLIENT_ORDER_ID_ARG), accountId, clientOrderId);
+        HttpRequest request = new HttpRequest("/openapi/account/orders/detail", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        params.put(ACCOUNT_ID_PARAM, accountId);
+        params.put(CLIENT_ORDER_ID_PARAM, clientOrderId);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(OrderHistory.class).doAction();
+    }
 }

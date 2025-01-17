@@ -13,24 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.trade.api.response.v2;
+package com.webull.openapi.common.dict;
 
-import com.webull.openapi.trade.api.response.CommonPositionInfo;
+public enum ComboType {
 
-import java.util.List;
+    /**  Simple Order  **/
+    NORMAL,
 
+    /** Master Order */
+    MASTER,
 
-public class AccountPositionsInfo {
+    /** Stop Loss Order **/
+    STOP_LOSS,
 
-    private String positionId;
+    /** Take Profit Order **/
+    STOP_PROFIT,
 
-    private String quantity;
+    /**  One Triggers Other Order **/
+    OTO,
 
-    private String costPrice;
+    /**  One Cancels Other Order **/
+    OCO,
 
-    private String unrealizedProfitLoss;
+    /**  One Triggers a One Cancels Other Order **/
+    OTOCO
 
-    private String unrealizedProfitLossRate;
-
-    private List<CommonPositionInfo> items;
 }

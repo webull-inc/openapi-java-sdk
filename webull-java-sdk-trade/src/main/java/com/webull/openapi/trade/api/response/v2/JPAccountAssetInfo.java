@@ -17,29 +17,14 @@ package com.webull.openapi.trade.api.response.v2;
 
 public class JPAccountAssetInfo {
 
-    /**
-     * 币种，取值参考字典值 CurrencyEnum
-     */
     private String currency;
 
-    /**
-     * 现金余额，币种为currency字段值，单位元，精确到小数点后2位
-     */
     private String cashBalance;
 
-    /**
-     * unsettledCash，币种为currency字段值，单位元，精确到小数点后2位
-     */
     private String unsettledCash;
 
-    /**
-     * 购买力，币种为currency字段值，单位元，精确到小数点后2位
-     */
     private String buyingPower;
 
-    /**
-     * 持仓盈亏
-     */
     private String unrealizedProfitLoss;
 
 

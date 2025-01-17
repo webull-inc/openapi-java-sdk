@@ -27,6 +27,7 @@ import com.webull.openapi.http.HttpRequest;
 import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
+import com.webull.openapi.trade.api.request.v2.OptionOrder;
 import com.webull.openapi.trade.api.response.Account;
 import com.webull.openapi.trade.api.response.AccountBalance;
 import com.webull.openapi.trade.api.response.AccountDetail;
@@ -43,6 +44,8 @@ import com.webull.openapi.trade.api.response.SimpleOrder;
 import com.webull.openapi.trade.api.response.SimpleOrderResponse;
 import com.webull.openapi.trade.api.response.TradableInstruments;
 import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
+import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
@@ -57,6 +60,7 @@ public class TradeHttpApiService implements TradeApiService {
     private static final String ACCOUNT_ID_ARG = "accountId";
     private static final String STOCK_ORDER_ARG = "stockOrder";
     private static final String TRADE_ORDER_ARG = "tradeOrder";
+    private static final String OPTION_ORDER_ARG = "optionOrder";
     private static final String NEW_ORDERS_ARG = "newOrders";
     private static final String MODIFY_ORDERS_ARG = "modifyOrders";
     private static final String CLIENT_ORDER_ID_ARG = "clientOrderId";
@@ -112,8 +116,7 @@ public class TradeHttpApiService implements TradeApiService {
             params.put(SUBSCRIPTION_ID_PARAM, subscriptionId);
         }
         request.setQuery(params);
-        return apiClient.request(request).responseType(new TypeToken<List<Account>>() {
-        }.getType()).doAction();
+        return apiClient.request(request).responseType(new TypeToken<List<Account>>() {}.getType()).doAction();
     }
 
     @Override
@@ -184,6 +187,7 @@ public class TradeHttpApiService implements TradeApiService {
         Assert.notBlank(Arrays.asList(ACCOUNT_ID_ARG, CLIENT_ORDER_ID_ARG), accountId, clientOrderId);
         HttpRequest request = new HttpRequest("/trade/order/cancel", Versions.V1, HttpMethod.POST);
         Map<String, Object> params = new HashMap<>();
+        params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(CLIENT_ORDER_ID_PARAM, clientOrderId);
         request.setBody(params);
         return apiClient.request(request).responseType(getTradeOrderResponseType()).doAction();
@@ -284,6 +288,60 @@ public class TradeHttpApiService implements TradeApiService {
         params.put(INSTRUMENT_SUPER_TYPE_PARAM, instrumentSuperType);
         request.setQuery(params);
         return apiClient.request(request).responseType(InstrumentInfo.class).doAction();
+    }
+
+    @Override
+    public PreviewOrderResponse previewOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notEmpty(NEW_ORDERS_ARG, optionOrder.getNewOrders());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/preview", Versions.V1, HttpMethod.POST);
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        request.setQuery(queryMap);
+        request.setBody(optionOrder);
+        return apiClient.request(request).responseType(PreviewOrderResponse.class).doAction();
+    }
+
+    @Override
+    public TradeOrderResponse placeOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notEmpty(NEW_ORDERS_ARG, optionOrder.getNewOrders());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/place", Versions.V1, HttpMethod.POST);
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        request.setQuery(queryMap);
+        request.setBody(optionOrder);
+        return apiClient.request(request).responseType(TradeOrderResponse.class).doAction();
+    }
+
+    @Override
+    public TradeOrderResponse replaceOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notEmpty(MODIFY_ORDERS_ARG, optionOrder.getModifyOrders());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/replace", Versions.V1, HttpMethod.POST);
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        request.setQuery(queryMap);
+        request.setBody(optionOrder);
+        return apiClient.request(request).responseType(TradeOrderResponse.class).doAction();
+    }
+
+    @Override
+    public TradeOrderResponse cancelOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notBlank(CLIENT_ORDER_ID_ARG, optionOrder.getClientOrderId());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/cancel", Versions.V1, HttpMethod.POST);
+        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        params.put(CLIENT_ORDER_ID_PARAM, optionOrder.getClientOrderId());
+        request.setQuery(queryMap);
+        request.setBody(params);
+        return apiClient.request(request).responseType(TradeOrderResponse.class).doAction();
     }
 
 }

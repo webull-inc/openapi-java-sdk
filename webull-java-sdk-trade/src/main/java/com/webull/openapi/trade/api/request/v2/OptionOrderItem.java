@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Webull Technologies Pte. Ltd.
+ * Copyright 2022 Webull
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,51 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.trade.api.response;
+package com.webull.openapi.trade.api.request.v2;
 
 import java.util.List;
 
-public class OrderHistory {
+public class OptionOrderItem {
 
     private String clientOrderId;
+    private String comboType;
+    private String optionStrategy;
     private String side;
     private String orderType;
     private String timeInForce;
     private String stopPrice;
     private String limitPrice;
     private String quantity;
-    private String filledQuantity;
-    private String status;
-    private String comboInstrumentType;
-    private String orderId;
-    private String supportTradingSession;
-    private String optionStrategy;
-
-    private List<NOrderItem> items;
-
-    public String getComboInstrumentType() {
-        return comboInstrumentType;
-    }
-
-    public void setComboInstrumentType(String comboInstrumentType) {
-        this.comboInstrumentType = comboInstrumentType;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getSupportTradingSession() {
-        return supportTradingSession;
-    }
-
-    public void setSupportTradingSession(String supportTradingSession) {
-        this.supportTradingSession = supportTradingSession;
-    }
+    private String entrustType;
+    private String currentAsk;
+    private String currentBid;
+    private List<OptionOrderItemLeg> orders;
 
     public String getClientOrderId() {
         return clientOrderId;
@@ -65,6 +39,22 @@ public class OrderHistory {
 
     public void setClientOrderId(String clientOrderId) {
         this.clientOrderId = clientOrderId;
+    }
+
+    public String getComboType() {
+        return comboType;
+    }
+
+    public void setComboType(String comboType) {
+        this.comboType = comboType;
+    }
+
+    public String getOptionStrategy() {
+        return optionStrategy;
+    }
+
+    public void setOptionStrategy(String optionStrategy) {
+        this.optionStrategy = optionStrategy;
     }
 
     public String getSide() {
@@ -115,55 +105,55 @@ public class OrderHistory {
         this.quantity = quantity;
     }
 
-    public String getFilledQuantity() {
-        return filledQuantity;
+    public String getEntrustType() {
+        return entrustType;
     }
 
-    public void setFilledQuantity(String filledQuantity) {
-        this.filledQuantity = filledQuantity;
+    public void setEntrustType(String entrustType) {
+        this.entrustType = entrustType;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCurrentAsk() {
+        return currentAsk;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCurrentAsk(String currentAsk) {
+        this.currentAsk = currentAsk;
     }
 
-    public List<NOrderItem> getItems() {
-        return items;
+    public String getCurrentBid() {
+        return currentBid;
     }
 
-    public void setItems(List<NOrderItem> items) {
-        this.items = items;
+    public void setCurrentBid(String currentBid) {
+        this.currentBid = currentBid;
     }
 
-    public String getOptionStrategy() {
-        return optionStrategy;
+    public List<OptionOrderItemLeg> getOrders() {
+        return orders;
     }
 
-    public void setOptionStrategy(String optionStrategy) {
-        this.optionStrategy = optionStrategy;
+    public void setOrders(List<OptionOrderItemLeg> orders) {
+        this.orders = orders;
     }
 
     @Override
     public String toString() {
-        return "OrderHistory{" +
+        return "OptionOrderItem{" +
                 "clientOrderId='" + clientOrderId + '\'' +
+                ", comboType='" + comboType + '\'' +
+                ", optionStrategy='" + optionStrategy + '\'' +
                 ", side='" + side + '\'' +
                 ", orderType='" + orderType + '\'' +
-                ", timeInForce='" + timeInForce + '\'' +
+                ", timeInForce=" + timeInForce +
                 ", stopPrice='" + stopPrice + '\'' +
                 ", limitPrice='" + limitPrice + '\'' +
                 ", quantity='" + quantity + '\'' +
-                ", filledQuantity='" + filledQuantity + '\'' +
-                ", status='" + status + '\'' +
-                ", comboInstrumentType='" + comboInstrumentType + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", supportTradingSession=" + supportTradingSession +
-                ", optionStrategy=" + optionStrategy +
-                ", items=" + items +
+                ", entrustType='" + entrustType + '\'' +
+                ", currentAsk='" + currentAsk + '\'' +
+                ", currentBid='" + currentBid + '\'' +
+                ", orders='" + orders + '\'' +
                 '}';
     }
+
 }
