@@ -15,6 +15,7 @@
  */
 package com.webull.openapi.trade.events.subscribe;
 
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.grpc.lifecycle.GrpcHandler;
 import com.webull.openapi.grpc.retry.GrpcRetryCondition;
 import com.webull.openapi.retry.RetryPolicy;
@@ -34,6 +35,8 @@ public interface EventClientBuilder {
     EventClientBuilder port(int port);
 
     EventClientBuilder regionId(String regionId);
+
+    EventClientBuilder customerType(CustomerType customerType);
 
     EventClientBuilder enableTls(boolean enableTls);
 

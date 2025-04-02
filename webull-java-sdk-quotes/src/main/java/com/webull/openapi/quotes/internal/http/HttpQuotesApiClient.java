@@ -16,6 +16,7 @@
 package com.webull.openapi.quotes.internal.http;
 
 import com.google.common.reflect.TypeToken;
+import com.webull.openapi.common.Headers;
 import com.webull.openapi.common.Versions;
 import com.webull.openapi.http.HttpApiClient;
 import com.webull.openapi.http.HttpApiConfig;
@@ -33,7 +34,6 @@ import com.webull.openapi.quotes.domain.CorpActionRequest;
 import com.webull.openapi.quotes.internal.common.ArgNames;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
-import com.google.api.client.util.Sets;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,6 +47,7 @@ public class HttpQuotesApiClient implements QuotesApiClient {
     private static final String NOT_SUPPORT_MSG = "Http client not support for this method, please use default grpc client.";
 
     private final HttpApiClient apiClient;
+    private String userId;
 
     public HttpQuotesApiClient(HttpApiConfig config) {
         this.apiClient = new HttpApiClient(config);
@@ -54,6 +55,26 @@ public class HttpQuotesApiClient implements QuotesApiClient {
 
     public HttpQuotesApiClient(HttpApiClient apiClient) {
         this.apiClient = apiClient;
+    }
+    
+    /**
+     * Set user ID which will be added as x-user-id header to all requests
+     * @param userId user ID
+     * @return current client instance
+     */
+    public HttpQuotesApiClient setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+    
+    /**
+     * Add custom headers to the request
+     * @param request HTTP request
+     */
+    private void addCustomHeaders(HttpRequest request) {
+        if (StringUtils.isNotEmpty(this.userId)) {
+            request.getHeaders().put(Headers.USER_ID_KEY, this.userId);
+        }
     }
 
     @Override
@@ -78,6 +99,7 @@ public class HttpQuotesApiClient implements QuotesApiClient {
         params.put(ArgNames.TIMESPAN, timespan);
         params.put(ArgNames.COUNT, count);
         request.setQuery(params);
+        addCustomHeaders(request);
         return apiClient.request(request).responseType(new TypeToken<List<Bar>>() {}.getType()).doAction();
     }
 
@@ -111,7 +133,6 @@ public class HttpQuotesApiClient implements QuotesApiClient {
         return apiClient.request(request).responseType(new TypeToken<List<CorpAction>>() {}.getType()).doAction();
     }
 
-
     @Override
     public Quote getQuote(String symbol, String category) {
         throw new UnsupportedOperationException(NOT_SUPPORT_MSG);
@@ -126,6 +147,7 @@ public class HttpQuotesApiClient implements QuotesApiClient {
         params.put(ArgNames.SYMBOLS, String.join(",", symbols));
         params.put(ArgNames.CATEGORY, category);
         request.setQuery(params);
+        addCustomHeaders(request);
         return apiClient.request(request).responseType(new TypeToken<List<Snapshot>>() {}.getType()).doAction();
     }
 

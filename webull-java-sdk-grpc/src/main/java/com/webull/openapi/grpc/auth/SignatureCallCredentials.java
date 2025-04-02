@@ -40,6 +40,7 @@ public class SignatureCallCredentials extends CallCredentials {
     private static final Metadata.Key<String> NONCE = Metadata.Key.of(Headers.NONCE, Metadata.ASCII_STRING_MARSHALLER);
     private static final Metadata.Key<String> TIMESTAMP = Metadata.Key.of(Headers.TIMESTAMP, Metadata.ASCII_STRING_MARSHALLER);
     private static final Metadata.Key<String> SIGNATURE = Metadata.Key.of(Headers.SIGNATURE, Metadata.ASCII_STRING_MARSHALLER);
+    private static final Metadata.Key<String> USER_ID = Metadata.Key.of(Headers.USER_ID_KEY, Metadata.ASCII_STRING_MARSHALLER);
 
     private final String appKey;
     private final String appSecret;
@@ -48,6 +49,7 @@ public class SignatureCallCredentials extends CallCredentials {
     private final String url;
     private final Signer signer;
     private final byte[] requestBytes;
+    private String userId;
 
     public SignatureCallCredentials(String appKey, String appSecret, byte[] requestBytes) {
         this(appKey, appSecret, null, null, null, requestBytes);
@@ -66,6 +68,16 @@ public class SignatureCallCredentials extends CallCredentials {
         this.requestBytes = requestBytes;
         this.signer = signer;
     }
+    
+    /**
+     * Set user ID
+     * @param userId user ID
+     * @return current CallCredentials instance
+     */
+    public SignatureCallCredentials setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
 
     @Override
     public void applyRequestMetadata(RequestInfo requestInfo, Executor executor, MetadataApplier applier) {
@@ -82,6 +94,11 @@ public class SignatureCallCredentials extends CallCredentials {
                 headers.put(SIGN_VERSION, signVersion);
                 headers.put(NONCE, guid);
                 headers.put(TIMESTAMP, timestamp);
+                
+                // Add user ID header if exists
+                if (StringUtils.isNotEmpty(this.userId)) {
+                    headers.put(USER_ID, this.userId);
+                }
 
                 // sign param key should be lowercase.
                 Map<String, String> signParams = new HashMap<>();

@@ -13,28 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.trade.api.response.v2;
+package com.webull.openapi.common;
 
-import com.webull.openapi.trade.api.response.CommonPositionInfo;
+import java.util.Optional;
 
-import java.util.List;
+/**
+ * CustomerType
+ */
+public enum CustomerType {
+    /**
+     * Individual customer
+     */
+    INDIVIDUAL,
+
+    /**
+     * Institution customer
+     */
+    INSTITUTION,
+    ;
 
 
-public class AccountPositionsInfo {
-
-    private String currency;
-
-    private String positionId;
-
-    private String quantity;
-
-    private String costPrice;
-
-    private String lastPrice;
-
-    private String unrealizedProfitLoss;
-
-    private String unrealizedProfitLossRate;
-
-    private List<CommonPositionInfo> items;
+    public static Optional<CustomerType> of(String name) {
+        for (CustomerType region : CustomerType.values()) {
+            if (region.name().equals(name)) {
+                return Optional.of(region);
+            }
+        }
+        return Optional.empty();
+    }
 }

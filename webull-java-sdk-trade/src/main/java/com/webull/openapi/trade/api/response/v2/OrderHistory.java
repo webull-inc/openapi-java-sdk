@@ -31,6 +31,11 @@ public class OrderHistory {
     private String quantity;
     private String filledQuantity;
     private String status;
+    private String supportTradingSession;
+    private String optionStrategy;
+    private String comboInstrumentType;
+    private String comboOrderId;
+    private String comboType;
     private List<NOrderItem> items;
 
     public String getClientOrderId() {
@@ -105,6 +110,46 @@ public class OrderHistory {
         this.status = status;
     }
 
+    public String getSupportTradingSession() {
+        return supportTradingSession;
+    }
+
+    public void setSupportTradingSession(String supportTradingSession) {
+        this.supportTradingSession = supportTradingSession;
+    }
+
+    public String getOptionStrategy() {
+        return optionStrategy;
+    }
+
+    public void setOptionStrategy(String optionStrategy) {
+        this.optionStrategy = optionStrategy;
+    }
+
+    public String getComboInstrumentType() {
+        return comboInstrumentType;
+    }
+
+    public void setComboInstrumentType(String comboInstrumentType) {
+        this.comboInstrumentType = comboInstrumentType;
+    }
+
+    public String getComboOrderId() {
+        return comboOrderId;
+    }
+
+    public void setComboOrderId(String comboOrderId) {
+        this.comboOrderId = comboOrderId;
+    }
+
+    public String getComboType() {
+        return comboType;
+    }
+
+    public void setComboType(String comboType) {
+        this.comboType = comboType;
+    }
+
     public List<NOrderItem> getItems() {
         return items;
     }
@@ -134,6 +179,11 @@ public class OrderHistory {
                 ", quantity='" + quantity + '\'' +
                 ", filledQuantity='" + filledQuantity + '\'' +
                 ", status='" + status + '\'' +
+                ", supportTradingSession='" + supportTradingSession + '\'' +
+                ", optionStrategy='" + optionStrategy + '\'' +
+                ", comboInstrumentType='" + comboInstrumentType + '\'' +
+                ", comboOrderId='" + comboOrderId + '\'' +
+                ", comboType='" + comboType + '\'' +
                 ", items=" + items +
                 '}';
     }

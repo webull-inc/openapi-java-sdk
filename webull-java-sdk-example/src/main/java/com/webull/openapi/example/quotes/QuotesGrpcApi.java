@@ -1,5 +1,6 @@
 package com.webull.openapi.example.quotes;
 
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.Timespan;
 import com.webull.openapi.example.config.Env;
@@ -13,6 +14,7 @@ import com.webull.openapi.quotes.domain.Instrument;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
 import com.webull.openapi.quotes.domain.Tick;
+import com.webull.openapi.serialize.JsonSerializer;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,31 +30,33 @@ public class QuotesGrpcApi {
         try (QuotesApiClient quotesApiClient = QuotesApiClient.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
+//                .customerType(CustomerType.INSTITUTION)
+//                .userId("<your_webull_user_id>")
                 .regionId(Env.REGION_ID)
                 .build()) {
-
             // get instruments
             Set<String> symbols = new HashSet<>();
             symbols.add(symbol);
 
             List<Instrument> instruments = quotesApiClient.getInstruments(symbols, Category.US_STOCK.name());
-            logger.info("Instruments: {}", instruments);
+            logger.info("Instruments: {}", JsonSerializer.toJson(instruments));
 
             // get bars
+
             List<Bar> bars = quotesApiClient.getBars(symbol, Category.US_STOCK.name(), Timespan.D.name(), 10);
-            logger.info("Bars: {}", bars);
+            logger.info("Bars: {}", JsonSerializer.toJson(bars));
 
             // get quote
             Quote quote = quotesApiClient.getQuote(symbol, Category.US_STOCK.name());
-            logger.info("Quote: {}", quote);
+            logger.info("Quote: {}", JsonSerializer.toJson(quote));
 
             // get snapshots
             List<Snapshot> snapshots = quotesApiClient.getSnapshots(symbols, Category.US_STOCK.name());
-            logger.info("Snapshots: {}", snapshots);
+            logger.info("Snapshots: {}", JsonSerializer.toJson(snapshots));
 
             // get ticks
             List<Tick> ticks = quotesApiClient.getTicks(symbol, Category.US_STOCK.name(), 10);
-            logger.info("Ticks: {}", ticks);
+            logger.info("Ticks: {}", JsonSerializer.toJson(ticks));
 
         } catch (ClientException ex) {
             logger.error("Client error", ex);

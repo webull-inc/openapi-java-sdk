@@ -16,6 +16,7 @@
 package com.webull.openapi.quotes.internal.grpc;
 
 import com.webull.openapi.common.ApiModule;
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.endpoint.EndpointResolver;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
@@ -39,12 +40,14 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
     private String appSecret;
     private String regionId;
     private String host;
+    private CustomerType customerType = CustomerType.INDIVIDUAL;
     private int port = 443;
     private long connectTimeoutMillis = 10000;
     private long readTimeoutMillis = 10000;
     private RetryPolicy retryPolicy =
             new RetryPolicy(GrpcRetryCondition.getInstance(), new FixedDelayStrategy(5, TimeUnit.SECONDS));
     private boolean enableTls = true;
+    private String userId;
 
     private final LinkedList<GrpcHandler> handlers = new LinkedList<>();
 
@@ -63,6 +66,12 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
     @Override
     public QuotesApiClientBuilder host(String host) {
         this.host = host;
+        return this;
+    }
+
+    @Override
+    public QuotesApiClientBuilder customerType(CustomerType customerType) {
+        this.customerType = customerType;
         return this;
     }
 
@@ -91,6 +100,12 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
     }
 
     @Override
+    public QuotesApiClientBuilder userId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    @Override
     public QuotesApiClientBuilder enableTls(boolean enableTls) {
         this.enableTls = enableTls;
         return this;
@@ -113,7 +128,7 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
     public QuotesApiClient build() {
         if (StringUtils.isBlank(this.host)) {
             Assert.notBlank("regionId", regionId);
-            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.QUOTES)
+            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.of("QUOTES_" + customerType.name()))
                     .orElseThrow(() -> new ClientException(ErrorCode.ENDPOINT_RESOLVING_ERROR, "Unknown region"));
         }
         if (this.handlers.stream().noneMatch(ApiDowngradeHandler.class::isInstance)) {
@@ -128,6 +143,7 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
                 this.readTimeoutMillis,
                 this.retryPolicy,
                 this.enableTls,
+                this.userId,
                 this.handlers);
     }
 }

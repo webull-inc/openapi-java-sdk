@@ -16,6 +16,7 @@
 package com.webull.openapi.quotes.internal.mqtt;
 
 import com.webull.openapi.common.ApiModule;
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.endpoint.EndpointResolver;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
@@ -50,6 +51,7 @@ public final class DefaultQuotesSubsClientBuilder implements QuotesSubsClientBui
     private String appSecret;
     private String regionId;
     private String host;
+    private CustomerType customerType = CustomerType.INDIVIDUAL;
     private int port = 8883;
     private long connectTimeoutMillis = 5000;
     private long readTimeoutMillis = 60000;
@@ -93,6 +95,12 @@ public final class DefaultQuotesSubsClientBuilder implements QuotesSubsClientBui
     @Override
     public QuotesSubsClientBuilder regionId(String regionId) {
         this.regionId = regionId;
+        return this;
+    }
+
+    @Override
+    public QuotesSubsClientBuilder customerType(CustomerType customerType) {
+        this.customerType = customerType;
         return this;
     }
 
@@ -163,7 +171,7 @@ public final class DefaultQuotesSubsClientBuilder implements QuotesSubsClientBui
     public QuotesSubsClient build() {
         if (StringUtils.isBlank(this.host)) {
             Assert.notBlank("regionId", regionId);
-            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.QUOTES)
+            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.of("QUOTES_" + customerType.name()))
                     .orElseThrow(() -> new ClientException(ErrorCode.ENDPOINT_RESOLVING_ERROR, "Unknown region"));
         }
 

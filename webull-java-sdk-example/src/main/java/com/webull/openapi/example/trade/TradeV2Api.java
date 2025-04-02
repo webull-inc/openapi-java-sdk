@@ -1,6 +1,6 @@
 package com.webull.openapi.example.trade;
 
-import com.google.api.client.util.Lists;
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.common.Region;
 import com.webull.openapi.common.dict.AccountTaxType;
 import com.webull.openapi.common.dict.EntrustType;
@@ -12,10 +12,11 @@ import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
 import com.webull.openapi.http.HttpApiConfig;
+import com.webull.openapi.http.RuntimeOptions;
 import com.webull.openapi.logger.Logger;
 import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.trade.api.http.TradeHttpApiV2Service;
-import com.webull.openapi.trade.api.request.v2.CloseContract;
+import com.webull.openapi.trade.api.request.v2.NoPartyId;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
 import com.webull.openapi.trade.api.request.v2.TradeOrderItem;
 import com.webull.openapi.trade.api.response.v2.Account;
@@ -39,6 +40,7 @@ public class TradeV2Api {
                     .appKey(Env.APP_KEY)
                     .appSecret(Env.APP_SECRET)
                     .regionId(Env.REGION_ID)
+//                    .customerType(CustomerType.INSTITUTION)
                     .build();
             TradeHttpApiV2Service apiService = new TradeHttpApiV2Service(apiConfig);
 
@@ -61,17 +63,28 @@ public class TradeV2Api {
             List<TradeOrderItem> newOrders = new ArrayList<>();
             TradeOrderItem placeOne = new TradeOrderItem();
             newOrders.add(placeOne);
-            placeOne.setSymbol("7011");
+            placeOne.setSymbol("AAPL");
             placeOne.setInstrumentType(InstrumentSuperType.EQUITY.name());
-            placeOne.setMarket(Region.jp.name().toUpperCase());
-            placeOne.setOrderType(OrderType.LIMIT.name());
+            placeOne.setMarket(Region.us.name().toUpperCase());
+            placeOne.setOrderType(OrderType.MARKET.name());
             placeOne.setQuantity("100");
-            placeOne.setLimitPrice("2070");
+            placeOne.setLimitPrice("400");
+            placeOne.setTotalCashAmount("100");
             placeOne.setSupportTradingSession("N");
             placeOne.setSide(OrderSide.BUY.name());
             placeOne.setTimeInForce(OrderTIF.DAY.name());
             placeOne.setEntrustType(EntrustType.QTY.name());
-            placeOne.setAccountTaxType(AccountTaxType.GENERAL.name());
+//            placeOne.setSenderSubId("123456");
+//            List<NoPartyId> noPartyIds = new ArrayList<>();
+//            NoPartyId partyId = new NoPartyId();
+//            partyId.setPartyId("BNG144.666555");
+//            partyId.setPartyIdSource("D");
+//            partyId.setPartyRole("3");
+//            noPartyIds.add(partyId);
+//            placeOne.setNoPartyIds(noPartyIds);
+
+            // only jp need input accountTaxType
+            // placeOne.setAccountTaxType(AccountTaxType.GENERAL.name());
             tradeOrder.setNewOrders(newOrders);
 
             PreviewOrderResponse previewOrderResponse = apiService.previewOrder(accountId, tradeOrder);
