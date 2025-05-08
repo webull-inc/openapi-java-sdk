@@ -15,6 +15,7 @@
  */
 package com.webull.openapi.quotes.subsribe;
 
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.quotes.api.QuotesApiClient;
 import com.webull.openapi.quotes.subsribe.lifecycle.QuotesSubsHandler;
 import com.webull.openapi.quotes.subsribe.message.MarketData;
@@ -37,6 +38,8 @@ public interface QuotesSubsClientBuilder {
     QuotesSubsClientBuilder port(int port);
 
     QuotesSubsClientBuilder regionId(String regionId);
+
+    QuotesSubsClientBuilder customerType(CustomerType customerType);
 
     QuotesSubsClientBuilder connectTimeout(long timeoutMillis);
 

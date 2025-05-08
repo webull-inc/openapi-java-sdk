@@ -1,5 +1,6 @@
 package com.webull.openapi.example.quotes;
 
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.EventType;
 import com.webull.openapi.common.dict.Timespan;
@@ -37,12 +38,14 @@ public class QuotesHttpApi {
         HttpApiConfig apiConfig = HttpApiConfig.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
+//                .customerType(CustomerType.INSTITUTION)
+//                .userId("<your_webull_user_id>")
                 .regionId(Env.REGION_ID)
                 .build();
 
         try (QuotesApiClient quotesApiClient = new HttpQuotesApiClient(apiConfig)) {
             // get bars
-            List<Bar> bars = quotesApiClient.getBars("AAPL", Category.US_STOCK.name(), Timespan.D.name(), 200);
+            List<Bar> bars = quotesApiClient.getBars("AAPL", Category.US_STOCK.name(), Timespan.D.name(), 10);
             logger.info("Bars: {}", bars);
 
             // get snapshots

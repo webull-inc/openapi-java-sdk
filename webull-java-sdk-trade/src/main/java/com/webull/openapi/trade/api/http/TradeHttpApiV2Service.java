@@ -25,8 +25,9 @@ import com.webull.openapi.http.HttpApiConfig;
 import com.webull.openapi.http.HttpRequest;
 import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiV2Service;
+import com.webull.openapi.trade.api.request.v2.OptionOrder;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
-import com.webull.openapi.trade.api.response.AccountBalance;
+import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.trade.api.response.v2.Account;
 import com.webull.openapi.trade.api.response.v2.AccountBalanceInfo;
 import com.webull.openapi.trade.api.response.v2.AccountPositionsInfo;
@@ -36,21 +37,17 @@ import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * This v2 interface is exclusively available for Webull Japan brokerage clients.
- * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
- * but support will be gradually introduced in the future.
- */
+
 public class TradeHttpApiV2Service implements TradeApiV2Service {
 
     private static final String ACCOUNT_ID_ARG = "accountId";
     private static final String TRADE_ORDER_ARG = "tradeOrder";
+    private static final String OPTION_ORDER_ARG = "optionOrder";
     private static final String NEW_ORDERS_ARG = "newOrders";
     private static final String MODIFY_ORDERS_ARG = "modifyOrders";
     private static final String CLIENT_ORDER_ID_ARG = "clientOrderId";
@@ -61,6 +58,12 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     private static final String LAST_CLIENT_ORDER_ID_PARAM = "last_client_order_id";
     private static final String ACCOUNT_ID_PARAM = "account_id";
     private static final String CLIENT_ORDER_ID_PARAM = "client_order_id";
+    private static final String MARKET_ARG = "market";
+    private static final String START_ARG = "start";
+    private static final String END_ARG = "end";
+    private static final String MARKET_PARAM = MARKET_ARG;
+    private static final String START_PARAM = START_ARG;
+    private static final String END_PARAM = END_ARG;
 
     private final Region region;
     private final HttpApiClient apiClient;
@@ -77,9 +80,9 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public List<Account> listAccount() {
@@ -89,9 +92,9 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public AccountBalanceInfo balanceAccount(String accountId) {
@@ -100,14 +103,13 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         Map<String, Object> params = new HashMap<>();
         params.put(ACCOUNT_ID_PARAM, accountId);
         request.setQuery(params);
-        Type responseType = region == Region.jp ? AccountBalanceInfo.class : AccountBalance.class;
-        return apiClient.request(request).responseType(responseType).doAction();
+        return apiClient.request(request).responseType(AccountBalanceInfo.class).doAction();
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public List<AccountPositionsInfo> positionsAccount(String accountId) {
@@ -120,9 +122,9 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public PreviewOrderResponse previewOrder(String accountId, TradeOrder tradeOrder) {
@@ -137,9 +139,9 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public TradeOrderResponse placeOrder(String accountId, TradeOrder tradeOrder) {
@@ -156,9 +158,9 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public TradeOrderResponse replaceOrder(String accountId, TradeOrder tradeOrder) {
@@ -175,9 +177,9 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public TradeOrderResponse cancelOrder(String accountId, TradeOrder tradeOrder) {
@@ -194,9 +196,9 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
     /**
-     * This interface is exclusively available for Webull Japan brokerage clients.
-     * Currently, it does not support Webull Hong Kong or Webull U.S. clients,
-     * but support will be gradually introduced in the future.
+     * This interface is currently available only to individual brokerage customers in Webull Japan
+     * and institutional brokerage clients in Webull Hong Kong. It is not yet available to
+     * Webull US brokerage customers, but support will be introduced progressively in the future.
      */
     @Override
     public List<OrderHistory> listOrders(String accountId, Integer pageSize, String startDate, String endDate, String lastClientOrderId) {
@@ -219,6 +221,11 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
     }
 
 
+    /**
+     * This interface is currently available only to individual and institutional clients
+     * of Webull Hong Kong brokerages. It is not yet supported for clients of Webull US
+     * and Webull Japan brokerages, but support will be gradually introduced in the future.
+     */
     @Override
     public OrderHistory getOrderDetails(String accountId, String clientOrderId) {
         Assert.notBlank(Arrays.asList(ACCOUNT_ID_ARG, CLIENT_ORDER_ID_ARG), accountId, clientOrderId);
@@ -229,4 +236,96 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         request.setQuery(params);
         return apiClient.request(request).responseType(OrderHistory.class).doAction();
     }
+
+    /**
+     * This interface is currently available only to individual and institutional clients
+     * of Webull Hong Kong brokerages. It is not yet supported for clients of Webull US
+     * and Webull Japan brokerages, but support will be gradually introduced in the future.
+     */
+    @Override
+    public PreviewOrderResponse previewOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notEmpty(NEW_ORDERS_ARG, optionOrder.getNewOrders());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/preview", Versions.V1, HttpMethod.POST);
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        request.setQuery(queryMap);
+        request.setBody(optionOrder);
+        return apiClient.request(request).responseType(PreviewOrderResponse.class).doAction();
+    }
+
+    /**
+     * This interface is currently available only to individual and institutional clients
+     * of Webull Hong Kong brokerages. It is not yet supported for clients of Webull US
+     * and Webull Japan brokerages, but support will be gradually introduced in the future.
+     */
+    @Override
+    public TradeOrderResponse placeOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notEmpty(NEW_ORDERS_ARG, optionOrder.getNewOrders());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/place", Versions.V1, HttpMethod.POST);
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        request.setQuery(queryMap);
+        request.setBody(optionOrder);
+        return apiClient.request(request).responseType(TradeOrderResponse.class).doAction();
+    }
+
+    /**
+     * This interface is currently available only to individual and institutional clients
+     * of Webull Hong Kong brokerages. It is not yet supported for clients of Webull US
+     * and Webull Japan brokerages, but support will be gradually introduced in the future.
+     */
+    @Override
+    public TradeOrderResponse replaceOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notEmpty(MODIFY_ORDERS_ARG, optionOrder.getModifyOrders());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/replace", Versions.V1, HttpMethod.POST);
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        request.setQuery(queryMap);
+        request.setBody(optionOrder);
+        return apiClient.request(request).responseType(TradeOrderResponse.class).doAction();
+    }
+
+    /**
+     * This interface is currently available only to individual and institutional clients
+     * of Webull Hong Kong brokerages. It is not yet supported for clients of Webull US
+     * and Webull Japan brokerages, but support will be gradually introduced in the future.
+     */
+    @Override
+    public TradeOrderResponse cancelOption(String accountId, OptionOrder optionOrder) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notNull(OPTION_ORDER_ARG, optionOrder);
+        Assert.notBlank(CLIENT_ORDER_ID_ARG, optionOrder.getClientOrderId());
+        HttpRequest request = new HttpRequest("/openapi/account/orders/option/cancel", Versions.V1, HttpMethod.POST);
+        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put(ACCOUNT_ID_PARAM, accountId);
+        params.put(CLIENT_ORDER_ID_PARAM, optionOrder.getClientOrderId());
+        request.setQuery(queryMap);
+        request.setBody(params);
+        return apiClient.request(request).responseType(TradeOrderResponse.class).doAction();
+    }
+
+    /**
+     * This interface is currently available only to individual and institutional clients
+     * of Webull Hong Kong brokerages. It is not yet supported for clients of Webull US
+     * and Webull Japan brokerages, but support will be gradually introduced in the future.
+     */
+    @Override
+    public List<TradeCalendar> getTradeCalendar(String market, String start, String end) {
+        Assert.notBlank(Arrays.asList(MARKET_ARG, START_ARG, END_ARG), market, start, end);
+        HttpRequest request = new HttpRequest("/openapi/trade/calendar", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        params.put(MARKET_PARAM, market);
+        params.put(START_PARAM, start);
+        params.put(END_PARAM, end);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(new TypeToken<List<TradeCalendar>>() {}.getType()).doAction();
+    }
+
 }

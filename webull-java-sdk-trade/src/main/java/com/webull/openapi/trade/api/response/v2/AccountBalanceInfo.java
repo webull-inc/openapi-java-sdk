@@ -26,11 +26,13 @@ public class AccountBalanceInfo {
 
     private String totalUnrealizedProfitLoss;
 
-    private List<JPAccountAssetInfo> accountCurrencyAssets;
+    private String totalMarketValue;
+
+    private List<AccountAssetInfo> accountCurrencyAssets;
 
     @Override
     public String toString() {
-        return "JPAccountBalanceInfo{" +
+        return "AccountBalanceInfo{" +
                 "totalAssetCurrency='" + totalAssetCurrency + '\'' +
                 ", totalCashBalance='" + totalCashBalance + '\'' +
                 ", totalUnrealizedProfitLoss='" + totalUnrealizedProfitLoss + '\'' +

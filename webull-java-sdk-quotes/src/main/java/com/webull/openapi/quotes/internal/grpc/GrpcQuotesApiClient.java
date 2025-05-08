@@ -90,8 +90,9 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
                                   long readTimeoutMillis,
                                   RetryPolicy retryPolicy,
                                   boolean enableTls,
+                                  String userId,
                                   List<GrpcHandler> handlers) {
-        this(appKey, appSecret, host, port, connectTimeoutMillis, readTimeoutMillis, retryPolicy, enableTls, handlers,
+        this(appKey, appSecret, host, port, connectTimeoutMillis, readTimeoutMillis, retryPolicy, enableTls, userId, handlers,
                 ApiHandlerProxyFactory.getInstance());
     }
 
@@ -103,6 +104,7 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
                                   long readTimeoutMillis,
                                   RetryPolicy retryPolicy,
                                   boolean enableTls,
+                                  String userId,
                                   List<GrpcHandler> handlers,
                                   HandlerProxyFactory<Gateway.ClientResponse> handlerProxyFactory) {
         super(appKey, appSecret, host, port, retryPolicy, enableTls, handlers, handlerProxyFactory);
@@ -114,6 +116,9 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
 
         GrpcStreamEndpoint<Gateway.ClientRequest, Gateway.ClientResponse> endpoint =
                 new GrpcStreamEndpoint<>(this.appKey, this.host, this.port, new ApiStreamObserverFactory());
+        if (StringUtils.isNotEmpty(userId)) {
+            ((SignatureCallCredentials) this.credentials).setUserId(userId);
+        }
         this.channelPool = channelPoolMap.get(endpoint);
     }
 

@@ -16,6 +16,7 @@
 package com.webull.openapi.http;
 
 import com.webull.openapi.common.ApiModule;
+import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.endpoint.EndpointResolver;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
@@ -28,10 +29,12 @@ public class HttpApiConfig {
     private String appSecret;
     private String regionId;
     private String endpoint;
+    private String userId;
     private Integer port;
     private boolean autoRetry;
     private int maxRetries;
     private RuntimeOptions runtimeOptions;
+    private CustomerType customerType;
 
     private HttpApiConfig() {
     }
@@ -52,6 +55,14 @@ public class HttpApiConfig {
         return endpoint;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public Integer getPort() {
         return port;
     }
@@ -68,6 +79,10 @@ public class HttpApiConfig {
         return runtimeOptions;
     }
 
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
     public static HttpApiConfigBuilder builder() {
         return new HttpApiConfigBuilder();
     }
@@ -78,10 +93,12 @@ public class HttpApiConfig {
         private String appSecret;
         private String regionId;
         private String endpoint;
+        private String userId;
         private Integer port;
         private boolean autoRetry = false;
         private int maxRetries = 3;
         private RuntimeOptions runtimeOptions;
+        private CustomerType customerType = CustomerType.INDIVIDUAL;
 
         private HttpApiConfigBuilder() {
         }
@@ -133,6 +150,17 @@ public class HttpApiConfig {
             return this;
         }
 
+        public HttpApiConfigBuilder userId(String userId) {
+            Assert.notBlank("userId", userId);
+            this.userId = userId;
+            return this;
+        }
+
+        public HttpApiConfigBuilder customerType(CustomerType customerType) {
+            Assert.notNull("customerType", customerType);
+            this.customerType = customerType;
+            return this;
+        }
         public HttpApiConfig build() {
             HttpApiConfig config = new HttpApiConfig();
             config.appKey = this.appKey;
@@ -142,7 +170,7 @@ public class HttpApiConfig {
             if (StringUtils.isBlank(this.endpoint)) {
                 Assert.notBlank("regionId", regionId);
                 EndpointResolver resolver = EndpointResolver.getDefault();
-                config.endpoint = resolver.resolve(config.regionId, ApiModule.API)
+                config.endpoint = resolver.resolve(config.regionId, ApiModule.of("API_" + customerType.name()))
                         .orElseThrow(() -> new ClientException(ErrorCode.ENDPOINT_RESOLVING_ERROR, "Unknown region"));
             } else {
                 config.endpoint = this.endpoint;

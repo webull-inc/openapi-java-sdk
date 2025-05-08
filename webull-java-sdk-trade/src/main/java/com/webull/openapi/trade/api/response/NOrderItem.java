@@ -32,6 +32,8 @@ public class NOrderItem {
     private String orderId;
     private String instrumentType;
     private String supportTradingSession;
+    private String comboType;
+    private String comboOrderId;
     private String entrustType;
     private String totalQuantity;
     private String remainQuantity;
@@ -163,6 +165,22 @@ public class NOrderItem {
         this.supportTradingSession = supportTradingSession;
     }
 
+    public String getComboType() {
+        return comboType;
+    }
+
+    public void setComboType(String comboType) {
+        this.comboType = comboType;
+    }
+
+    public String getComboOrderId() {
+        return comboOrderId;
+    }
+
+    public void setComboOrderId(String comboOrderId) {
+        this.comboOrderId = comboOrderId;
+    }
+
     public String getEntrustType() {
         return entrustType;
     }
@@ -261,6 +279,8 @@ public class NOrderItem {
                 ", orderId='" + orderId + '\'' +
                 ", instrumentType='" + instrumentType + '\'' +
                 ", supportTradingSession='" + supportTradingSession + '\'' +
+                ", comboType='" + comboType + '\'' +
+                ", comboOrderId='" + comboOrderId + '\'' +
                 ", entrustType='" + entrustType + '\'' +
                 ", totalQuantity='" + totalQuantity + '\'' +
                 ", remainQuantity='" + remainQuantity + '\'' +

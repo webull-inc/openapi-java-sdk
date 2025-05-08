@@ -21,15 +21,27 @@ public enum ApiModule {
     /**
      * api
      */
-    API(DefaultHost.API_US, DefaultHost.API_HK, DefaultHost.API_JP),
+    API_INDIVIDUAL(DefaultHost.API_US, DefaultHost.API_HK, DefaultHost.API_JP),
+    /**
+     * api institution
+     */
+    API_INSTITUTION(DefaultHost.API_US_INSTITUTION, DefaultHost.API_HK_INSTITUTION, null),
     /**
      * quotes api
      */
-    QUOTES(DefaultHost.QUOTES_US, DefaultHost.QUOTES_HK, DefaultHost.QUOTES_JP),
+    QUOTES_INDIVIDUAL(DefaultHost.QUOTES_US, DefaultHost.QUOTES_HK, DefaultHost.QUOTES_JP),
+    /**
+     * quotes institution api
+     */
+    QUOTES_INSTITUTION(DefaultHost.QUOTES_US_INSTITUTION, DefaultHost.QUOTES_HK_INSTITUTION, null),
     /**
      * events api
      */
-    EVENTS(DefaultHost.EVENTS_US, DefaultHost.EVENTS_HK, DefaultHost.EVENTS_JP);
+    EVENTS_INDIVIDUAL(DefaultHost.EVENTS_US, DefaultHost.EVENTS_HK, DefaultHost.EVENTS_JP),
+    /**
+     * events api
+     */
+    EVENTS_INSTITUTION(DefaultHost.EVENTS_US_INSTITUTION, DefaultHost.EVENTS_HK_INSTITUTION, null);
 
     private final EnumMap<Region, String> hosts;
 
@@ -45,5 +57,14 @@ public enum ApiModule {
 
     public String getHost(Region region) {
         return hosts.get(region);
+    }
+
+    public static ApiModule of(String name) {
+        for (ApiModule apiModule : ApiModule.values()) {
+            if (apiModule.name().equals(name)) {
+                return apiModule;
+            }
+        }
+        return null;
     }
 }

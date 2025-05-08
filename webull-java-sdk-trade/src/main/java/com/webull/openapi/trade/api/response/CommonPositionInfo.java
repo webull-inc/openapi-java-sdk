@@ -16,7 +16,6 @@
 package com.webull.openapi.trade.api.response;
 
 
-
 public class CommonPositionInfo {
 
     private String itemId;
@@ -31,9 +30,21 @@ public class CommonPositionInfo {
 
     private String costPrice;
 
+    private String lastPrice;
+
     private String unrealizedProfitLoss;
 
     private String accountTaxType;
+
+    private String optionType;
+
+    private String optionCategory;
+
+    private String optionExercisePrice;
+
+    private String optionContractMultiplier;
+
+    private String optionContractDeliverable;
 
     public String getItemId() {
         return itemId;
@@ -99,6 +110,54 @@ public class CommonPositionInfo {
         this.availableQuantity = availableQuantity;
     }
 
+    public String getLastPrice() {
+        return lastPrice;
+    }
+
+    public void setLastPrice(String lastPrice) {
+        this.lastPrice = lastPrice;
+    }
+
+    public String getOptionType() {
+        return optionType;
+    }
+
+    public void setOptionType(String optionType) {
+        this.optionType = optionType;
+    }
+
+    public String getOptionCategory() {
+        return optionCategory;
+    }
+
+    public void setOptionCategory(String optionCategory) {
+        this.optionCategory = optionCategory;
+    }
+
+    public String getOptionExercisePrice() {
+        return optionExercisePrice;
+    }
+
+    public void setOptionExercisePrice(String optionExercisePrice) {
+        this.optionExercisePrice = optionExercisePrice;
+    }
+
+    public String getOptionContractMultiplier() {
+        return optionContractMultiplier;
+    }
+
+    public void setOptionContractMultiplier(String optionContractMultiplier) {
+        this.optionContractMultiplier = optionContractMultiplier;
+    }
+
+    public String getOptionContractDeliverable() {
+        return optionContractDeliverable;
+    }
+
+    public void setOptionContractDeliverable(String optionContractDeliverable) {
+        this.optionContractDeliverable = optionContractDeliverable;
+    }
+
     @Override
     public String toString() {
         return "CommonPositionInfo{" +
@@ -108,8 +167,14 @@ public class CommonPositionInfo {
                 ", availableQuantity='" + availableQuantity + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", costPrice='" + costPrice + '\'' +
+                ", lastPrice='" + lastPrice + '\'' +
                 ", unrealizedProfitLoss='" + unrealizedProfitLoss + '\'' +
                 ", accountTaxType='" + accountTaxType + '\'' +
+                ", optionType='" + optionType + '\'' +
+                ", optionCategory='" + optionCategory + '\'' +
+                ", optionExercisePrice='" + optionExercisePrice + '\'' +
+                ", optionContractMultiplier='" + optionContractMultiplier + '\'' +
+                ", optionContractDeliverable='" + optionContractDeliverable + '\'' +
                 '}';
     }
 }

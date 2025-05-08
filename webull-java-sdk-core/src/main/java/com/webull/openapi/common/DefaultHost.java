@@ -23,11 +23,20 @@ public final class DefaultHost {
     public static final String QUOTES_US = "usquotes-api.webullfintech.com";
     public static final String EVENTS_US = "events-api.webull.com";
 
+    public static final String API_US_INSTITUTION = "";
+    public static final String QUOTES_US_INSTITUTION = "";
+    public static final String EVENTS_US_INSTITUTION = "";
+
     public static final String API_HK = "api.webull.hk";
     public static final String QUOTES_HK = "quotes-api.webull.hk";
     public static final String EVENTS_HK = "events-api.webull.hk";
 
+    public static final String API_HK_INSTITUTION = "inst-api.webull.hk";
+    public static final String QUOTES_HK_INSTITUTION = "quotes-api.webull.hk";
+    public static final String EVENTS_HK_INSTITUTION = "events-inst-api.webull.hk";
+
     public static final String API_JP = "api.webull.co.jp";
     public static final String QUOTES_JP = "";
     public static final String EVENTS_JP = "events-api.webull.co.jp";
+
 }

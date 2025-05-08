@@ -43,6 +43,9 @@ public class TradeOrderItem implements Serializable {
     private String tradeCurrency;
     private String marginType;
     private List<CloseContract> closeContracts;
+    private String senderSubId;
+    private List<NoPartyId> noPartyIds;
+    private String totalCashAmount;
 
     public String getClientOrderId() {
         return clientOrderId;
@@ -212,6 +215,30 @@ public class TradeOrderItem implements Serializable {
         this.closeContracts = closeContracts;
     }
 
+    public String getSenderSubId() {
+        return senderSubId;
+    }
+
+    public void setSenderSubId(String senderSubId) {
+        this.senderSubId = senderSubId;
+    }
+
+    public List<NoPartyId> getNoPartyIds() {
+        return noPartyIds;
+    }
+
+    public void setNoPartyIds(List<NoPartyId> noPartyIds) {
+        this.noPartyIds = noPartyIds;
+    }
+
+    public String getTotalCashAmount() {
+        return totalCashAmount;
+    }
+
+    public void setTotalCashAmount(String totalCashAmount) {
+        this.totalCashAmount = totalCashAmount;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderItem{" +
@@ -236,6 +263,9 @@ public class TradeOrderItem implements Serializable {
                 ", tradeCurrency='" + tradeCurrency + '\'' +
                 ", marginType='" + marginType + '\'' +
                 ", closeContracts=" + closeContracts +
+                ", senderSubId='" + senderSubId + '\'' +
+                ", noPartyIds=" + noPartyIds +
+                ", totalCashAmount='" + totalCashAmount + '\'' +
                 '}';
     }
 }

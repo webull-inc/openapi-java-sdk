@@ -29,6 +29,9 @@ public final class Headers {
     public static final String TIMESTAMP = "x-timestamp";
     public static final String VERSION = "x-version";
 
+    public static final String USER_ID_KEY = "wb-user-id";
+
+
     public static final String NATIVE_HOST = "Host";
     public static final String NATIVE_CONTENT_TYPE = "Content-Type";
 }
