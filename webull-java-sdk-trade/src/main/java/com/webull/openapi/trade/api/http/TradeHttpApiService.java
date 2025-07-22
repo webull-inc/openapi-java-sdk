@@ -16,9 +16,11 @@
 package com.webull.openapi.trade.api.http;
 
 import com.google.gson.reflect.TypeToken;
+import com.webull.openapi.common.Headers;
 import com.webull.openapi.common.Region;
 import com.webull.openapi.common.Versions;
 import com.webull.openapi.common.dict.InstrumentSuperType;
+import com.webull.openapi.common.dict.OptionType;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
 import com.webull.openapi.http.HttpApiClient;
@@ -28,6 +30,7 @@ import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
 import com.webull.openapi.trade.api.request.v2.OptionOrder;
+import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
 import com.webull.openapi.trade.api.response.Account;
 import com.webull.openapi.trade.api.response.AccountBalance;
 import com.webull.openapi.trade.api.response.AccountDetail;
@@ -47,6 +50,7 @@ import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 import com.webull.openapi.utils.Assert;
+import com.webull.openapi.utils.CollectionUtils;
 import com.webull.openapi.utils.StringUtils;
 
 import java.lang.reflect.Type;
@@ -54,6 +58,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class TradeHttpApiService implements TradeApiService {
 
@@ -163,6 +168,7 @@ public class TradeHttpApiService implements TradeApiService {
         Assert.notBlank(ACCOUNT_ID_ARG, accountId);
         Assert.notNull(STOCK_ORDER_ARG, stockOrder);
         HttpRequest request = new HttpRequest("/trade/order/place", Versions.V1, HttpMethod.POST);
+        addCustomHeaders(request, stockOrder);
         Map<String, Object> params = new HashMap<>();
         params.put(ACCOUNT_ID_PARAM, accountId);
         params.put(STOCK_ORDER_PARAM, stockOrder);
@@ -290,6 +296,31 @@ public class TradeHttpApiService implements TradeApiService {
         return apiClient.request(request).responseType(InstrumentInfo.class).doAction();
     }
 
+    private void addCustomHeaders(HttpRequest request, StockOrder stockOrder) {
+        if (StringUtils.isNotBlank(stockOrder.getCategory())) {
+            request.getHeaders().put(Headers.CATEGORY_KEY, stockOrder.getCategory());
+        }
+    }
+
+    private void addCustomHeaders(HttpRequest request, OptionOrder optionOrder) {
+        if(CollectionUtils.isEmpty(optionOrder.getNewOrders())
+                || Objects.isNull(optionOrder.getNewOrders().get(0))
+                || CollectionUtils.isEmpty(optionOrder.getNewOrders().get(0).getOrders())){
+            return;
+        }
+        OptionOrderItemLeg item = optionOrder.getNewOrders().get(0).getOrders().stream().
+                filter(v-> Objects.nonNull(v) && Objects.equals(InstrumentSuperType.OPTION.name(), v.getInstrumentType()))
+                .findFirst().orElse(null);
+        if(Objects.isNull(item)){
+            return;
+        }
+        List<String> categoryList = Arrays.asList( item.getMarket(), InstrumentSuperType.EQUITY.name(), OptionType.CALL.name(), InstrumentSuperType.OPTION.name());
+        String category = StringUtils.join(categoryList, "_");
+        if (StringUtils.isNotBlank(category)) {
+            request.getHeaders().put(Headers.CATEGORY_KEY, category);
+        }
+    }
+
     @Override
     public PreviewOrderResponse previewOption(String accountId, OptionOrder optionOrder) {
         Assert.notBlank(ACCOUNT_ID_ARG, accountId);
@@ -309,6 +340,7 @@ public class TradeHttpApiService implements TradeApiService {
         Assert.notNull(OPTION_ORDER_ARG, optionOrder);
         Assert.notEmpty(NEW_ORDERS_ARG, optionOrder.getNewOrders());
         HttpRequest request = new HttpRequest("/openapi/account/orders/option/place", Versions.V1, HttpMethod.POST);
+        addCustomHeaders(request, optionOrder);
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put(ACCOUNT_ID_PARAM, accountId);
         request.setQuery(queryMap);

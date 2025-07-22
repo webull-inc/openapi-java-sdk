@@ -13,32 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.common;
+package com.webull.openapi.quotes.domain;
 
-import java.util.Optional;
+import java.util.List;
 
-/**
- * CustomerType
- */
-public enum CustomerType {
-    /**
-     * Individual customer
-     */
-    INDIVIDUAL,
+public class BatchBarResponse {
 
-    /**
-     * Institution customer
-     */
-    INSTITUTION,
-    ;
+    private List<NBar> result;
 
+    public List<NBar> getResult() {
+        return result;
+    }
 
-    public static Optional<CustomerType> of(String name) {
-        for (CustomerType region : CustomerType.values()) {
-            if (region.name().equals(name)) {
-                return Optional.of(region);
-            }
-        }
-        return Optional.empty();
+    public void setResult(List<NBar> result) {
+        this.result = result;
     }
 }

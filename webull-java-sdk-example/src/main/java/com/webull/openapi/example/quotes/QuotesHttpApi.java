@@ -1,6 +1,5 @@
 package com.webull.openapi.example.quotes;
 
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.EventType;
 import com.webull.openapi.common.dict.Timespan;
@@ -13,7 +12,9 @@ import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.quotes.api.QuotesApiClient;
 import com.webull.openapi.quotes.domain.*;
 import com.webull.openapi.quotes.internal.http.HttpQuotesApiClient;
+import com.webull.openapi.serialize.JsonSerializer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +39,6 @@ public class QuotesHttpApi {
         HttpApiConfig apiConfig = HttpApiConfig.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
-//                .customerType(CustomerType.INSTITUTION)
 //                .userId("<your_webull_user_id>")
                 .regionId(Env.REGION_ID)
                 .build();
@@ -47,6 +47,10 @@ public class QuotesHttpApi {
             // get bars
             List<Bar> bars = quotesApiClient.getBars("AAPL", Category.US_STOCK.name(), Timespan.D.name(), 10);
             logger.info("Bars: {}", bars);
+
+            // get bars with symbols
+            BatchBarResponse batchBars = quotesApiClient.getBatchBars(new ArrayList<>(symbols), Category.US_STOCK.name(), Timespan.D.name(), 2);
+            logger.info("Batch bars: {}", JsonSerializer.toJson(batchBars));
 
             // get snapshots
             List<Snapshot> snapshots = quotesApiClient.getSnapshots(symbols, Category.US_STOCK.name());

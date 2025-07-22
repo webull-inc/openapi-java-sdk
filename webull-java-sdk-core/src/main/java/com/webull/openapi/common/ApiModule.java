@@ -21,27 +21,16 @@ public enum ApiModule {
     /**
      * api
      */
-    API_INDIVIDUAL(DefaultHost.API_US, DefaultHost.API_HK, DefaultHost.API_JP),
-    /**
-     * api institution
-     */
-    API_INSTITUTION(DefaultHost.API_US_INSTITUTION, DefaultHost.API_HK_INSTITUTION, null),
+    API(DefaultHost.API_US, DefaultHost.API_HK, DefaultHost.API_JP),
     /**
      * quotes api
      */
-    QUOTES_INDIVIDUAL(DefaultHost.QUOTES_US, DefaultHost.QUOTES_HK, DefaultHost.QUOTES_JP),
-    /**
-     * quotes institution api
-     */
-    QUOTES_INSTITUTION(DefaultHost.QUOTES_US_INSTITUTION, DefaultHost.QUOTES_HK_INSTITUTION, null),
+    QUOTES(DefaultHost.QUOTES_US, DefaultHost.QUOTES_HK, DefaultHost.QUOTES_JP),
     /**
      * events api
      */
-    EVENTS_INDIVIDUAL(DefaultHost.EVENTS_US, DefaultHost.EVENTS_HK, DefaultHost.EVENTS_JP),
-    /**
-     * events api
-     */
-    EVENTS_INSTITUTION(DefaultHost.EVENTS_US_INSTITUTION, DefaultHost.EVENTS_HK_INSTITUTION, null);
+    EVENTS(DefaultHost.EVENTS_US, DefaultHost.EVENTS_HK, DefaultHost.EVENTS_JP),
+    ;
 
     private final EnumMap<Region, String> hosts;
 

@@ -15,7 +15,6 @@
  */
 package com.webull.openapi.quotes.api;
 
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.grpc.lifecycle.GrpcHandler;
 import com.webull.openapi.grpc.retry.GrpcRetryCondition;
 import com.webull.openapi.retry.RetryPolicy;
@@ -30,8 +29,6 @@ public interface QuotesApiClientBuilder {
     QuotesApiClientBuilder host(String host);
 
     QuotesApiClientBuilder port(int port);
-
-    QuotesApiClientBuilder customerType(CustomerType customerType);
 
     QuotesApiClientBuilder regionId(String regionId);
 

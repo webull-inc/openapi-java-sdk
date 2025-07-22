@@ -24,6 +24,7 @@ import com.webull.openapi.http.HttpRequest;
 import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.quotes.api.QuotesApiClient;
 import com.webull.openapi.quotes.domain.Bar;
+import com.webull.openapi.quotes.domain.BatchBarResponse;
 import com.webull.openapi.quotes.domain.Instrument;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
@@ -36,6 +37,7 @@ import com.webull.openapi.utils.Assert;
 import com.webull.openapi.utils.StringUtils;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +103,24 @@ public class HttpQuotesApiClient implements QuotesApiClient {
         request.setQuery(params);
         addCustomHeaders(request);
         return apiClient.request(request).responseType(new TypeToken<List<Bar>>() {}.getType()).doAction();
+    }
+
+    @Override
+    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count) {
+        Assert.notEmpty(ArgNames.SYMBOLS, symbols);
+        Assert.notBlank(ArgNames.CATEGORY, category);
+        Assert.notBlank(ArgNames.TIMESPAN, timespan);
+        HttpRequest request = new HttpRequest("/market-data/batch-bars", Versions.V1, HttpMethod.POST);
+        Map<String, Object> params = new HashMap<>();
+        params.put(ArgNames.SYMBOLS, symbols);
+        params.put(ArgNames.CATEGORY, category);
+        params.put(ArgNames.TIMESPAN, timespan);
+        params.put(ArgNames.COUNT, count);
+        request.setBody(params);
+        addCustomHeaders(request);
+        return apiClient.request(request)
+                .responseType(new TypeToken<BatchBarResponse>() {}.getType())
+                .doAction();
     }
 
     @Override

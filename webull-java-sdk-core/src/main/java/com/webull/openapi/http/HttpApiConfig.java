@@ -16,7 +16,6 @@
 package com.webull.openapi.http;
 
 import com.webull.openapi.common.ApiModule;
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.endpoint.EndpointResolver;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
@@ -34,7 +33,6 @@ public class HttpApiConfig {
     private boolean autoRetry;
     private int maxRetries;
     private RuntimeOptions runtimeOptions;
-    private CustomerType customerType;
 
     private HttpApiConfig() {
     }
@@ -79,10 +77,6 @@ public class HttpApiConfig {
         return runtimeOptions;
     }
 
-    public CustomerType getCustomerType() {
-        return customerType;
-    }
-
     public static HttpApiConfigBuilder builder() {
         return new HttpApiConfigBuilder();
     }
@@ -98,7 +92,6 @@ public class HttpApiConfig {
         private boolean autoRetry = false;
         private int maxRetries = 3;
         private RuntimeOptions runtimeOptions;
-        private CustomerType customerType = CustomerType.INDIVIDUAL;
 
         private HttpApiConfigBuilder() {
         }
@@ -156,11 +149,6 @@ public class HttpApiConfig {
             return this;
         }
 
-        public HttpApiConfigBuilder customerType(CustomerType customerType) {
-            Assert.notNull("customerType", customerType);
-            this.customerType = customerType;
-            return this;
-        }
         public HttpApiConfig build() {
             HttpApiConfig config = new HttpApiConfig();
             config.appKey = this.appKey;
@@ -170,7 +158,7 @@ public class HttpApiConfig {
             if (StringUtils.isBlank(this.endpoint)) {
                 Assert.notBlank("regionId", regionId);
                 EndpointResolver resolver = EndpointResolver.getDefault();
-                config.endpoint = resolver.resolve(config.regionId, ApiModule.of("API_" + customerType.name()))
+                config.endpoint = resolver.resolve(config.regionId, ApiModule.of("API"))
                         .orElseThrow(() -> new ClientException(ErrorCode.ENDPOINT_RESOLVING_ERROR, "Unknown region"));
             } else {
                 config.endpoint = this.endpoint;

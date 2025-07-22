@@ -16,6 +16,7 @@
 package com.webull.openapi.quotes.api;
 
 import com.webull.openapi.quotes.domain.Bar;
+import com.webull.openapi.quotes.domain.BatchBarResponse;
 import com.webull.openapi.quotes.domain.Instrument;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
@@ -42,6 +43,11 @@ public interface QuotesApiClient extends Closeable {
     }
 
     List<Bar> getBars(String symbol, String category, String timespan, int count);
+
+    /**
+     * Get batch bars for multiple symbols.
+     */
+    BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count);
 
     /**
      * Only for Webull JP

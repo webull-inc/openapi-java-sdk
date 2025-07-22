@@ -1,6 +1,6 @@
 package com.webull.openapi.example.quotes;
 
-import com.webull.openapi.common.CustomerType;
+import com.google.api.client.util.Lists;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.Timespan;
 import com.webull.openapi.example.config.Env;
@@ -10,6 +10,7 @@ import com.webull.openapi.logger.Logger;
 import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.quotes.api.QuotesApiClient;
 import com.webull.openapi.quotes.domain.Bar;
+import com.webull.openapi.quotes.domain.BatchBarResponse;
 import com.webull.openapi.quotes.domain.Instrument;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
@@ -30,21 +31,24 @@ public class QuotesGrpcApi {
         try (QuotesApiClient quotesApiClient = QuotesApiClient.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
-//                .customerType(CustomerType.INSTITUTION)
 //                .userId("<your_webull_user_id>")
                 .regionId(Env.REGION_ID)
                 .build()) {
             // get instruments
             Set<String> symbols = new HashSet<>();
-            symbols.add(symbol);
+            symbols.add("AAPL");
+            symbols.add("TSLA");
 
             List<Instrument> instruments = quotesApiClient.getInstruments(symbols, Category.US_STOCK.name());
             logger.info("Instruments: {}", JsonSerializer.toJson(instruments));
 
             // get bars
-
             List<Bar> bars = quotesApiClient.getBars(symbol, Category.US_STOCK.name(), Timespan.D.name(), 10);
             logger.info("Bars: {}", JsonSerializer.toJson(bars));
+
+            // get bars with symbols
+            BatchBarResponse batchBars = quotesApiClient.getBatchBars(Lists.newArrayList(symbols), Category.US_STOCK.name(), Timespan.M1.name(), 2);
+            logger.info("Batch bars: {}", JsonSerializer.toJson(batchBars));
 
             // get quote
             Quote quote = quotesApiClient.getQuote(symbol, Category.US_STOCK.name());

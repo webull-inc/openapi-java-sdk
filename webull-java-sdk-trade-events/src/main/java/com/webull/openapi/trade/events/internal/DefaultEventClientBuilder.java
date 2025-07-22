@@ -16,7 +16,6 @@
 package com.webull.openapi.trade.events.internal;
 
 import com.webull.openapi.common.ApiModule;
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.endpoint.EndpointResolver;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
@@ -44,7 +43,6 @@ public class DefaultEventClientBuilder implements EventClientBuilder {
     private String appSecret;
     private String regionId;
     private String host;
-    private CustomerType customerType = CustomerType.INDIVIDUAL;
     private int port = 443;
 
     private RetryPolicy retryPolicy = new RetryPolicy(GrpcRetryCondition.getInstance(), new FixedDelayStrategy(5, TimeUnit.SECONDS));
@@ -84,12 +82,6 @@ public class DefaultEventClientBuilder implements EventClientBuilder {
     }
 
     @Override
-    public EventClientBuilder customerType(CustomerType customerType) {
-        this.customerType = customerType;
-        return this;
-    }
-
-    @Override
     public EventClientBuilder enableTls(boolean enableTls) {
         this.enableTls = enableTls;
         return this;
@@ -117,7 +109,7 @@ public class DefaultEventClientBuilder implements EventClientBuilder {
     public EventClient build() {
         if (StringUtils.isBlank(this.host)) {
             Assert.notBlank("regionId", regionId);
-            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.of("EVENTS_" + customerType.name()))
+            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.of("EVENTS"))
                     .orElseThrow(() -> new ClientException(ErrorCode.ENDPOINT_RESOLVING_ERROR, "Unknown region"));
         }
         List<GrpcHandler> allHandlers = new ArrayList<>();

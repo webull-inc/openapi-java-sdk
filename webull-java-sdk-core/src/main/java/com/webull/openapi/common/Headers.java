@@ -30,6 +30,7 @@ public final class Headers {
     public static final String VERSION = "x-version";
 
     public static final String USER_ID_KEY = "wb-user-id";
+    public static final String CATEGORY_KEY = "category";
 
 
     public static final String NATIVE_HOST = "Host";
