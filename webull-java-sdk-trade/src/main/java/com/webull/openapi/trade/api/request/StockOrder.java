@@ -33,6 +33,7 @@ public class StockOrder {
     private String tradeCurrency;
     private String accountTaxType;
     private String marginType;
+    private String category;
     private List<CloseContract> closeContracts;
 
 
@@ -156,6 +157,14 @@ public class StockOrder {
         this.closeContracts = closeContracts;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "StockOrder{" +
@@ -173,6 +182,7 @@ public class StockOrder {
                 ", tradeCurrency='" + tradeCurrency + '\'' +
                 ", accountTaxType='" + accountTaxType + '\'' +
                 ", marginType='" + marginType + '\'' +
+                ", category='" + category + '\'' +
                 ", closeContracts=" + closeContracts +
                 '}';
     }

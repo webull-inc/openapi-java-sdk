@@ -15,6 +15,9 @@
  */
 package com.webull.openapi.utils;
 
+import java.util.Collection;
+import java.util.StringJoiner;
+
 public final class StringUtils {
 
     private StringUtils() {
@@ -52,4 +55,16 @@ public final class StringUtils {
     public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
+
+    public static String join(Collection<?> items, String delimiter) {
+        if (items == null || items.isEmpty() || StringUtils.isBlank(delimiter)) {
+            return "";
+        }
+        StringJoiner joiner = new StringJoiner(delimiter);
+        for (Object item : items) {
+            joiner.add(String.valueOf(item));
+        }
+        return joiner.toString();
+    }
+
 }

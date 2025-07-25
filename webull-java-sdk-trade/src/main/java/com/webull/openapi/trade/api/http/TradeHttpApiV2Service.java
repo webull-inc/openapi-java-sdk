@@ -16,8 +16,12 @@
 package com.webull.openapi.trade.api.http;
 
 import com.google.gson.reflect.TypeToken;
+import com.webull.openapi.common.Headers;
 import com.webull.openapi.common.Region;
 import com.webull.openapi.common.Versions;
+import com.webull.openapi.common.dict.InstrumentSuperType;
+import com.webull.openapi.common.dict.OptionType;
+import com.webull.openapi.common.dict.TickerType;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
 import com.webull.openapi.http.HttpApiClient;
@@ -26,7 +30,9 @@ import com.webull.openapi.http.HttpRequest;
 import com.webull.openapi.http.common.HttpMethod;
 import com.webull.openapi.trade.api.TradeApiV2Service;
 import com.webull.openapi.trade.api.request.v2.OptionOrder;
+import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
+import com.webull.openapi.trade.api.request.v2.TradeOrderItem;
 import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.trade.api.response.v2.Account;
 import com.webull.openapi.trade.api.response.v2.AccountBalanceInfo;
@@ -35,12 +41,14 @@ import com.webull.openapi.trade.api.response.v2.OrderHistory;
 import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 import com.webull.openapi.utils.Assert;
+import com.webull.openapi.utils.CollectionUtils;
 import com.webull.openapi.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class TradeHttpApiV2Service implements TradeApiV2Service {
@@ -149,6 +157,7 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         Assert.notNull(TRADE_ORDER_ARG, tradeOrder);
         Assert.notEmpty(NEW_ORDERS_ARG, tradeOrder.getNewOrders());
         HttpRequest request = new HttpRequest("/openapi/account/orders/place", Versions.V1, HttpMethod.POST);
+        addCustomHeaders(request, tradeOrder);
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put(ACCOUNT_ID_PARAM, accountId);
         request.setQuery(queryMap);
@@ -237,6 +246,40 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         return apiClient.request(request).responseType(OrderHistory.class).doAction();
     }
 
+    private void addCustomHeaders(HttpRequest request, TradeOrder tradeOrder) {
+        if(Objects.isNull(tradeOrder)
+                || CollectionUtils.isEmpty(tradeOrder.getNewOrders())
+                || Objects.isNull(tradeOrder.getNewOrders().get(0))){
+            return;
+        }
+        TradeOrderItem item = tradeOrder.getNewOrders().get(0);
+
+        List<String> categoryList = Arrays.asList( item.getMarket(), TickerType.STOCK.name());
+        String category = StringUtils.join(categoryList, "_");
+        if (StringUtils.isNotBlank(category)) {
+            request.getHeaders().put(Headers.CATEGORY_KEY, category);
+        }
+    }
+
+    private void addCustomHeaders(HttpRequest request, OptionOrder optionOrder) {
+        if(CollectionUtils.isEmpty(optionOrder.getNewOrders())
+                || Objects.isNull(optionOrder.getNewOrders().get(0))
+                || CollectionUtils.isEmpty(optionOrder.getNewOrders().get(0).getOrders())){
+            return;
+        }
+        OptionOrderItemLeg item = optionOrder.getNewOrders().get(0).getOrders().stream().
+                filter(v-> Objects.nonNull(v) && Objects.equals(InstrumentSuperType.OPTION.name(), v.getInstrumentType()))
+                .findFirst().orElse(null);
+        if(Objects.isNull(item)){
+            return;
+        }
+        List<String> categoryList = Arrays.asList( item.getMarket(), InstrumentSuperType.EQUITY.name(), item.getOptionType(), item.getInstrumentType());
+        String category = StringUtils.join(categoryList, "_");
+        if (StringUtils.isNotBlank(category)) {
+            request.getHeaders().put(Headers.CATEGORY_KEY, category);
+        }
+    }
+
     /**
      * This interface is currently available only to individual and institutional clients
      * of Webull Hong Kong brokerages. It is not yet supported for clients of Webull US
@@ -266,6 +309,7 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         Assert.notNull(OPTION_ORDER_ARG, optionOrder);
         Assert.notEmpty(NEW_ORDERS_ARG, optionOrder.getNewOrders());
         HttpRequest request = new HttpRequest("/openapi/account/orders/option/place", Versions.V1, HttpMethod.POST);
+        addCustomHeaders(request, optionOrder);
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put(ACCOUNT_ID_PARAM, accountId);
         request.setQuery(queryMap);

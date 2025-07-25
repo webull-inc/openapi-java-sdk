@@ -1,6 +1,5 @@
 package com.webull.openapi.example.quotes;
 
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.SubscribeType;
 import com.webull.openapi.example.config.Env;
@@ -38,7 +37,6 @@ public class QuotesSubscribe {
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
                 .regionId(Env.REGION_ID)
-//                .customerType(CustomerType.INSTITUTION)
                 .onMessage(QuotesSubscribe::handleMarketData)
                 .addSubscription(symbols, Category.US_STOCK.name(), subTypes)
                 .build()) {

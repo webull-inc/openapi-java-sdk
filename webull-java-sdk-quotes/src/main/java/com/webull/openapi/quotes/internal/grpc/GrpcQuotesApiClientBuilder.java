@@ -16,7 +16,6 @@
 package com.webull.openapi.quotes.internal.grpc;
 
 import com.webull.openapi.common.ApiModule;
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.endpoint.EndpointResolver;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
@@ -40,7 +39,6 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
     private String appSecret;
     private String regionId;
     private String host;
-    private CustomerType customerType = CustomerType.INDIVIDUAL;
     private int port = 443;
     private long connectTimeoutMillis = 10000;
     private long readTimeoutMillis = 10000;
@@ -66,12 +64,6 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
     @Override
     public QuotesApiClientBuilder host(String host) {
         this.host = host;
-        return this;
-    }
-
-    @Override
-    public QuotesApiClientBuilder customerType(CustomerType customerType) {
-        this.customerType = customerType;
         return this;
     }
 
@@ -128,7 +120,7 @@ public class GrpcQuotesApiClientBuilder implements QuotesApiClientBuilder {
     public QuotesApiClient build() {
         if (StringUtils.isBlank(this.host)) {
             Assert.notBlank("regionId", regionId);
-            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.of("QUOTES_" + customerType.name()))
+            this.host = EndpointResolver.getDefault().resolve(regionId, ApiModule.of("QUOTES"))
                     .orElseThrow(() -> new ClientException(ErrorCode.ENDPOINT_RESOLVING_ERROR, "Unknown region"));
         }
         if (this.handlers.stream().noneMatch(ApiDowngradeHandler.class::isInstance)) {

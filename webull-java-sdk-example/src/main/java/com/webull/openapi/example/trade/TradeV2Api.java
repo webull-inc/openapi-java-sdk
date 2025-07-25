@@ -1,6 +1,5 @@
 package com.webull.openapi.example.trade;
 
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.common.Region;
 import com.webull.openapi.common.dict.AccountTaxType;
 import com.webull.openapi.common.dict.EntrustType;
@@ -40,7 +39,6 @@ public class TradeV2Api {
                     .appKey(Env.APP_KEY)
                     .appSecret(Env.APP_SECRET)
                     .regionId(Env.REGION_ID)
-//                    .customerType(CustomerType.INSTITUTION)
                     .build();
             TradeHttpApiV2Service apiService = new TradeHttpApiV2Service(apiConfig);
 

@@ -5995,6 +5995,1762 @@ public final class Api {
 
   }
 
+  public interface BatchBarsRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:api.BatchBarsRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @return A list containing the symbols.
+     */
+    java.util.List<java.lang.String>
+        getSymbolsList();
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @return The count of symbols.
+     */
+    int getSymbolsCount();
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @param index The index of the element to return.
+     * @return The symbols at the given index.
+     */
+    java.lang.String getSymbols(int index);
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the symbols at the given index.
+     */
+    com.google.protobuf.ByteString
+        getSymbolsBytes(int index);
+
+    /**
+     * <code>string category = 2;</code>
+     * @return The category.
+     */
+    java.lang.String getCategory();
+    /**
+     * <code>string category = 2;</code>
+     * @return The bytes for category.
+     */
+    com.google.protobuf.ByteString
+        getCategoryBytes();
+
+    /**
+     * <code>string timespan = 3;</code>
+     * @return The timespan.
+     */
+    java.lang.String getTimespan();
+    /**
+     * <code>string timespan = 3;</code>
+     * @return The bytes for timespan.
+     */
+    com.google.protobuf.ByteString
+        getTimespanBytes();
+
+    /**
+     * <code>int32 count = 4;</code>
+     * @return The count.
+     */
+    int getCount();
+  }
+  /**
+   * Protobuf type {@code api.BatchBarsRequest}
+   */
+  public static final class BatchBarsRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:api.BatchBarsRequest)
+      BatchBarsRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use BatchBarsRequest.newBuilder() to construct.
+    private BatchBarsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private BatchBarsRequest() {
+      symbols_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      category_ = "";
+      timespan_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new BatchBarsRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest.class, com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest.Builder.class);
+    }
+
+    public static final int SYMBOLS_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList symbols_;
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @return A list containing the symbols.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getSymbolsList() {
+      return symbols_;
+    }
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @return The count of symbols.
+     */
+    public int getSymbolsCount() {
+      return symbols_.size();
+    }
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @param index The index of the element to return.
+     * @return The symbols at the given index.
+     */
+    public java.lang.String getSymbols(int index) {
+      return symbols_.get(index);
+    }
+    /**
+     * <code>repeated string symbols = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the symbols at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getSymbolsBytes(int index) {
+      return symbols_.getByteString(index);
+    }
+
+    public static final int CATEGORY_FIELD_NUMBER = 2;
+    private volatile java.lang.Object category_;
+    /**
+     * <code>string category = 2;</code>
+     * @return The category.
+     */
+    @java.lang.Override
+    public java.lang.String getCategory() {
+      java.lang.Object ref = category_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        category_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string category = 2;</code>
+     * @return The bytes for category.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getCategoryBytes() {
+      java.lang.Object ref = category_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        category_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TIMESPAN_FIELD_NUMBER = 3;
+    private volatile java.lang.Object timespan_;
+    /**
+     * <code>string timespan = 3;</code>
+     * @return The timespan.
+     */
+    @java.lang.Override
+    public java.lang.String getTimespan() {
+      java.lang.Object ref = timespan_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        timespan_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string timespan = 3;</code>
+     * @return The bytes for timespan.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getTimespanBytes() {
+      java.lang.Object ref = timespan_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        timespan_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int COUNT_FIELD_NUMBER = 4;
+    private int count_;
+    /**
+     * <code>int32 count = 4;</code>
+     * @return The count.
+     */
+    @java.lang.Override
+    public int getCount() {
+      return count_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < symbols_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, symbols_.getRaw(i));
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(category_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, category_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timespan_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, timespan_);
+      }
+      if (count_ != 0) {
+        output.writeInt32(4, count_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < symbols_.size(); i++) {
+          dataSize += computeStringSizeNoTag(symbols_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getSymbolsList().size();
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(category_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, category_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timespan_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, timespan_);
+      }
+      if (count_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, count_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest)) {
+        return super.equals(obj);
+      }
+      com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest other = (com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest) obj;
+
+      if (!getSymbolsList()
+          .equals(other.getSymbolsList())) return false;
+      if (!getCategory()
+          .equals(other.getCategory())) return false;
+      if (!getTimespan()
+          .equals(other.getTimespan())) return false;
+      if (getCount()
+          != other.getCount()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getSymbolsCount() > 0) {
+        hash = (37 * hash) + SYMBOLS_FIELD_NUMBER;
+        hash = (53 * hash) + getSymbolsList().hashCode();
+      }
+      hash = (37 * hash) + CATEGORY_FIELD_NUMBER;
+      hash = (53 * hash) + getCategory().hashCode();
+      hash = (37 * hash) + TIMESPAN_FIELD_NUMBER;
+      hash = (53 * hash) + getTimespan().hashCode();
+      hash = (37 * hash) + COUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getCount();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code api.BatchBarsRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:api.BatchBarsRequest)
+        com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest.class, com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest.Builder.class);
+      }
+
+      // Construct using com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        symbols_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        category_ = "";
+
+        timespan_ = "";
+
+        count_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest getDefaultInstanceForType() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest build() {
+        com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest buildPartial() {
+        com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest result = new com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          symbols_ = symbols_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.symbols_ = symbols_;
+        result.category_ = category_;
+        result.timespan_ = timespan_;
+        result.count_ = count_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest) {
+          return mergeFrom((com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest other) {
+        if (other == com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest.getDefaultInstance()) return this;
+        if (!other.symbols_.isEmpty()) {
+          if (symbols_.isEmpty()) {
+            symbols_ = other.symbols_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureSymbolsIsMutable();
+            symbols_.addAll(other.symbols_);
+          }
+          onChanged();
+        }
+        if (!other.getCategory().isEmpty()) {
+          category_ = other.category_;
+          onChanged();
+        }
+        if (!other.getTimespan().isEmpty()) {
+          timespan_ = other.timespan_;
+          onChanged();
+        }
+        if (other.getCount() != 0) {
+          setCount(other.getCount());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+                ensureSymbolsIsMutable();
+                symbols_.add(s);
+                break;
+              } // case 10
+              case 18: {
+                category_ = input.readStringRequireUtf8();
+
+                break;
+              } // case 18
+              case 26: {
+                timespan_ = input.readStringRequireUtf8();
+
+                break;
+              } // case 26
+              case 32: {
+                count_ = input.readInt32();
+
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.LazyStringList symbols_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureSymbolsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          symbols_ = new com.google.protobuf.LazyStringArrayList(symbols_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @return A list containing the symbols.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getSymbolsList() {
+        return symbols_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @return The count of symbols.
+       */
+      public int getSymbolsCount() {
+        return symbols_.size();
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @param index The index of the element to return.
+       * @return The symbols at the given index.
+       */
+      public java.lang.String getSymbols(int index) {
+        return symbols_.get(index);
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the symbols at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getSymbolsBytes(int index) {
+        return symbols_.getByteString(index);
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @param index The index to set the value at.
+       * @param value The symbols to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSymbols(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSymbolsIsMutable();
+        symbols_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @param value The symbols to add.
+       * @return This builder for chaining.
+       */
+      public Builder addSymbols(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSymbolsIsMutable();
+        symbols_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @param values The symbols to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllSymbols(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureSymbolsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, symbols_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSymbols() {
+        symbols_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string symbols = 1;</code>
+       * @param value The bytes of the symbols to add.
+       * @return This builder for chaining.
+       */
+      public Builder addSymbolsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureSymbolsIsMutable();
+        symbols_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object category_ = "";
+      /**
+       * <code>string category = 2;</code>
+       * @return The category.
+       */
+      public java.lang.String getCategory() {
+        java.lang.Object ref = category_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          category_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string category = 2;</code>
+       * @return The bytes for category.
+       */
+      public com.google.protobuf.ByteString
+          getCategoryBytes() {
+        java.lang.Object ref = category_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          category_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string category = 2;</code>
+       * @param value The category to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCategory(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        category_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string category = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCategory() {
+        
+        category_ = getDefaultInstance().getCategory();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string category = 2;</code>
+       * @param value The bytes for category to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCategoryBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        category_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object timespan_ = "";
+      /**
+       * <code>string timespan = 3;</code>
+       * @return The timespan.
+       */
+      public java.lang.String getTimespan() {
+        java.lang.Object ref = timespan_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          timespan_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string timespan = 3;</code>
+       * @return The bytes for timespan.
+       */
+      public com.google.protobuf.ByteString
+          getTimespanBytes() {
+        java.lang.Object ref = timespan_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          timespan_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string timespan = 3;</code>
+       * @param value The timespan to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTimespan(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        timespan_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string timespan = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTimespan() {
+        
+        timespan_ = getDefaultInstance().getTimespan();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string timespan = 3;</code>
+       * @param value The bytes for timespan to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTimespanBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        timespan_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int count_ ;
+      /**
+       * <code>int32 count = 4;</code>
+       * @return The count.
+       */
+      @java.lang.Override
+      public int getCount() {
+        return count_;
+      }
+      /**
+       * <code>int32 count = 4;</code>
+       * @param value The count to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCount(int value) {
+        
+        count_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 count = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCount() {
+        
+        count_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:api.BatchBarsRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:api.BatchBarsRequest)
+    private static final com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest();
+    }
+
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<BatchBarsRequest>
+        PARSER = new com.google.protobuf.AbstractParser<BatchBarsRequest>() {
+      @java.lang.Override
+      public BatchBarsRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<BatchBarsRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BatchBarsRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface BatchBarsResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:api.BatchBarsResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    java.util.List<com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse> 
+        getResultList();
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse getResult(int index);
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    int getResultCount();
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    java.util.List<? extends com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder> 
+        getResultOrBuilderList();
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder getResultOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code api.BatchBarsResponse}
+   */
+  public static final class BatchBarsResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:api.BatchBarsResponse)
+      BatchBarsResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use BatchBarsResponse.newBuilder() to construct.
+    private BatchBarsResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private BatchBarsResponse() {
+      result_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new BatchBarsResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse.class, com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse.Builder.class);
+    }
+
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private java.util.List<com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse> result_;
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse> getResultList() {
+      return result_;
+    }
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder> 
+        getResultOrBuilderList() {
+      return result_;
+    }
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    @java.lang.Override
+    public int getResultCount() {
+      return result_.size();
+    }
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    @java.lang.Override
+    public com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse getResult(int index) {
+      return result_.get(index);
+    }
+    /**
+     * <code>repeated .api.BarsResponse result = 1;</code>
+     */
+    @java.lang.Override
+    public com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder getResultOrBuilder(
+        int index) {
+      return result_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < result_.size(); i++) {
+        output.writeMessage(1, result_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < result_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, result_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse)) {
+        return super.equals(obj);
+      }
+      com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse other = (com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse) obj;
+
+      if (!getResultList()
+          .equals(other.getResultList())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getResultCount() > 0) {
+        hash = (37 * hash) + RESULT_FIELD_NUMBER;
+        hash = (53 * hash) + getResultList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code api.BatchBarsResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:api.BatchBarsResponse)
+        com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse.class, com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse.Builder.class);
+      }
+
+      // Construct using com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (resultBuilder_ == null) {
+          result_ = java.util.Collections.emptyList();
+        } else {
+          result_ = null;
+          resultBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.internal_static_api_BatchBarsResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse getDefaultInstanceForType() {
+        return com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse build() {
+        com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse buildPartial() {
+        com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse result = new com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse(this);
+        int from_bitField0_ = bitField0_;
+        if (resultBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            result_ = java.util.Collections.unmodifiableList(result_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.result_ = result_;
+        } else {
+          result.result_ = resultBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse) {
+          return mergeFrom((com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse other) {
+        if (other == com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse.getDefaultInstance()) return this;
+        if (resultBuilder_ == null) {
+          if (!other.result_.isEmpty()) {
+            if (result_.isEmpty()) {
+              result_ = other.result_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureResultIsMutable();
+              result_.addAll(other.result_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.result_.isEmpty()) {
+            if (resultBuilder_.isEmpty()) {
+              resultBuilder_.dispose();
+              resultBuilder_ = null;
+              result_ = other.result_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              resultBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getResultFieldBuilder() : null;
+            } else {
+              resultBuilder_.addAllMessages(other.result_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse m =
+                    input.readMessage(
+                        com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.parser(),
+                        extensionRegistry);
+                if (resultBuilder_ == null) {
+                  ensureResultIsMutable();
+                  result_.add(m);
+                } else {
+                  resultBuilder_.addMessage(m);
+                }
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse> result_ =
+        java.util.Collections.emptyList();
+      private void ensureResultIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          result_ = new java.util.ArrayList<com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse>(result_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder> resultBuilder_;
+
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public java.util.List<com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse> getResultList() {
+        if (resultBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(result_);
+        } else {
+          return resultBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public int getResultCount() {
+        if (resultBuilder_ == null) {
+          return result_.size();
+        } else {
+          return resultBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse getResult(int index) {
+        if (resultBuilder_ == null) {
+          return result_.get(index);
+        } else {
+          return resultBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder setResult(
+          int index, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.set(index, value);
+          onChanged();
+        } else {
+          resultBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder setResult(
+          int index, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder addResult(com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.add(value);
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder addResult(
+          int index, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.add(index, value);
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder addResult(
+          com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.add(builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder addResult(
+          int index, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder addAllResult(
+          java.lang.Iterable<? extends com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse> values) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, result_);
+          onChanged();
+        } else {
+          resultBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder clearResult() {
+        if (resultBuilder_ == null) {
+          result_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          resultBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public Builder removeResult(int index) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.remove(index);
+          onChanged();
+        } else {
+          resultBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder getResultBuilder(
+          int index) {
+        return getResultFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder getResultOrBuilder(
+          int index) {
+        if (resultBuilder_ == null) {
+          return result_.get(index);  } else {
+          return resultBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public java.util.List<? extends com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder> 
+           getResultOrBuilderList() {
+        if (resultBuilder_ != null) {
+          return resultBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(result_);
+        }
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder addResultBuilder() {
+        return getResultFieldBuilder().addBuilder(
+            com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder addResultBuilder(
+          int index) {
+        return getResultFieldBuilder().addBuilder(
+            index, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .api.BarsResponse result = 1;</code>
+       */
+      public java.util.List<com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder> 
+           getResultBuilderList() {
+        return getResultFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder> 
+          getResultFieldBuilder() {
+        if (resultBuilder_ == null) {
+          resultBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponse.Builder, com.webull.openapi.quotes.internal.grpc.proto.Api.BarsResponseOrBuilder>(
+                  result_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          result_ = null;
+        }
+        return resultBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:api.BatchBarsResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:api.BatchBarsResponse)
+    private static final com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse();
+    }
+
+    public static com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<BatchBarsResponse>
+        PARSER = new com.google.protobuf.AbstractParser<BatchBarsResponse>() {
+      @java.lang.Override
+      public BatchBarsResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<BatchBarsResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BatchBarsResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.webull.openapi.quotes.internal.grpc.proto.Api.BatchBarsResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface SnapshotRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.SnapshotRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -19660,6 +21416,16 @@ public final class Api {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_api_Bar_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_BatchBarsRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_BatchBarsRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_BatchBarsResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_BatchBarsResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_api_SnapshotRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -19750,34 +21516,37 @@ public final class Api {
       "ent_id\030\002 \001(\t\022\030\n\006result\030\003 \003(\0132\010.api.Bar\"[" +
       "\n\003Bar\022\014\n\004time\030\001 \001(\t\022\014\n\004open\030\002 \001(\t\022\r\n\005clo" +
       "se\030\003 \001(\t\022\014\n\004high\030\004 \001(\t\022\013\n\003low\030\005 \001(\t\022\016\n\006v" +
-      "olume\030\006 \001(\t\"4\n\017SnapshotRequest\022\017\n\007symbol" +
-      "s\030\001 \001(\t\022\020\n\010category\030\002 \001(\t\"1\n\020SnapshotRes" +
-      "ponse\022\035\n\006result\030\001 \003(\0132\r.api.Snapshot\"\306\001\n" +
-      "\010Snapshot\022\016\n\006symbol\030\001 \001(\t\022\025\n\rinstrument_" +
-      "id\030\002 \001(\t\022\022\n\ntrade_time\030\003 \001(\t\022\r\n\005price\030\004 " +
-      "\001(\t\022\014\n\004open\030\005 \001(\t\022\014\n\004high\030\006 \001(\t\022\013\n\003low\030\007" +
-      " \001(\t\022\021\n\tpre_close\030\010 \001(\t\022\016\n\006volume\030\t \001(\t\022" +
-      "\016\n\006change\030\n \001(\t\022\024\n\014change_ratio\030\013 \001(\t\"0\n" +
-      "\014QuoteRequest\022\016\n\006symbol\030\001 \001(\t\022\020\n\010categor" +
-      "y\030\002 \001(\t\"l\n\rQuoteResponse\022\016\n\006symbol\030\001 \001(\t" +
-      "\022\025\n\rinstrument_id\030\002 \001(\t\022\031\n\004asks\030\003 \003(\0132\013." +
-      "api.AskBid\022\031\n\004bids\030\004 \003(\0132\013.api.AskBid\"]\n" +
-      "\006AskBid\022\r\n\005price\030\001 \001(\t\022\014\n\004size\030\002 \001(\t\022\031\n\005" +
-      "order\030\003 \003(\0132\n.api.Order\022\033\n\006broker\030\004 \003(\0132" +
-      "\013.api.Broker\"#\n\005Order\022\014\n\004mpid\030\001 \001(\t\022\014\n\004s" +
-      "ize\030\002 \001(\t\"#\n\006Broker\022\013\n\003bid\030\001 \001(\t\022\014\n\004name" +
-      "\030\002 \001(\t\">\n\013TickRequest\022\016\n\006symbol\030\001 \001(\t\022\020\n" +
-      "\010category\030\002 \001(\t\022\r\n\005count\030\003 \001(\t\"P\n\014TickRe" +
-      "sponse\022\016\n\006symbol\030\001 \001(\t\022\025\n\rinstrument_id\030" +
-      "\002 \001(\t\022\031\n\006result\030\003 \003(\0132\t.api.Tick\"A\n\004Tick" +
-      "\022\014\n\004time\030\001 \001(\t\022\r\n\005price\030\002 \001(\t\022\016\n\006volume\030" +
-      "\003 \001(\t\022\014\n\004side\030\004 \001(\t\"\036\n\rTokenResponse\022\r\n\005" +
-      "token\030\001 \001(\t\"p\n\020SubscribeRequest\022\r\n\005token" +
-      "\030\001 \001(\t\022\017\n\007symbols\030\002 \003(\t\022\020\n\010category\030\003 \001(" +
-      "\t\022\021\n\tsub_types\030\004 \003(\t\022\027\n\017unsubscribe_all\030" +
-      "\005 \001(\t\"\023\n\021SubscribeResponseB/\n-com.webull" +
-      ".openapi.quotes.internal.grpc.protob\006pro" +
-      "to3"
+      "olume\030\006 \001(\t\"V\n\020BatchBarsRequest\022\017\n\007symbo" +
+      "ls\030\001 \003(\t\022\020\n\010category\030\002 \001(\t\022\020\n\010timespan\030\003" +
+      " \001(\t\022\r\n\005count\030\004 \001(\005\"6\n\021BatchBarsResponse" +
+      "\022!\n\006result\030\001 \003(\0132\021.api.BarsResponse\"4\n\017S" +
+      "napshotRequest\022\017\n\007symbols\030\001 \001(\t\022\020\n\010categ" +
+      "ory\030\002 \001(\t\"1\n\020SnapshotResponse\022\035\n\006result\030" +
+      "\001 \003(\0132\r.api.Snapshot\"\306\001\n\010Snapshot\022\016\n\006sym" +
+      "bol\030\001 \001(\t\022\025\n\rinstrument_id\030\002 \001(\t\022\022\n\ntrad" +
+      "e_time\030\003 \001(\t\022\r\n\005price\030\004 \001(\t\022\014\n\004open\030\005 \001(" +
+      "\t\022\014\n\004high\030\006 \001(\t\022\013\n\003low\030\007 \001(\t\022\021\n\tpre_clos" +
+      "e\030\010 \001(\t\022\016\n\006volume\030\t \001(\t\022\016\n\006change\030\n \001(\t\022" +
+      "\024\n\014change_ratio\030\013 \001(\t\"0\n\014QuoteRequest\022\016\n" +
+      "\006symbol\030\001 \001(\t\022\020\n\010category\030\002 \001(\t\"l\n\rQuote" +
+      "Response\022\016\n\006symbol\030\001 \001(\t\022\025\n\rinstrument_i" +
+      "d\030\002 \001(\t\022\031\n\004asks\030\003 \003(\0132\013.api.AskBid\022\031\n\004bi" +
+      "ds\030\004 \003(\0132\013.api.AskBid\"]\n\006AskBid\022\r\n\005price" +
+      "\030\001 \001(\t\022\014\n\004size\030\002 \001(\t\022\031\n\005order\030\003 \003(\0132\n.ap" +
+      "i.Order\022\033\n\006broker\030\004 \003(\0132\013.api.Broker\"#\n\005" +
+      "Order\022\014\n\004mpid\030\001 \001(\t\022\014\n\004size\030\002 \001(\t\"#\n\006Bro" +
+      "ker\022\013\n\003bid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\">\n\013TickRe" +
+      "quest\022\016\n\006symbol\030\001 \001(\t\022\020\n\010category\030\002 \001(\t\022" +
+      "\r\n\005count\030\003 \001(\t\"P\n\014TickResponse\022\016\n\006symbol" +
+      "\030\001 \001(\t\022\025\n\rinstrument_id\030\002 \001(\t\022\031\n\006result\030" +
+      "\003 \003(\0132\t.api.Tick\"A\n\004Tick\022\014\n\004time\030\001 \001(\t\022\r" +
+      "\n\005price\030\002 \001(\t\022\016\n\006volume\030\003 \001(\t\022\014\n\004side\030\004 " +
+      "\001(\t\"\036\n\rTokenResponse\022\r\n\005token\030\001 \001(\t\"p\n\020S" +
+      "ubscribeRequest\022\r\n\005token\030\001 \001(\t\022\017\n\007symbol" +
+      "s\030\002 \003(\t\022\020\n\010category\030\003 \001(\t\022\021\n\tsub_types\030\004" +
+      " \003(\t\022\027\n\017unsubscribe_all\030\005 \001(\t\"\023\n\021Subscri" +
+      "beResponseB/\n-com.webull.openapi.quotes." +
+      "internal.grpc.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -19819,86 +21588,98 @@ public final class Api {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_Bar_descriptor,
         new java.lang.String[] { "Time", "Open", "Close", "High", "Low", "Volume", });
-    internal_static_api_SnapshotRequest_descriptor =
+    internal_static_api_BatchBarsRequest_descriptor =
       getDescriptor().getMessageTypes().get(6);
+    internal_static_api_BatchBarsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_BatchBarsRequest_descriptor,
+        new java.lang.String[] { "Symbols", "Category", "Timespan", "Count", });
+    internal_static_api_BatchBarsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_api_BatchBarsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_BatchBarsResponse_descriptor,
+        new java.lang.String[] { "Result", });
+    internal_static_api_SnapshotRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
     internal_static_api_SnapshotRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_SnapshotRequest_descriptor,
         new java.lang.String[] { "Symbols", "Category", });
     internal_static_api_SnapshotResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_api_SnapshotResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_SnapshotResponse_descriptor,
         new java.lang.String[] { "Result", });
     internal_static_api_Snapshot_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_api_Snapshot_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_Snapshot_descriptor,
         new java.lang.String[] { "Symbol", "InstrumentId", "TradeTime", "Price", "Open", "High", "Low", "PreClose", "Volume", "Change", "ChangeRatio", });
     internal_static_api_QuoteRequest_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_api_QuoteRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_QuoteRequest_descriptor,
         new java.lang.String[] { "Symbol", "Category", });
     internal_static_api_QuoteResponse_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_api_QuoteResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_QuoteResponse_descriptor,
         new java.lang.String[] { "Symbol", "InstrumentId", "Asks", "Bids", });
     internal_static_api_AskBid_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_api_AskBid_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_AskBid_descriptor,
         new java.lang.String[] { "Price", "Size", "Order", "Broker", });
     internal_static_api_Order_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_api_Order_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_Order_descriptor,
         new java.lang.String[] { "Mpid", "Size", });
     internal_static_api_Broker_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_api_Broker_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_Broker_descriptor,
         new java.lang.String[] { "Bid", "Name", });
     internal_static_api_TickRequest_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_api_TickRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_TickRequest_descriptor,
         new java.lang.String[] { "Symbol", "Category", "Count", });
     internal_static_api_TickResponse_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_api_TickResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_TickResponse_descriptor,
         new java.lang.String[] { "Symbol", "InstrumentId", "Result", });
     internal_static_api_Tick_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_api_Tick_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_Tick_descriptor,
         new java.lang.String[] { "Time", "Price", "Volume", "Side", });
     internal_static_api_TokenResponse_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_api_TokenResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_TokenResponse_descriptor,
         new java.lang.String[] { "Token", });
     internal_static_api_SubscribeRequest_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_api_SubscribeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_SubscribeRequest_descriptor,
         new java.lang.String[] { "Token", "Symbols", "Category", "SubTypes", "UnsubscribeAll", });
     internal_static_api_SubscribeResponse_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_api_SubscribeResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_SubscribeResponse_descriptor,

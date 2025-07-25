@@ -31,8 +31,10 @@ import com.webull.openapi.quotes.api.QuotesApiClient;
 import com.webull.openapi.quotes.api.lifecycle.ReplyMessage;
 import com.webull.openapi.quotes.domain.AskBid;
 import com.webull.openapi.quotes.domain.Bar;
+import com.webull.openapi.quotes.domain.BatchBarResponse;
 import com.webull.openapi.quotes.domain.Broker;
 import com.webull.openapi.quotes.domain.Instrument;
+import com.webull.openapi.quotes.domain.NBar;
 import com.webull.openapi.quotes.domain.Order;
 import com.webull.openapi.quotes.domain.Quote;
 import com.webull.openapi.quotes.domain.Snapshot;
@@ -59,6 +61,7 @@ import com.webull.openapi.utils.StringUtils;
 import io.grpc.CallCredentials;
 import io.grpc.stub.StreamObserver;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -200,6 +203,55 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
             }).collect(Collectors.toList());
         } catch (InvalidProtocolBufferException e) {
             throw new ClientException("Deserialize bar response error.", e);
+        }
+    }
+
+    @Override
+    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count) {
+        Assert.notEmpty(ArgNames.SYMBOLS, symbols);
+        Assert.notBlank(ArgNames.CATEGORY, category);
+        Assert.notBlank(ArgNames.TIMESPAN, timespan);
+        Assert.nonnegative(ArgNames.COUNT, count);
+        Api.BatchBarsRequest batchBarsRequest = Api.BatchBarsRequest.newBuilder()
+                .addAllSymbols(symbols)
+                .setCategory(category)
+                .setTimespan(timespan)
+                .setCount(count)
+                .build();
+        Gateway.ClientRequest request = Gateway.ClientRequest.newBuilder()
+                .setType(Gateway.MsgType.Payload)
+                .setRequestId(UUID.randomUUID().toString())
+                .setPath("/market-data/batch-bars")
+                .setPayload(batchBarsRequest.toByteString())
+                .build();
+        Gateway.ClientResponse response = this.doRequest(request);
+        try {
+            Api.BatchBarsResponse batchBarsResponse = Api.BatchBarsResponse.parseFrom(response.getPayload());
+            List<Api.BarsResponse> barsResponses = batchBarsResponse.getResultList();
+            List<NBar> nBars = barsResponses.stream().map(barsResponse -> {
+                NBar nBar = new NBar();
+                nBar.setSymbol(barsResponse.getSymbol());
+                nBar.setInstrumentId(barsResponse.getInstrumentId());
+
+                List<Bar> bars = barsResponse.getResultList().stream().map(bar -> {
+                    Bar barObj = new Bar();
+                    barObj.setTime(bar.getTime());
+                    barObj.setOpen(bar.getOpen());
+                    barObj.setClose(bar.getClose());
+                    barObj.setHigh(bar.getHigh());
+                    barObj.setLow(bar.getLow());
+                    barObj.setVolume(bar.getVolume());
+                    return barObj;
+                }).collect(Collectors.toList());
+
+                nBar.setResult(bars);
+                return nBar;
+            }).collect(Collectors.toList());
+            BatchBarResponse batchBarResponse = new BatchBarResponse();
+            batchBarResponse.setResult(nBars);
+            return batchBarResponse;
+        } catch (InvalidProtocolBufferException e) {
+            throw new ClientException("Deserialize batch bar response error.", e);
         }
     }
 

@@ -1,7 +1,6 @@
 package com.webull.openapi.example.trade;
 
 import com.google.common.reflect.TypeToken;
-import com.webull.openapi.common.CustomerType;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
@@ -25,7 +24,6 @@ public class TradeEvents {
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
                 .regionId(Env.REGION_ID)
-//                .customerType(CustomerType.INSTITUTION)
                 .onMessage(TradeEvents::handleEventMessage)
                 .build()) {
 
