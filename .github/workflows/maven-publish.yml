@@ -11,7 +11,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '8'
-          distribution: 'adopt'
+          distribution: 'temurin'
       - name: import gpg private key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v5
@@ -29,7 +29,12 @@ jobs:
                 "id": "ossrh",
                 "username": "${{ secrets.NEXUS_USERNAME }}",
                 "password": "${{ secrets.NEXUS_PASSWORD }}"
-              }
+              },
+              {
+                "id": "central",
+                "username": "${{ secrets.NEXUS_USERNAME }}",
+                "password": "${{ secrets.NEXUS_PASSWORD }}"
+              },            
             ]
           output_file: /home/runner/.m2/settings.xml
       - name: publish package
