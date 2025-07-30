@@ -31,6 +31,7 @@ import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TradeApiService {
 
@@ -92,4 +93,22 @@ public interface TradeApiService {
      * but support will be gradually introduced in the future.
      */
     TradeOrderResponse cancelOption(String accountId, OptionOrder optionOrder);
+
+    /**
+     * This is an optional feature; you can still make a request without setting it.
+     * If set, you can specify certain headers to perform specific operations.
+     * Note: If you set a header, call removeCustomHeaders to clean up the header after the request is completed.
+     *
+     * Currently supported header keys and functions:
+     *      Key：category {@link com.webull.openapi.common.dict.Category}
+     *      Function: Frequency limit rules, please refer to the document for details. currently only supports Hong Kong
+     *
+     * @param headersMap
+     */
+    void addCustomHeaders(Map<String, String> headersMap);
+
+    /**
+     * Clearing headers after the request is completed.
+     */
+    void removeCustomHeaders();
 }

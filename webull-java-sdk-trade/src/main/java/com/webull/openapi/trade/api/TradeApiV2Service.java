@@ -17,16 +17,16 @@ package com.webull.openapi.trade.api;
 
 import com.webull.openapi.trade.api.request.v2.OptionOrder;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
-import com.webull.openapi.trade.api.response.InstrumentInfo;
 import com.webull.openapi.trade.api.response.TradeCalendar;
-import com.webull.openapi.trade.api.response.v2.OrderHistory;
 import com.webull.openapi.trade.api.response.v2.Account;
 import com.webull.openapi.trade.api.response.v2.AccountBalanceInfo;
 import com.webull.openapi.trade.api.response.v2.AccountPositionsInfo;
+import com.webull.openapi.trade.api.response.v2.OrderHistory;
 import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TradeApiV2Service {
 
@@ -129,5 +129,22 @@ public interface TradeApiV2Service {
      */
     List<TradeCalendar> getTradeCalendar(String market, String start, String end);
 
+    /**
+     * This is an optional feature; you can still make a request without setting it.
+     * If set, you can specify certain headers to perform specific operations.
+     * Note: If you set a header, call removeCustomHeaders to clean up the header after the request is completed.
+     *
+     * Currently supported header keys and functions:
+     *      Key：category {@link com.webull.openapi.common.dict.Category}
+     *      Function: Frequency limit rules, please refer to the document for details. currently only supports Hong Kong
+     *
+     * @param headersMap
+     */
+    void addCustomHeaders(Map<String, String> headersMap);
+
+    /**
+     * Clearing headers
+     */
+    void removeCustomHeaders();
 
 }

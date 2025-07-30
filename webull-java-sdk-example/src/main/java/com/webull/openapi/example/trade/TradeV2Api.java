@@ -1,9 +1,13 @@
 package com.webull.openapi.example.trade;
 
 import com.webull.openapi.common.Region;
-import com.webull.openapi.common.dict.AccountTaxType;
+import com.webull.openapi.common.dict.Category;
+import com.webull.openapi.common.dict.ComboType;
 import com.webull.openapi.common.dict.EntrustType;
 import com.webull.openapi.common.dict.InstrumentSuperType;
+import com.webull.openapi.common.dict.Markets;
+import com.webull.openapi.common.dict.OptionStrategy;
+import com.webull.openapi.common.dict.OptionType;
 import com.webull.openapi.common.dict.OrderSide;
 import com.webull.openapi.common.dict.OrderTIF;
 import com.webull.openapi.common.dict.OrderType;
@@ -11,11 +15,12 @@ import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
 import com.webull.openapi.http.HttpApiConfig;
-import com.webull.openapi.http.RuntimeOptions;
 import com.webull.openapi.logger.Logger;
 import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.trade.api.http.TradeHttpApiV2Service;
-import com.webull.openapi.trade.api.request.v2.NoPartyId;
+import com.webull.openapi.trade.api.request.v2.OptionOrder;
+import com.webull.openapi.trade.api.request.v2.OptionOrderItem;
+import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
 import com.webull.openapi.trade.api.request.v2.TradeOrderItem;
 import com.webull.openapi.trade.api.response.v2.Account;
@@ -28,7 +33,11 @@ import com.webull.openapi.utils.CollectionUtils;
 import com.webull.openapi.utils.GUID;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.webull.openapi.common.Headers.CATEGORY_KEY;
 
 public class TradeV2Api {
     private static final Logger logger = LoggerFactory.getLogger(TradeV2Api.class);
@@ -89,7 +98,12 @@ public class TradeV2Api {
             logger.info("previewOrderResponse: {}", previewOrderResponse);
             String clientOrderId = GUID.get();
             placeOne.setClientOrderId(clientOrderId);
+            // This is an optional feature; you can still make a request without setting it.
+            Map<String,String> customHeadersMap = new HashMap<>();
+            customHeadersMap.put(CATEGORY_KEY, Category.US_STOCK.name());
+            apiService.addCustomHeaders(customHeadersMap);
             TradeOrderResponse tradePlaceOrderResponse = apiService.placeOrder(accountId, tradeOrder);
+            apiService.removeCustomHeaders();
             logger.info("tradePlaceOrderResponse: {}", tradePlaceOrderResponse);
             Thread.sleep(1000L);
             TradeOrder modifyTradeOrder = new TradeOrder();
@@ -114,6 +128,79 @@ public class TradeV2Api {
             // Replace with the client_order_id to be queried.
             OrderHistory orderDetailResponse = apiService.getOrderDetails(accountId, clientOrderId);
             logger.info("orderDetailResponse: {}", orderDetailResponse);
+
+
+
+
+            // Options
+            OptionOrderItemLeg optionOrderItemLeg = new OptionOrderItemLeg();
+            optionOrderItemLeg.setSide(OrderSide.BUY.name());
+            optionOrderItemLeg.setQuantity("1");
+            optionOrderItemLeg.setSymbol("AAPL");
+            optionOrderItemLeg.setStrikePrice("250");
+            optionOrderItemLeg.setInitExpDate("2025-08-15");
+            optionOrderItemLeg.setInstrumentType(InstrumentSuperType.OPTION.name());
+            optionOrderItemLeg.setOptionType(OptionType.CALL.name());
+            optionOrderItemLeg.setMarket(Markets.US.name());
+            List<OptionOrderItemLeg> optionOrderItemLegList = new ArrayList<>();
+            optionOrderItemLegList.add(optionOrderItemLeg);
+            OptionOrderItem optionOrderItem = new OptionOrderItem();
+            optionOrderItem.setClientOrderId(GUID.get());
+            optionOrderItem.setComboType(ComboType.NORMAL.name());
+            optionOrderItem.setOptionStrategy(OptionStrategy.SINGLE.name());
+            optionOrderItem.setSide(OrderSide.BUY.name());
+            optionOrderItem.setOrderType(OrderType.LIMIT.name());
+            optionOrderItem.setTimeInForce(OrderTIF.GTC.name());
+            optionOrderItem.setLimitPrice("2");
+            optionOrderItem.setQuantity("1");
+            optionOrderItem.setEntrustType(EntrustType.QTY.name());
+            optionOrderItem.setOrders(optionOrderItemLegList);
+            List<OptionOrderItem> optionOrderItemList = new ArrayList<>();
+            optionOrderItemList.add(optionOrderItem);
+            OptionOrder optionOrder = new OptionOrder();
+            optionOrder.setNewOrders(optionOrderItemList);
+
+            logger.info("previewOptionRequest: {}", optionOrder);
+            PreviewOrderResponse previewOptionResponse = apiService.previewOption(accountId, optionOrder);
+            logger.info("previewOptionResponse: {}", previewOptionResponse);
+
+            logger.info("placeOptionRequest: {}", optionOrder);
+            // This is an optional feature; you can still make a request without setting it.
+            Map<String,String> optionCustomHeadersMap = new HashMap<>();
+            optionCustomHeadersMap.put(CATEGORY_KEY, Category.US_OPTION.name());
+            apiService.addCustomHeaders(optionCustomHeadersMap);
+            TradeOrderResponse placeOptionResponse = apiService.placeOption(accountId, optionOrder);
+            apiService.removeCustomHeaders();
+            logger.info("placeOptionResponse: {}", placeOptionResponse);
+            Thread.sleep(5000L);
+
+            // This code is only applicable for single-leg options modification operations.
+            OptionOrderItemLeg optionReplaceItemLeg = new OptionOrderItemLeg();
+            optionReplaceItemLeg.setQuantity("2");
+            optionReplaceItemLeg.setClientOrderId(optionOrderItem.getClientOrderId());
+            List<OptionOrderItemLeg> optionReplaceItemLegList = new ArrayList<>();
+            optionReplaceItemLegList.add(optionReplaceItemLeg);
+            OptionOrderItem optionReplaceItem = new OptionOrderItem();
+            optionReplaceItem.setClientOrderId(optionOrderItem.getClientOrderId());
+            optionReplaceItem.setLimitPrice("3");
+            optionReplaceItem.setQuantity("2");
+            optionReplaceItem.setOrders(optionReplaceItemLegList);
+            List<OptionOrderItem> optionReplaceItemList = new ArrayList<>();
+            optionReplaceItemList.add(optionReplaceItem);
+            OptionOrder optionReplace = new OptionOrder();
+            optionReplace.setModifyOrders(optionReplaceItemList);
+
+            logger.info("replaceOptionRequest: {}", optionReplace);
+            TradeOrderResponse replaceOptionResponse = apiService.replaceOption(accountId, optionReplace);
+            logger.info("replaceOptionResponse: {}", replaceOptionResponse);
+            Thread.sleep(5000L);
+
+            OptionOrder cancelTradeOption = new OptionOrder();
+            cancelTradeOption.setClientOrderId(optionOrderItem.getClientOrderId());
+
+            logger.info("cancelOptionRequest: {}", cancelTradeOption);
+            TradeOrderResponse cancelOptionResponse = apiService.cancelOption(accountId, cancelTradeOption);
+            logger.info("cancelOptionResponse: {}", cancelOptionResponse);
 
         } catch (ClientException ex) {
             logger.error("Client error", ex);

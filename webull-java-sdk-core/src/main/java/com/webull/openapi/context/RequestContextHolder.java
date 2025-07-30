@@ -13,52 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webull.openapi.common.dict;
+package com.webull.openapi.context;
 
-public enum Category {
+import java.util.HashMap;
+import java.util.Map;
 
-    /**
-     * China Connect Stocks
-     */
-    CN_STOCK,
+public class RequestContextHolder {
 
-    /**
-     * Hong Kong stocks
-     */
-    HK_STOCK,
+    private static final ThreadLocal<Map<String,String>> HEADERS = ThreadLocal.withInitial(HashMap::new);
 
-    /**
-     * Hong Kong ETFs
-     */
-    HK_ETF,
+    public RequestContextHolder() {
+    }
 
-    /**
-     * US Stocks
-     */
-    US_STOCK,
+    public static Map<String,String> get() {
+        return HEADERS.get();
+    }
 
-    /**
-     * 	US ETFs
-     */
-    US_ETF,
+    public static void clear() {
+        HEADERS.remove();
+    }
 
-    /**
-     * U.S. Options
-     */
-    US_OPTION,
-
-    /**
-     * Cryptocurrency
-     */
-    CRYPTO,
-
-    /**
-     * NFTs
-     */
-    NFT,
-
-    /**
-     * Stock/ETF CFDs
-     */
-    US_CFDONSTOCK
 }
