@@ -20,8 +20,8 @@ import com.webull.openapi.common.Headers;
 import com.webull.openapi.common.Region;
 import com.webull.openapi.common.Versions;
 import com.webull.openapi.common.dict.InstrumentSuperType;
-import com.webull.openapi.common.dict.OptionType;
 import com.webull.openapi.common.dict.TickerType;
+import com.webull.openapi.context.RequestContextHolder;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ErrorCode;
 import com.webull.openapi.http.HttpApiClient;
@@ -157,7 +157,8 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         Assert.notNull(TRADE_ORDER_ARG, tradeOrder);
         Assert.notEmpty(NEW_ORDERS_ARG, tradeOrder.getNewOrders());
         HttpRequest request = new HttpRequest("/openapi/account/orders/place", Versions.V1, HttpMethod.POST);
-        addCustomHeaders(request, tradeOrder);
+        addCustomHeadersFromOrder(request, tradeOrder);
+        addCustomHeaderFromContext(request);
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put(ACCOUNT_ID_PARAM, accountId);
         request.setQuery(queryMap);
@@ -246,7 +247,7 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         return apiClient.request(request).responseType(OrderHistory.class).doAction();
     }
 
-    private void addCustomHeaders(HttpRequest request, TradeOrder tradeOrder) {
+    private void addCustomHeadersFromOrder(HttpRequest request, TradeOrder tradeOrder) {
         if(Objects.isNull(tradeOrder)
                 || CollectionUtils.isEmpty(tradeOrder.getNewOrders())
                 || Objects.isNull(tradeOrder.getNewOrders().get(0))){
@@ -261,7 +262,7 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         }
     }
 
-    private void addCustomHeaders(HttpRequest request, OptionOrder optionOrder) {
+    private void addCustomHeadersFromOrder(HttpRequest request, OptionOrder optionOrder) {
         if(CollectionUtils.isEmpty(optionOrder.getNewOrders())
                 || Objects.isNull(optionOrder.getNewOrders().get(0))
                 || CollectionUtils.isEmpty(optionOrder.getNewOrders().get(0).getOrders())){
@@ -273,7 +274,7 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         if(Objects.isNull(item)){
             return;
         }
-        List<String> categoryList = Arrays.asList( item.getMarket(), InstrumentSuperType.EQUITY.name(), item.getOptionType(), item.getInstrumentType());
+        List<String> categoryList = Arrays.asList( item.getMarket(), item.getInstrumentType());
         String category = StringUtils.join(categoryList, "_");
         if (StringUtils.isNotBlank(category)) {
             request.getHeaders().put(Headers.CATEGORY_KEY, category);
@@ -309,7 +310,8 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         Assert.notNull(OPTION_ORDER_ARG, optionOrder);
         Assert.notEmpty(NEW_ORDERS_ARG, optionOrder.getNewOrders());
         HttpRequest request = new HttpRequest("/openapi/account/orders/option/place", Versions.V1, HttpMethod.POST);
-        addCustomHeaders(request, optionOrder);
+        addCustomHeadersFromOrder(request, optionOrder);
+        addCustomHeaderFromContext(request);
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put(ACCOUNT_ID_PARAM, accountId);
         request.setQuery(queryMap);
@@ -370,6 +372,33 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
         params.put(END_PARAM, end);
         request.setQuery(params);
         return apiClient.request(request).responseType(new TypeToken<List<TradeCalendar>>() {}.getType()).doAction();
+    }
+
+    @Override
+    public void addCustomHeaders(Map<String, String> headersMap) {
+        if(Objects.isNull(headersMap) || headersMap.isEmpty()){
+            return;
+        }
+        RequestContextHolder.get().putAll(headersMap);
+    }
+
+    @Override
+    public void removeCustomHeaders() {
+        RequestContextHolder.clear();
+    }
+
+    private void addCustomHeaderFromContext(HttpRequest request){
+        try{
+            Map<String, String> headersMap =  RequestContextHolder.get();
+            if(Objects.isNull(headersMap) || headersMap.isEmpty()){
+                return;
+            }
+
+            request.getHeaders().putAll(headersMap);
+        }finally {
+            RequestContextHolder.clear();
+        }
+
     }
 
 }

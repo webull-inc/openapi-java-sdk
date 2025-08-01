@@ -1,5 +1,6 @@
 package com.webull.openapi.example.trade;
 
+import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.ComboType;
 import com.webull.openapi.common.dict.EntrustType;
 import com.webull.openapi.common.dict.InstrumentSuperType;
@@ -38,7 +39,11 @@ import com.webull.openapi.utils.GUID;
 import com.webull.openapi.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.webull.openapi.common.Headers.CATEGORY_KEY;
 
 public class TradeApi {
 
@@ -88,7 +93,12 @@ public class TradeApi {
             stockOrder.setQty("100");
             stockOrder.setExtendedHoursTrading(false);
 
+            // This is an optional feature; you can still make a request without setting it.
+            Map<String,String> customHeadersMap = new HashMap<>();
+            customHeadersMap.put(CATEGORY_KEY, Category.US_STOCK.name());
+            apiService.addCustomHeaders(customHeadersMap);
             OrderResponse placeOrderResponse = apiService.placeOrder(accountId, stockOrder);
+            apiService.removeCustomHeaders();
             logger.info("Place order: {}", placeOrderResponse);
 
             OrderResponse replaceOrderResponse = apiService.replaceOrder(accountId, stockOrder);
@@ -162,7 +172,12 @@ public class TradeApi {
             logger.info("previewOptionResponse: {}", previewOptionResponse);
 
             logger.info("placeOptionRequest: {}", optionOrder);
+            // This is an optional feature; you can still make a request without setting it.
+            Map<String,String> optionCustomHeadersMap = new HashMap<>();
+            optionCustomHeadersMap.put(CATEGORY_KEY, Category.US_OPTION.name());
+            apiService.addCustomHeaders(optionCustomHeadersMap);
             TradeOrderResponse placeOptionResponse = apiService.placeOption(accountId, optionOrder);
+            apiService.removeCustomHeaders();
             logger.info("placeOptionResponse: {}", placeOptionResponse);
             Thread.sleep(5000L);
 
