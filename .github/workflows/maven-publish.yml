@@ -32,8 +32,8 @@ jobs:
               },
               {
                 "id": "central",
-                "username": "${{ secrets.NEXUS_USERNAME }}",
-                "password": "${{ secrets.NEXUS_PASSWORD }}"
+                "username": "${{ secrets.CENTRAL_TOKEN_USER }}",
+                "password": "${{ secrets.CENTRAL_TOKEN_PASS }}"
               }
             ]
           output_file: /home/runner/.m2/settings.xml
