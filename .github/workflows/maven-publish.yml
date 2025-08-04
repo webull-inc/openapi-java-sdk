@@ -34,7 +34,7 @@ jobs:
                 "id": "central",
                 "username": "${{ secrets.NEXUS_USERNAME }}",
                 "password": "${{ secrets.NEXUS_PASSWORD }}"
-              },            
+              }
             ]
           output_file: /home/runner/.m2/settings.xml
       - name: publish package
