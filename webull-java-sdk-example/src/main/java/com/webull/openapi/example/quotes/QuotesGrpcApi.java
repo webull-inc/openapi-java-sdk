@@ -3,6 +3,8 @@ package com.webull.openapi.example.quotes;
 import com.google.api.client.util.Lists;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.Timespan;
+import com.webull.openapi.common.dict.TradingSession;
+import com.webull.openapi.common.dict.YesOrNo;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
@@ -17,6 +19,7 @@ import com.webull.openapi.quotes.domain.Snapshot;
 import com.webull.openapi.quotes.domain.Tick;
 import com.webull.openapi.serialize.JsonSerializer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +42,12 @@ public class QuotesGrpcApi {
             symbols.add("AAPL");
             symbols.add("TSLA");
 
+            List<String> tradingSessions = new ArrayList<>();
+            tradingSessions.add(TradingSession.PRE.name());
+            tradingSessions.add(TradingSession.RTH.name());
+            tradingSessions.add(TradingSession.ATH.name());
+            tradingSessions.add(TradingSession.OVN.name());
+
             List<Instrument> instruments = quotesApiClient.getInstruments(symbols, Category.US_STOCK.name());
             logger.info("Instruments: {}", JsonSerializer.toJson(instruments));
 
@@ -48,6 +57,14 @@ public class QuotesGrpcApi {
 
             // get bars with symbols
             BatchBarResponse batchBars = quotesApiClient.getBatchBars(Lists.newArrayList(symbols), Category.US_STOCK.name(), Timespan.M1.name(), 2);
+            logger.info("Batch bars: {}", JsonSerializer.toJson(batchBars));
+
+            // get bars. Only supports HK.
+            bars = quotesApiClient.getBars(symbol, Category.US_STOCK.name(), Timespan.M5.name(), 10, YesOrNo.N.name() , tradingSessions);
+            logger.info("Bars: {}", JsonSerializer.toJson(bars));
+
+            // get bars with symbols. Only supports HK.
+            batchBars = quotesApiClient.getBatchBars(Lists.newArrayList(symbols), Category.US_STOCK.name(), Timespan.M15.name(), 2, YesOrNo.N.name() , tradingSessions);
             logger.info("Batch bars: {}", JsonSerializer.toJson(batchBars));
 
             // get quote

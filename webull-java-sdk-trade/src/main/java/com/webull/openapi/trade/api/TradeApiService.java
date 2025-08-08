@@ -17,16 +17,7 @@ package com.webull.openapi.trade.api;
 
 import com.webull.openapi.trade.api.request.StockOrder;
 import com.webull.openapi.trade.api.request.v2.OptionOrder;
-import com.webull.openapi.trade.api.response.Account;
-import com.webull.openapi.trade.api.response.AccountDetail;
-import com.webull.openapi.trade.api.response.AccountPositions;
-import com.webull.openapi.trade.api.response.BalanceBase;
-import com.webull.openapi.trade.api.response.InstrumentInfo;
-import com.webull.openapi.trade.api.response.Order;
-import com.webull.openapi.trade.api.response.OrderResponse;
-import com.webull.openapi.trade.api.response.Orders;
-import com.webull.openapi.trade.api.response.TradableInstruments;
-import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.*;
 import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 
@@ -111,4 +102,6 @@ public interface TradeApiService {
      * Clearing headers after the request is completed.
      */
     void removeCustomHeaders();
+
+    OAuthCommonPositionContractVO getCommonPositionDetail(String accountId, String tickerId, String startId, Integer size);
 }

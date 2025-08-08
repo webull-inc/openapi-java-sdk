@@ -172,16 +172,34 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
 
     @Override
     public List<Bar> getBars(String symbol, String category, String timespan, int count) {
+        return getBars(symbol, category, timespan, count, null, null);
+    }
+
+    @Override
+    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count) {
+        return getBatchBars(symbols, category, timespan, count, null, null);
+    }
+
+    @Override
+    public List<Bar> getBars(String symbol, String category, String timespan, int count, String realTimeRequired, List<String> tradingSessions) {
         Assert.notBlank(ArgNames.SYMBOL, symbol);
         Assert.notBlank(ArgNames.CATEGORY, category);
         Assert.notBlank(ArgNames.TIMESPAN, timespan);
         Assert.nonnegative(ArgNames.COUNT, count);
-        Api.BarsRequest barsRequest = Api.BarsRequest.newBuilder()
+
+        Api.BarsRequest.Builder barsRequestBuilder = Api.BarsRequest.newBuilder()
                 .setSymbol(symbol)
                 .setCategory(category)
                 .setTimespan(timespan)
-                .setCount(String.valueOf(count))
-                .build();
+                .setCount(String.valueOf(count));
+        if(StringUtils.isNotBlank(realTimeRequired)){
+            barsRequestBuilder.setRealTimeRequired(realTimeRequired);
+        }
+        if(CollectionUtils.isNotEmpty(tradingSessions)){
+            barsRequestBuilder.setTradingSessions(String.join(",", tradingSessions));
+        }
+
+        Api.BarsRequest barsRequest = barsRequestBuilder.build();
         Gateway.ClientRequest request = Gateway.ClientRequest.newBuilder()
                 .setType(Gateway.MsgType.Payload)
                 .setRequestId(UUID.randomUUID().toString())
@@ -207,17 +225,25 @@ public class GrpcQuotesApiClient extends BaseGrpcClient<Gateway.ClientResponse> 
     }
 
     @Override
-    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count) {
+    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count, String realTimeRequired, List<String> tradingSessions) {
         Assert.notEmpty(ArgNames.SYMBOLS, symbols);
         Assert.notBlank(ArgNames.CATEGORY, category);
         Assert.notBlank(ArgNames.TIMESPAN, timespan);
         Assert.nonnegative(ArgNames.COUNT, count);
-        Api.BatchBarsRequest batchBarsRequest = Api.BatchBarsRequest.newBuilder()
+
+        Api.BatchBarsRequest.Builder batchBarsRequestBuilder = Api.BatchBarsRequest.newBuilder()
                 .addAllSymbols(symbols)
                 .setCategory(category)
                 .setTimespan(timespan)
-                .setCount(count)
-                .build();
+                .setCount(count);
+        if(StringUtils.isNotBlank(realTimeRequired)){
+            batchBarsRequestBuilder.setRealTimeRequired(realTimeRequired);
+        }
+        if(CollectionUtils.isNotEmpty(tradingSessions)){
+            batchBarsRequestBuilder.addAllTradingSessions(tradingSessions);
+        }
+
+        Api.BatchBarsRequest batchBarsRequest = batchBarsRequestBuilder.build();
         Gateway.ClientRequest request = Gateway.ClientRequest.newBuilder()
                 .setType(Gateway.MsgType.Payload)
                 .setRequestId(UUID.randomUUID().toString())

@@ -31,22 +31,7 @@ import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.request.StockOrder;
 import com.webull.openapi.trade.api.request.v2.OptionOrder;
 import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
-import com.webull.openapi.trade.api.response.Account;
-import com.webull.openapi.trade.api.response.AccountBalance;
-import com.webull.openapi.trade.api.response.AccountDetail;
-import com.webull.openapi.trade.api.response.AccountPositions;
-import com.webull.openapi.trade.api.response.BalanceBase;
-import com.webull.openapi.trade.api.response.ComboOrder;
-import com.webull.openapi.trade.api.response.ComboOrderResponse;
-import com.webull.openapi.trade.api.response.InstrumentInfo;
-import com.webull.openapi.trade.api.response.JPAccountBalance;
-import com.webull.openapi.trade.api.response.Order;
-import com.webull.openapi.trade.api.response.OrderResponse;
-import com.webull.openapi.trade.api.response.Orders;
-import com.webull.openapi.trade.api.response.SimpleOrder;
-import com.webull.openapi.trade.api.response.SimpleOrderResponse;
-import com.webull.openapi.trade.api.response.TradableInstruments;
-import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.*;
 import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 import com.webull.openapi.utils.Assert;
@@ -382,6 +367,22 @@ public class TradeHttpApiService implements TradeApiService {
     @Override
     public void removeCustomHeaders() {
         RequestContextHolder.clear();
+    }
+
+    @Override
+    public OAuthCommonPositionContractVO getCommonPositionDetail(String accountId, String tickerId, String startId, Integer size) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notBlank("tickerId", tickerId);
+        HttpRequest request = new HttpRequest("/account/position/details", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        params.put(ACCOUNT_ID_PARAM, accountId);
+        params.put("ticker_id", tickerId);
+        if(StringUtils.isEmpty(startId)) startId = "0";
+        if(size == null || size == 0) size = 20;
+        params.put("last_instrument_id", startId);
+        params.put("size", size);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(OAuthCommonPositionContractVO.class).doAction();
     }
 
     private void addCustomHeaderFromContext(HttpRequest request){

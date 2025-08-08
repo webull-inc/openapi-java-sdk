@@ -15,61 +15,17 @@
  */
 package com.webull.openapi.common.dict;
 
-public enum Category {
+public enum TradingSession {
 
-    /**
-     * China Connect Stocks
-     */
-    CN_STOCK,
+    /** Pre-Market */
+    PRE,
 
-    /**
-     * Hong Kong stocks
-     */
-    HK_STOCK,
+    /** Regular Trading Hours */
+    RTH,
 
-    /**
-     * Hong Kong ETFs
-     */
-    HK_ETF,
+    /** After-Trading Hours */
+    ATH,
 
-    /**
-     * US Stocks
-     */
-    US_STOCK,
-
-    /**
-     * 	US ETFs
-     */
-    US_ETF,
-
-    /**
-     * U.S. Options
-     */
-    US_OPTION,
-
-    /**
-     * Cryptocurrency
-     */
-    CRYPTO,
-
-    /**
-     * NFTs
-     */
-    NFT,
-
-    /**
-     * Stock/ETF CFDs
-     */
-    US_CFDONSTOCK,
-
-    /**
-     * Japan stock
-     */
-    JP_STOCK,
-
-    /**
-     * Japan etf
-     */
-    JP_ETF;
-
+    /** Overnight */
+    OVN,
 }

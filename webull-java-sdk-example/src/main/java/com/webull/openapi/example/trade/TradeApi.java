@@ -22,16 +22,7 @@ import com.webull.openapi.trade.api.request.StockOrder;
 import com.webull.openapi.trade.api.request.v2.OptionOrder;
 import com.webull.openapi.trade.api.request.v2.OptionOrderItem;
 import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
-import com.webull.openapi.trade.api.response.Account;
-import com.webull.openapi.trade.api.response.AccountDetail;
-import com.webull.openapi.trade.api.response.AccountPositions;
-import com.webull.openapi.trade.api.response.BalanceBase;
-import com.webull.openapi.trade.api.response.InstrumentInfo;
-import com.webull.openapi.trade.api.response.Order;
-import com.webull.openapi.trade.api.response.OrderResponse;
-import com.webull.openapi.trade.api.response.Orders;
-import com.webull.openapi.trade.api.response.TradableInstruments;
-import com.webull.openapi.trade.api.response.TradeCalendar;
+import com.webull.openapi.trade.api.response.*;
 import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
 import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
 import com.webull.openapi.utils.CollectionUtils;
@@ -209,6 +200,10 @@ public class TradeApi {
             TradeOrderResponse cancelOptionResponse = apiService.cancelOption(accountId, cancelTradeOption);
             logger.info("cancelOptionResponse: {}", cancelOptionResponse);
 
+            String tickerId = "", startId = "";
+            Integer size = 10;
+            OAuthCommonPositionContractVO contractVO = apiService.getCommonPositionDetail(accountId, tickerId, startId, size);
+            logger.info("OAuthCommonPositionContractVO: {}", contractVO);
         } catch (ClientException ex) {
             logger.error("Client error", ex);
         } catch (ServerException ex) {

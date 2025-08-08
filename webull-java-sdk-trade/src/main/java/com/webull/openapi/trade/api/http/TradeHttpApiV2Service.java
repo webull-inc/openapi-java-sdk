@@ -33,6 +33,8 @@ import com.webull.openapi.trade.api.request.v2.OptionOrder;
 import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
 import com.webull.openapi.trade.api.request.v2.TradeOrderItem;
+import com.webull.openapi.trade.api.response.OAuthCommonPositionContractVO;
+import com.webull.openapi.trade.api.response.OAuthCommonPositionDetailVO;
 import com.webull.openapi.trade.api.response.TradeCalendar;
 import com.webull.openapi.trade.api.response.v2.Account;
 import com.webull.openapi.trade.api.response.v2.AccountBalanceInfo;
@@ -401,4 +403,19 @@ public class TradeHttpApiV2Service implements TradeApiV2Service {
 
     }
 
+    @Override
+    public OAuthCommonPositionContractVO getCommonPositionDetail(String accountId, String tickerId, String startId, Integer size) {
+        Assert.notBlank(ACCOUNT_ID_ARG, accountId);
+        Assert.notBlank("tickerId", tickerId);
+        HttpRequest request = new HttpRequest("/openapi/account/position/details", Versions.V1, HttpMethod.GET);
+        Map<String, Object> params = new HashMap<>();
+        params.put(ACCOUNT_ID_PARAM, accountId);
+        params.put("ticker_id", tickerId);
+        if(StringUtils.isEmpty(startId)) startId = "0";
+        if(size == null || size == 0) size = 20;
+        params.put("last_instrument_id", startId);
+        params.put("size", size);
+        request.setQuery(params);
+        return apiClient.request(request).responseType(OAuthCommonPositionContractVO.class).doAction();
+    }
 }
