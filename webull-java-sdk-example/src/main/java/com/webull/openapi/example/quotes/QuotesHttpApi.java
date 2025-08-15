@@ -3,6 +3,8 @@ package com.webull.openapi.example.quotes;
 import com.webull.openapi.common.dict.Category;
 import com.webull.openapi.common.dict.EventType;
 import com.webull.openapi.common.dict.Timespan;
+import com.webull.openapi.common.dict.TradingSession;
+import com.webull.openapi.common.dict.YesOrNo;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
@@ -36,6 +38,12 @@ public class QuotesHttpApi {
         eventTypes.add(EventType.Reverse_Stock_Split.getCode());
         eventTypes.add(EventType.Stock_Split.getCode());
 
+        List<String> tradingSessions = new ArrayList<>();
+        tradingSessions.add(TradingSession.PRE.name());
+        tradingSessions.add(TradingSession.RTH.name());
+        tradingSessions.add(TradingSession.ATH.name());
+        tradingSessions.add(TradingSession.OVN.name());
+
         HttpApiConfig apiConfig = HttpApiConfig.builder()
                 .appKey(Env.APP_KEY)
                 .appSecret(Env.APP_SECRET)
@@ -50,6 +58,14 @@ public class QuotesHttpApi {
 
             // get bars with symbols
             BatchBarResponse batchBars = quotesApiClient.getBatchBars(new ArrayList<>(symbols), Category.US_STOCK.name(), Timespan.D.name(), 2);
+            logger.info("Batch bars: {}", JsonSerializer.toJson(batchBars));
+
+            // get bars. Only supports HK.
+            bars = quotesApiClient.getBars("AAPL", Category.US_STOCK.name(), Timespan.D.name(), 10, YesOrNo.N.name() , tradingSessions);
+            logger.info("Bars: {}", bars);
+
+            // get bars with symbols. Only supports HK.
+            batchBars = quotesApiClient.getBatchBars(new ArrayList<>(symbols), Category.US_STOCK.name(), Timespan.D.name(), 2, YesOrNo.N.name() , tradingSessions);
             logger.info("Batch bars: {}", JsonSerializer.toJson(batchBars));
 
             // get snapshots

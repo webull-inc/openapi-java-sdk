@@ -2683,6 +2683,30 @@ public final class Api {
      */
     com.google.protobuf.ByteString
         getCountBytes();
+
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The realTimeRequired.
+     */
+    java.lang.String getRealTimeRequired();
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The bytes for realTimeRequired.
+     */
+    com.google.protobuf.ByteString
+        getRealTimeRequiredBytes();
+
+    /**
+     * <code>string trading_sessions = 6;</code>
+     * @return The tradingSessions.
+     */
+    java.lang.String getTradingSessions();
+    /**
+     * <code>string trading_sessions = 6;</code>
+     * @return The bytes for tradingSessions.
+     */
+    com.google.protobuf.ByteString
+        getTradingSessionsBytes();
   }
   /**
    * Protobuf type {@code api.BarsRequest}
@@ -2701,6 +2725,8 @@ public final class Api {
       category_ = "";
       timespan_ = "";
       count_ = "";
+      realTimeRequired_ = "";
+      tradingSessions_ = "";
     }
 
     @java.lang.Override
@@ -2880,6 +2906,82 @@ public final class Api {
       }
     }
 
+    public static final int REAL_TIME_REQUIRED_FIELD_NUMBER = 5;
+    private volatile java.lang.Object realTimeRequired_;
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The realTimeRequired.
+     */
+    @java.lang.Override
+    public java.lang.String getRealTimeRequired() {
+      java.lang.Object ref = realTimeRequired_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        realTimeRequired_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The bytes for realTimeRequired.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getRealTimeRequiredBytes() {
+      java.lang.Object ref = realTimeRequired_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        realTimeRequired_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TRADING_SESSIONS_FIELD_NUMBER = 6;
+    private volatile java.lang.Object tradingSessions_;
+    /**
+     * <code>string trading_sessions = 6;</code>
+     * @return The tradingSessions.
+     */
+    @java.lang.Override
+    public java.lang.String getTradingSessions() {
+      java.lang.Object ref = tradingSessions_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tradingSessions_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string trading_sessions = 6;</code>
+     * @return The bytes for tradingSessions.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getTradingSessionsBytes() {
+      java.lang.Object ref = tradingSessions_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tradingSessions_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2906,6 +3008,12 @@ public final class Api {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(count_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, count_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(realTimeRequired_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, realTimeRequired_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tradingSessions_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, tradingSessions_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2926,6 +3034,12 @@ public final class Api {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(count_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, count_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(realTimeRequired_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, realTimeRequired_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tradingSessions_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, tradingSessions_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -2950,6 +3064,10 @@ public final class Api {
           .equals(other.getTimespan())) return false;
       if (!getCount()
           .equals(other.getCount())) return false;
+      if (!getRealTimeRequired()
+          .equals(other.getRealTimeRequired())) return false;
+      if (!getTradingSessions()
+          .equals(other.getTradingSessions())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -2969,6 +3087,10 @@ public final class Api {
       hash = (53 * hash) + getTimespan().hashCode();
       hash = (37 * hash) + COUNT_FIELD_NUMBER;
       hash = (53 * hash) + getCount().hashCode();
+      hash = (37 * hash) + REAL_TIME_REQUIRED_FIELD_NUMBER;
+      hash = (53 * hash) + getRealTimeRequired().hashCode();
+      hash = (37 * hash) + TRADING_SESSIONS_FIELD_NUMBER;
+      hash = (53 * hash) + getTradingSessions().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3105,6 +3227,10 @@ public final class Api {
 
         count_ = "";
 
+        realTimeRequired_ = "";
+
+        tradingSessions_ = "";
+
         return this;
       }
 
@@ -3135,6 +3261,8 @@ public final class Api {
         result.category_ = category_;
         result.timespan_ = timespan_;
         result.count_ = count_;
+        result.realTimeRequired_ = realTimeRequired_;
+        result.tradingSessions_ = tradingSessions_;
         onBuilt();
         return result;
       }
@@ -3199,6 +3327,14 @@ public final class Api {
           count_ = other.count_;
           onChanged();
         }
+        if (!other.getRealTimeRequired().isEmpty()) {
+          realTimeRequired_ = other.realTimeRequired_;
+          onChanged();
+        }
+        if (!other.getTradingSessions().isEmpty()) {
+          tradingSessions_ = other.tradingSessions_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -3245,6 +3381,16 @@ public final class Api {
 
                 break;
               } // case 34
+              case 42: {
+                realTimeRequired_ = input.readStringRequireUtf8();
+
+                break;
+              } // case 42
+              case 50: {
+                tradingSessions_ = input.readStringRequireUtf8();
+
+                break;
+              } // case 50
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -3561,6 +3707,158 @@ public final class Api {
   checkByteStringIsUtf8(value);
         
         count_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object realTimeRequired_ = "";
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @return The realTimeRequired.
+       */
+      public java.lang.String getRealTimeRequired() {
+        java.lang.Object ref = realTimeRequired_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          realTimeRequired_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @return The bytes for realTimeRequired.
+       */
+      public com.google.protobuf.ByteString
+          getRealTimeRequiredBytes() {
+        java.lang.Object ref = realTimeRequired_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          realTimeRequired_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @param value The realTimeRequired to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRealTimeRequired(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        realTimeRequired_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRealTimeRequired() {
+        
+        realTimeRequired_ = getDefaultInstance().getRealTimeRequired();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @param value The bytes for realTimeRequired to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRealTimeRequiredBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        realTimeRequired_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object tradingSessions_ = "";
+      /**
+       * <code>string trading_sessions = 6;</code>
+       * @return The tradingSessions.
+       */
+      public java.lang.String getTradingSessions() {
+        java.lang.Object ref = tradingSessions_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tradingSessions_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string trading_sessions = 6;</code>
+       * @return The bytes for tradingSessions.
+       */
+      public com.google.protobuf.ByteString
+          getTradingSessionsBytes() {
+        java.lang.Object ref = tradingSessions_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tradingSessions_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string trading_sessions = 6;</code>
+       * @param value The tradingSessions to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTradingSessions(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tradingSessions_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string trading_sessions = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTradingSessions() {
+        
+        tradingSessions_ = getDefaultInstance().getTradingSessions();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string trading_sessions = 6;</code>
+       * @param value The bytes for tradingSessions to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTradingSessionsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tradingSessions_ = value;
         onChanged();
         return this;
       }
@@ -6053,6 +6351,43 @@ public final class Api {
      * @return The count.
      */
     int getCount();
+
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The realTimeRequired.
+     */
+    java.lang.String getRealTimeRequired();
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The bytes for realTimeRequired.
+     */
+    com.google.protobuf.ByteString
+        getRealTimeRequiredBytes();
+
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @return A list containing the tradingSessions.
+     */
+    java.util.List<java.lang.String>
+        getTradingSessionsList();
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @return The count of tradingSessions.
+     */
+    int getTradingSessionsCount();
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @param index The index of the element to return.
+     * @return The tradingSessions at the given index.
+     */
+    java.lang.String getTradingSessions(int index);
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the tradingSessions at the given index.
+     */
+    com.google.protobuf.ByteString
+        getTradingSessionsBytes(int index);
   }
   /**
    * Protobuf type {@code api.BatchBarsRequest}
@@ -6070,6 +6405,8 @@ public final class Api {
       symbols_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       category_ = "";
       timespan_ = "";
+      realTimeRequired_ = "";
+      tradingSessions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -6219,6 +6556,79 @@ public final class Api {
       return count_;
     }
 
+    public static final int REAL_TIME_REQUIRED_FIELD_NUMBER = 5;
+    private volatile java.lang.Object realTimeRequired_;
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The realTimeRequired.
+     */
+    @java.lang.Override
+    public java.lang.String getRealTimeRequired() {
+      java.lang.Object ref = realTimeRequired_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        realTimeRequired_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string real_time_required = 5;</code>
+     * @return The bytes for realTimeRequired.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getRealTimeRequiredBytes() {
+      java.lang.Object ref = realTimeRequired_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        realTimeRequired_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TRADING_SESSIONS_FIELD_NUMBER = 6;
+    private com.google.protobuf.LazyStringList tradingSessions_;
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @return A list containing the tradingSessions.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getTradingSessionsList() {
+      return tradingSessions_;
+    }
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @return The count of tradingSessions.
+     */
+    public int getTradingSessionsCount() {
+      return tradingSessions_.size();
+    }
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @param index The index of the element to return.
+     * @return The tradingSessions at the given index.
+     */
+    public java.lang.String getTradingSessions(int index) {
+      return tradingSessions_.get(index);
+    }
+    /**
+     * <code>repeated string trading_sessions = 6;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the tradingSessions at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getTradingSessionsBytes(int index) {
+      return tradingSessions_.getByteString(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -6244,6 +6654,12 @@ public final class Api {
       }
       if (count_ != 0) {
         output.writeInt32(4, count_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(realTimeRequired_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, realTimeRequired_);
+      }
+      for (int i = 0; i < tradingSessions_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, tradingSessions_.getRaw(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -6272,6 +6688,17 @@ public final class Api {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, count_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(realTimeRequired_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, realTimeRequired_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < tradingSessions_.size(); i++) {
+          dataSize += computeStringSizeNoTag(tradingSessions_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getTradingSessionsList().size();
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -6295,6 +6722,10 @@ public final class Api {
           .equals(other.getTimespan())) return false;
       if (getCount()
           != other.getCount()) return false;
+      if (!getRealTimeRequired()
+          .equals(other.getRealTimeRequired())) return false;
+      if (!getTradingSessionsList()
+          .equals(other.getTradingSessionsList())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -6316,6 +6747,12 @@ public final class Api {
       hash = (53 * hash) + getTimespan().hashCode();
       hash = (37 * hash) + COUNT_FIELD_NUMBER;
       hash = (53 * hash) + getCount();
+      hash = (37 * hash) + REAL_TIME_REQUIRED_FIELD_NUMBER;
+      hash = (53 * hash) + getRealTimeRequired().hashCode();
+      if (getTradingSessionsCount() > 0) {
+        hash = (37 * hash) + TRADING_SESSIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getTradingSessionsList().hashCode();
+      }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6452,6 +6889,10 @@ public final class Api {
 
         count_ = 0;
 
+        realTimeRequired_ = "";
+
+        tradingSessions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -6487,6 +6928,12 @@ public final class Api {
         result.category_ = category_;
         result.timespan_ = timespan_;
         result.count_ = count_;
+        result.realTimeRequired_ = realTimeRequired_;
+        if (((bitField0_ & 0x00000002) != 0)) {
+          tradingSessions_ = tradingSessions_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.tradingSessions_ = tradingSessions_;
         onBuilt();
         return result;
       }
@@ -6556,6 +7003,20 @@ public final class Api {
         if (other.getCount() != 0) {
           setCount(other.getCount());
         }
+        if (!other.getRealTimeRequired().isEmpty()) {
+          realTimeRequired_ = other.realTimeRequired_;
+          onChanged();
+        }
+        if (!other.tradingSessions_.isEmpty()) {
+          if (tradingSessions_.isEmpty()) {
+            tradingSessions_ = other.tradingSessions_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureTradingSessionsIsMutable();
+            tradingSessions_.addAll(other.tradingSessions_);
+          }
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -6603,6 +7064,17 @@ public final class Api {
 
                 break;
               } // case 32
+              case 42: {
+                realTimeRequired_ = input.readStringRequireUtf8();
+
+                break;
+              } // case 42
+              case 50: {
+                java.lang.String s = input.readStringRequireUtf8();
+                ensureTradingSessionsIsMutable();
+                tradingSessions_.add(s);
+                break;
+              } // case 50
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -6909,6 +7381,192 @@ public final class Api {
       public Builder clearCount() {
         
         count_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object realTimeRequired_ = "";
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @return The realTimeRequired.
+       */
+      public java.lang.String getRealTimeRequired() {
+        java.lang.Object ref = realTimeRequired_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          realTimeRequired_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @return The bytes for realTimeRequired.
+       */
+      public com.google.protobuf.ByteString
+          getRealTimeRequiredBytes() {
+        java.lang.Object ref = realTimeRequired_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          realTimeRequired_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @param value The realTimeRequired to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRealTimeRequired(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        realTimeRequired_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRealTimeRequired() {
+        
+        realTimeRequired_ = getDefaultInstance().getRealTimeRequired();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string real_time_required = 5;</code>
+       * @param value The bytes for realTimeRequired to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRealTimeRequiredBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        realTimeRequired_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList tradingSessions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureTradingSessionsIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          tradingSessions_ = new com.google.protobuf.LazyStringArrayList(tradingSessions_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @return A list containing the tradingSessions.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getTradingSessionsList() {
+        return tradingSessions_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @return The count of tradingSessions.
+       */
+      public int getTradingSessionsCount() {
+        return tradingSessions_.size();
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @param index The index of the element to return.
+       * @return The tradingSessions at the given index.
+       */
+      public java.lang.String getTradingSessions(int index) {
+        return tradingSessions_.get(index);
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the tradingSessions at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getTradingSessionsBytes(int index) {
+        return tradingSessions_.getByteString(index);
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @param index The index to set the value at.
+       * @param value The tradingSessions to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTradingSessions(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTradingSessionsIsMutable();
+        tradingSessions_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @param value The tradingSessions to add.
+       * @return This builder for chaining.
+       */
+      public Builder addTradingSessions(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTradingSessionsIsMutable();
+        tradingSessions_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @param values The tradingSessions to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllTradingSessions(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureTradingSessionsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, tradingSessions_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTradingSessions() {
+        tradingSessions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string trading_sessions = 6;</code>
+       * @param value The bytes of the tradingSessions to add.
+       * @return This builder for chaining.
+       */
+      public Builder addTradingSessionsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureTradingSessionsIsMutable();
+        tradingSessions_.add(value);
         onChanged();
         return this;
       }
@@ -21509,44 +22167,47 @@ public final class Api {
       "rumentResponse\022\037\n\006result\030\001 \003(\0132\017.api.Ins" +
       "trument\"j\n\nInstrument\022\014\n\004name\030\001 \001(\t\022\016\n\006s" +
       "ymbol\030\002 \001(\t\022\025\n\rinstrument_id\030\003 \001(\t\022\025\n\rex" +
-      "change_code\030\004 \001(\t\022\020\n\010currency\030\005 \001(\t\"P\n\013B" +
-      "arsRequest\022\016\n\006symbol\030\001 \001(\t\022\020\n\010category\030\002" +
-      " \001(\t\022\020\n\010timespan\030\003 \001(\t\022\r\n\005count\030\004 \001(\t\"O\n" +
-      "\014BarsResponse\022\016\n\006symbol\030\001 \001(\t\022\025\n\rinstrum" +
-      "ent_id\030\002 \001(\t\022\030\n\006result\030\003 \003(\0132\010.api.Bar\"[" +
-      "\n\003Bar\022\014\n\004time\030\001 \001(\t\022\014\n\004open\030\002 \001(\t\022\r\n\005clo" +
-      "se\030\003 \001(\t\022\014\n\004high\030\004 \001(\t\022\013\n\003low\030\005 \001(\t\022\016\n\006v" +
-      "olume\030\006 \001(\t\"V\n\020BatchBarsRequest\022\017\n\007symbo" +
-      "ls\030\001 \003(\t\022\020\n\010category\030\002 \001(\t\022\020\n\010timespan\030\003" +
-      " \001(\t\022\r\n\005count\030\004 \001(\005\"6\n\021BatchBarsResponse" +
-      "\022!\n\006result\030\001 \003(\0132\021.api.BarsResponse\"4\n\017S" +
-      "napshotRequest\022\017\n\007symbols\030\001 \001(\t\022\020\n\010categ" +
-      "ory\030\002 \001(\t\"1\n\020SnapshotResponse\022\035\n\006result\030" +
-      "\001 \003(\0132\r.api.Snapshot\"\306\001\n\010Snapshot\022\016\n\006sym" +
-      "bol\030\001 \001(\t\022\025\n\rinstrument_id\030\002 \001(\t\022\022\n\ntrad" +
-      "e_time\030\003 \001(\t\022\r\n\005price\030\004 \001(\t\022\014\n\004open\030\005 \001(" +
-      "\t\022\014\n\004high\030\006 \001(\t\022\013\n\003low\030\007 \001(\t\022\021\n\tpre_clos" +
-      "e\030\010 \001(\t\022\016\n\006volume\030\t \001(\t\022\016\n\006change\030\n \001(\t\022" +
-      "\024\n\014change_ratio\030\013 \001(\t\"0\n\014QuoteRequest\022\016\n" +
-      "\006symbol\030\001 \001(\t\022\020\n\010category\030\002 \001(\t\"l\n\rQuote" +
-      "Response\022\016\n\006symbol\030\001 \001(\t\022\025\n\rinstrument_i" +
-      "d\030\002 \001(\t\022\031\n\004asks\030\003 \003(\0132\013.api.AskBid\022\031\n\004bi" +
-      "ds\030\004 \003(\0132\013.api.AskBid\"]\n\006AskBid\022\r\n\005price" +
-      "\030\001 \001(\t\022\014\n\004size\030\002 \001(\t\022\031\n\005order\030\003 \003(\0132\n.ap" +
-      "i.Order\022\033\n\006broker\030\004 \003(\0132\013.api.Broker\"#\n\005" +
-      "Order\022\014\n\004mpid\030\001 \001(\t\022\014\n\004size\030\002 \001(\t\"#\n\006Bro" +
-      "ker\022\013\n\003bid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\">\n\013TickRe" +
-      "quest\022\016\n\006symbol\030\001 \001(\t\022\020\n\010category\030\002 \001(\t\022" +
-      "\r\n\005count\030\003 \001(\t\"P\n\014TickResponse\022\016\n\006symbol" +
-      "\030\001 \001(\t\022\025\n\rinstrument_id\030\002 \001(\t\022\031\n\006result\030" +
-      "\003 \003(\0132\t.api.Tick\"A\n\004Tick\022\014\n\004time\030\001 \001(\t\022\r" +
-      "\n\005price\030\002 \001(\t\022\016\n\006volume\030\003 \001(\t\022\014\n\004side\030\004 " +
-      "\001(\t\"\036\n\rTokenResponse\022\r\n\005token\030\001 \001(\t\"p\n\020S" +
-      "ubscribeRequest\022\r\n\005token\030\001 \001(\t\022\017\n\007symbol" +
-      "s\030\002 \003(\t\022\020\n\010category\030\003 \001(\t\022\021\n\tsub_types\030\004" +
-      " \003(\t\022\027\n\017unsubscribe_all\030\005 \001(\t\"\023\n\021Subscri" +
-      "beResponseB/\n-com.webull.openapi.quotes." +
-      "internal.grpc.protob\006proto3"
+      "change_code\030\004 \001(\t\022\020\n\010currency\030\005 \001(\t\"\206\001\n\013" +
+      "BarsRequest\022\016\n\006symbol\030\001 \001(\t\022\020\n\010category\030" +
+      "\002 \001(\t\022\020\n\010timespan\030\003 \001(\t\022\r\n\005count\030\004 \001(\t\022\032" +
+      "\n\022real_time_required\030\005 \001(\t\022\030\n\020trading_se" +
+      "ssions\030\006 \001(\t\"O\n\014BarsResponse\022\016\n\006symbol\030\001" +
+      " \001(\t\022\025\n\rinstrument_id\030\002 \001(\t\022\030\n\006result\030\003 " +
+      "\003(\0132\010.api.Bar\"[\n\003Bar\022\014\n\004time\030\001 \001(\t\022\014\n\004op" +
+      "en\030\002 \001(\t\022\r\n\005close\030\003 \001(\t\022\014\n\004high\030\004 \001(\t\022\013\n" +
+      "\003low\030\005 \001(\t\022\016\n\006volume\030\006 \001(\t\"\214\001\n\020BatchBars" +
+      "Request\022\017\n\007symbols\030\001 \003(\t\022\020\n\010category\030\002 \001" +
+      "(\t\022\020\n\010timespan\030\003 \001(\t\022\r\n\005count\030\004 \001(\005\022\032\n\022r" +
+      "eal_time_required\030\005 \001(\t\022\030\n\020trading_sessi" +
+      "ons\030\006 \003(\t\"6\n\021BatchBarsResponse\022!\n\006result" +
+      "\030\001 \003(\0132\021.api.BarsResponse\"4\n\017SnapshotReq" +
+      "uest\022\017\n\007symbols\030\001 \001(\t\022\020\n\010category\030\002 \001(\t\"" +
+      "1\n\020SnapshotResponse\022\035\n\006result\030\001 \003(\0132\r.ap" +
+      "i.Snapshot\"\306\001\n\010Snapshot\022\016\n\006symbol\030\001 \001(\t\022" +
+      "\025\n\rinstrument_id\030\002 \001(\t\022\022\n\ntrade_time\030\003 \001" +
+      "(\t\022\r\n\005price\030\004 \001(\t\022\014\n\004open\030\005 \001(\t\022\014\n\004high\030" +
+      "\006 \001(\t\022\013\n\003low\030\007 \001(\t\022\021\n\tpre_close\030\010 \001(\t\022\016\n" +
+      "\006volume\030\t \001(\t\022\016\n\006change\030\n \001(\t\022\024\n\014change_" +
+      "ratio\030\013 \001(\t\"0\n\014QuoteRequest\022\016\n\006symbol\030\001 " +
+      "\001(\t\022\020\n\010category\030\002 \001(\t\"l\n\rQuoteResponse\022\016" +
+      "\n\006symbol\030\001 \001(\t\022\025\n\rinstrument_id\030\002 \001(\t\022\031\n" +
+      "\004asks\030\003 \003(\0132\013.api.AskBid\022\031\n\004bids\030\004 \003(\0132\013" +
+      ".api.AskBid\"]\n\006AskBid\022\r\n\005price\030\001 \001(\t\022\014\n\004" +
+      "size\030\002 \001(\t\022\031\n\005order\030\003 \003(\0132\n.api.Order\022\033\n" +
+      "\006broker\030\004 \003(\0132\013.api.Broker\"#\n\005Order\022\014\n\004m" +
+      "pid\030\001 \001(\t\022\014\n\004size\030\002 \001(\t\"#\n\006Broker\022\013\n\003bid" +
+      "\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\">\n\013TickRequest\022\016\n\006s" +
+      "ymbol\030\001 \001(\t\022\020\n\010category\030\002 \001(\t\022\r\n\005count\030\003" +
+      " \001(\t\"P\n\014TickResponse\022\016\n\006symbol\030\001 \001(\t\022\025\n\r" +
+      "instrument_id\030\002 \001(\t\022\031\n\006result\030\003 \003(\0132\t.ap" +
+      "i.Tick\"A\n\004Tick\022\014\n\004time\030\001 \001(\t\022\r\n\005price\030\002 " +
+      "\001(\t\022\016\n\006volume\030\003 \001(\t\022\014\n\004side\030\004 \001(\t\"\036\n\rTok" +
+      "enResponse\022\r\n\005token\030\001 \001(\t\"p\n\020SubscribeRe" +
+      "quest\022\r\n\005token\030\001 \001(\t\022\017\n\007symbols\030\002 \003(\t\022\020\n" +
+      "\010category\030\003 \001(\t\022\021\n\tsub_types\030\004 \003(\t\022\027\n\017un" +
+      "subscribe_all\030\005 \001(\t\"\023\n\021SubscribeResponse" +
+      "B/\n-com.webull.openapi.quotes.internal.g" +
+      "rpc.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -21575,7 +22236,7 @@ public final class Api {
     internal_static_api_BarsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_BarsRequest_descriptor,
-        new java.lang.String[] { "Symbol", "Category", "Timespan", "Count", });
+        new java.lang.String[] { "Symbol", "Category", "Timespan", "Count", "RealTimeRequired", "TradingSessions", });
     internal_static_api_BarsResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_api_BarsResponse_fieldAccessorTable = new
@@ -21593,7 +22254,7 @@ public final class Api {
     internal_static_api_BatchBarsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_BatchBarsRequest_descriptor,
-        new java.lang.String[] { "Symbols", "Category", "Timespan", "Count", });
+        new java.lang.String[] { "Symbols", "Category", "Timespan", "Count", "RealTimeRequired", "TradingSessions", });
     internal_static_api_BatchBarsResponse_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_api_BatchBarsResponse_fieldAccessorTable = new

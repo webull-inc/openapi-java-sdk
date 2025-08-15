@@ -23,6 +23,7 @@ import com.webull.openapi.trade.api.request.v2.OptionOrderItem;
 import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
 import com.webull.openapi.trade.api.request.v2.TradeOrder;
 import com.webull.openapi.trade.api.request.v2.TradeOrderItem;
+import com.webull.openapi.trade.api.response.OAuthCommonPositionContractVO;
 import com.webull.openapi.trade.api.response.v2.Account;
 import com.webull.openapi.trade.api.response.v2.AccountBalanceInfo;
 import com.webull.openapi.trade.api.response.v2.AccountPositionsInfo;
@@ -202,6 +203,11 @@ public class TradeV2Api {
             TradeOrderResponse cancelOptionResponse = apiService.cancelOption(accountId, cancelTradeOption);
             logger.info("cancelOptionResponse: {}", cancelOptionResponse);
 
+            accountId = "";
+            String tickserId = "", startId = "";
+            Integer size=10;
+            OAuthCommonPositionContractVO contractVO = apiService.getCommonPositionDetail(accountId, tickserId, startId, size);
+            logger.info("OAuthCommonPositionContractVO:{}", contractVO);
         } catch (ClientException ex) {
             logger.error("Client error", ex);
         } catch (ServerException ex) {

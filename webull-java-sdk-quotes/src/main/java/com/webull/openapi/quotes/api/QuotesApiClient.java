@@ -49,6 +49,14 @@ public interface QuotesApiClient extends Closeable {
      */
     BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count);
 
+
+    List<Bar> getBars(String symbol, String category, String timespan, int count, String realTimeRequired, List<String> tradingSessions);
+
+    /**
+     * Get batch bars for multiple symbols.
+     */
+    BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count, String realTimeRequired, List<String> tradingSessions);
+
     /**
      * Only for Webull JP
      */

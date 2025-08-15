@@ -25,6 +25,8 @@ public final class ArgNames {
     public static final String CATEGORY = "category";
     public static final String TIMESPAN = "timespan";
     public static final String COUNT = "count";
+    public static final String REAL_TIME_REQUIRED = "real_time_required";
+    public static final String TRADING_SESSIONS = "trading_sessions";
     public static final String SUBTYPES = "subTypes";
     public static final String TOKEN = "token";
     public static final String INSTRUMENT_IDS = "instrument_ids";

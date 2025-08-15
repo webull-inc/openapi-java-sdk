@@ -34,6 +34,7 @@ import com.webull.openapi.quotes.domain.CorpAction;
 import com.webull.openapi.quotes.domain.CorpActionRequest;
 import com.webull.openapi.quotes.internal.common.ArgNames;
 import com.webull.openapi.utils.Assert;
+import com.webull.openapi.utils.CollectionUtils;
 import com.webull.openapi.utils.StringUtils;
 
 import java.util.Arrays;
@@ -93,6 +94,16 @@ public class HttpQuotesApiClient implements QuotesApiClient {
 
     @Override
     public List<Bar> getBars(String symbol, String category, String timespan, int count) {
+        return getBars(symbol, category, timespan, count, null, null);
+    }
+
+    @Override
+    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count) {
+        return getBatchBars(symbols, category, timespan, count, null, null);
+    }
+
+    @Override
+    public List<Bar> getBars(String symbol, String category, String timespan, int count, String realTimeRequired, List<String> tradingSessions) {
         Assert.notBlank(Arrays.asList(ArgNames.SYMBOL, ArgNames.CATEGORY, ArgNames.TIMESPAN), symbol, category, timespan);
         HttpRequest request = new HttpRequest("/market-data/bars", Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
@@ -100,13 +111,19 @@ public class HttpQuotesApiClient implements QuotesApiClient {
         params.put(ArgNames.CATEGORY, category);
         params.put(ArgNames.TIMESPAN, timespan);
         params.put(ArgNames.COUNT, count);
+        if(StringUtils.isNotBlank(realTimeRequired)){
+            params.put(ArgNames.REAL_TIME_REQUIRED, realTimeRequired);
+        }
+        if(CollectionUtils.isNotEmpty(tradingSessions)){
+            params.put(ArgNames.TRADING_SESSIONS, String.join(",", tradingSessions));
+        }
         request.setQuery(params);
         addCustomHeaders(request);
         return apiClient.request(request).responseType(new TypeToken<List<Bar>>() {}.getType()).doAction();
     }
 
     @Override
-    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count) {
+    public BatchBarResponse getBatchBars(List<String> symbols, String category, String timespan, int count, String realTimeRequired, List<String> tradingSessions) {
         Assert.notEmpty(ArgNames.SYMBOLS, symbols);
         Assert.notBlank(ArgNames.CATEGORY, category);
         Assert.notBlank(ArgNames.TIMESPAN, timespan);
@@ -116,6 +133,12 @@ public class HttpQuotesApiClient implements QuotesApiClient {
         params.put(ArgNames.CATEGORY, category);
         params.put(ArgNames.TIMESPAN, timespan);
         params.put(ArgNames.COUNT, count);
+        if(StringUtils.isNotBlank(realTimeRequired)){
+            params.put(ArgNames.REAL_TIME_REQUIRED, realTimeRequired);
+        }
+        if(CollectionUtils.isNotEmpty(tradingSessions)){
+            params.put(ArgNames.TRADING_SESSIONS, tradingSessions);
+        }
         request.setBody(params);
         addCustomHeaders(request);
         return apiClient.request(request)
