@@ -376,7 +376,7 @@ public class TradeHttpApiService implements TradeApiService {
         HttpRequest request = new HttpRequest("/account/position/details", Versions.V1, HttpMethod.GET);
         Map<String, Object> params = new HashMap<>();
         params.put(ACCOUNT_ID_PARAM, accountId);
-        params.put("ticker_id", tickerId);
+        params.put("instrument_id", tickerId);
         if(StringUtils.isEmpty(startId)) startId = "0";
         if(size == null || size == 0) size = 20;
         params.put("last_instrument_id", startId);
