@@ -27,6 +27,26 @@ public class Instrument {
 
     private String currency;
 
+    private Boolean shortable;
+
+    private Boolean marginable;
+
+    public Boolean getShortable() {
+        return shortable;
+    }
+
+    public void setShortable(Boolean shortable) {
+        this.shortable = shortable;
+    }
+
+    public Boolean getMarginable() {
+        return marginable;
+    }
+
+    public void setMarginable(Boolean marginable) {
+        this.marginable = marginable;
+    }
+
     public String getName() {
         return name;
     }
@@ -75,6 +95,8 @@ public class Instrument {
                 ", instrumentId='" + instrumentId + '\'' +
                 ", exchangeCode='" + exchangeCode + '\'' +
                 ", currency='" + currency + '\'' +
+                ", shortable='" + shortable + '\'' +
+                ", marginable='" + marginable + '\'' +
                 '}';
     }
 }
