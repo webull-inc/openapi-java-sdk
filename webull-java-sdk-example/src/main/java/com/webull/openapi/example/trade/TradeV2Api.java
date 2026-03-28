@@ -1,16 +1,7 @@
 package com.webull.openapi.example.trade;
 
 import com.webull.openapi.common.Region;
-import com.webull.openapi.common.dict.Category;
-import com.webull.openapi.common.dict.ComboType;
-import com.webull.openapi.common.dict.EntrustType;
-import com.webull.openapi.common.dict.InstrumentSuperType;
-import com.webull.openapi.common.dict.Markets;
-import com.webull.openapi.common.dict.OptionStrategy;
-import com.webull.openapi.common.dict.OptionType;
-import com.webull.openapi.common.dict.OrderSide;
-import com.webull.openapi.common.dict.OrderTIF;
-import com.webull.openapi.common.dict.OrderType;
+import com.webull.openapi.common.dict.*;
 import com.webull.openapi.example.config.Env;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;

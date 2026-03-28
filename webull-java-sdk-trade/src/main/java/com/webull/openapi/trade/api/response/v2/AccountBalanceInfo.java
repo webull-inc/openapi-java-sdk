@@ -28,7 +28,98 @@ public class AccountBalanceInfo {
 
     private String totalMarketValue;
 
+    private String maintenanceMargin;
+
+    private String usedMargin;
+
+    private String usedMarginForOpenOrder;
+
+    private String marginExcess;
+
+    private String marginRatio;
+
     private List<AccountAssetInfo> accountCurrencyAssets;
+
+
+    public String getTotalUnrealizedProfitLoss() {
+        return totalUnrealizedProfitLoss;
+    }
+
+    public void setTotalUnrealizedProfitLoss(String totalUnrealizedProfitLoss) {
+        this.totalUnrealizedProfitLoss = totalUnrealizedProfitLoss;
+    }
+
+    public String getTotalAssetCurrency() {
+        return totalAssetCurrency;
+    }
+
+    public void setTotalAssetCurrency(String totalAssetCurrency) {
+        this.totalAssetCurrency = totalAssetCurrency;
+    }
+
+    public String getTotalCashBalance() {
+        return totalCashBalance;
+    }
+
+    public void setTotalCashBalance(String totalCashBalance) {
+        this.totalCashBalance = totalCashBalance;
+    }
+
+    public String getTotalMarketValue() {
+        return totalMarketValue;
+    }
+
+    public void setTotalMarketValue(String totalMarketValue) {
+        this.totalMarketValue = totalMarketValue;
+    }
+
+    public String getMaintenanceMargin() {
+        return maintenanceMargin;
+    }
+
+    public void setMaintenanceMargin(String maintenanceMargin) {
+        this.maintenanceMargin = maintenanceMargin;
+    }
+
+    public String getUsedMargin() {
+        return usedMargin;
+    }
+
+    public void setUsedMargin(String usedMargin) {
+        this.usedMargin = usedMargin;
+    }
+
+    public String getUsedMarginForOpenOrder() {
+        return usedMarginForOpenOrder;
+    }
+
+    public void setUsedMarginForOpenOrder(String usedMarginForOpenOrder) {
+        this.usedMarginForOpenOrder = usedMarginForOpenOrder;
+    }
+
+    public String getMarginExcess() {
+        return marginExcess;
+    }
+
+    public void setMarginExcess(String marginExcess) {
+        this.marginExcess = marginExcess;
+    }
+
+    public String getMarginRatio() {
+        return marginRatio;
+    }
+
+    public void setMarginRatio(String marginRatio) {
+        this.marginRatio = marginRatio;
+    }
+
+    public List<AccountAssetInfo> getAccountCurrencyAssets() {
+        return accountCurrencyAssets;
+    }
+
+    public void setAccountCurrencyAssets(List<AccountAssetInfo> accountCurrencyAssets) {
+        this.accountCurrencyAssets = accountCurrencyAssets;
+    }
 
     @Override
     public String toString() {
@@ -36,6 +127,12 @@ public class AccountBalanceInfo {
                 "totalAssetCurrency='" + totalAssetCurrency + '\'' +
                 ", totalCashBalance='" + totalCashBalance + '\'' +
                 ", totalUnrealizedProfitLoss='" + totalUnrealizedProfitLoss + '\'' +
+                ", totalMarketValue=" + totalMarketValue +
+                ", maintenance_margin=" + maintenanceMargin +
+                ", usedMargin=" + usedMargin +
+                ", usedMarginForOpenOrder=" + usedMarginForOpenOrder +
+                ", marginExcess=" + marginExcess +
+                ", marginRatio=" + marginRatio +
                 ", accountCurrencyAssets=" + accountCurrencyAssets +
                 '}';
     }

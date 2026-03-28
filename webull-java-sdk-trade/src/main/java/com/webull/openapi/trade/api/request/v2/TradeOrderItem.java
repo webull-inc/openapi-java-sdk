@@ -46,6 +46,7 @@ public class TradeOrderItem implements Serializable {
     private String senderSubId;
     private List<NoPartyId> noPartyIds;
     private String totalCashAmount;
+    private String positionIntent;
 
     public String getClientOrderId() {
         return clientOrderId;
@@ -239,6 +240,14 @@ public class TradeOrderItem implements Serializable {
         this.totalCashAmount = totalCashAmount;
     }
 
+    public String getPositionIntent() {
+        return positionIntent;
+    }
+
+    public void setPositionIntent(String positionIntent) {
+        this.positionIntent = positionIntent;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderItem{" +
@@ -266,6 +275,7 @@ public class TradeOrderItem implements Serializable {
                 ", senderSubId='" + senderSubId + '\'' +
                 ", noPartyIds=" + noPartyIds +
                 ", totalCashAmount='" + totalCashAmount + '\'' +
+                ", positionIntent='" + positionIntent + '\'' +
                 '}';
     }
 }
