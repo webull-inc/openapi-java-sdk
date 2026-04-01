@@ -1,16 +1,7 @@
 package com.webull.openapi.example.trade;
 
-import com.webull.openapi.common.dict.Category;
-import com.webull.openapi.common.dict.ComboType;
-import com.webull.openapi.common.dict.EntrustType;
-import com.webull.openapi.common.dict.InstrumentSuperType;
-import com.webull.openapi.common.dict.Markets;
-import com.webull.openapi.common.dict.OptionStrategy;
-import com.webull.openapi.common.dict.OptionType;
-import com.webull.openapi.common.dict.OrderSide;
-import com.webull.openapi.common.dict.OrderTIF;
-import com.webull.openapi.common.dict.OrderType;
 import com.webull.openapi.example.config.Env;
+import com.webull.openapi.example.trade.HoldingAction.ActionType;
 import com.webull.openapi.execption.ClientException;
 import com.webull.openapi.execption.ServerException;
 import com.webull.openapi.http.HttpApiConfig;
@@ -18,29 +9,27 @@ import com.webull.openapi.logger.Logger;
 import com.webull.openapi.logger.LoggerFactory;
 import com.webull.openapi.trade.api.TradeApiService;
 import com.webull.openapi.trade.api.http.TradeHttpApiService;
-import com.webull.openapi.trade.api.request.StockOrder;
-import com.webull.openapi.trade.api.request.v2.OptionOrder;
-import com.webull.openapi.trade.api.request.v2.OptionOrderItem;
-import com.webull.openapi.trade.api.request.v2.OptionOrderItemLeg;
 import com.webull.openapi.trade.api.response.*;
-import com.webull.openapi.trade.api.response.v2.PreviewOrderResponse;
-import com.webull.openapi.trade.api.response.v2.TradeOrderResponse;
-import com.webull.openapi.utils.CollectionUtils;
-import com.webull.openapi.utils.GUID;
-import com.webull.openapi.utils.StringUtils;
+//import com.webull.openapi.utils.CollectionUtils;
+//import com.webull.openapi.utils.StringUtils;
+
+//import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static com.webull.openapi.common.Headers.CATEGORY_KEY;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class TradeApi {
 
     private static final Logger logger = LoggerFactory.getLogger(TradeApi.class);
 
     public static void main(String[] args) {
+        String acctNum = "";
+        String acctId = "";
+        int numPositions = 0;
+        List<HoldingAction> holdingActions = new ArrayList<>();
+
         try {
             HttpApiConfig apiConfig = HttpApiConfig.builder()
                     .appKey(Env.APP_KEY)
@@ -51,165 +40,152 @@ public class TradeApi {
 
             // get account list
             List<Account> accounts = apiService.getAccountList("");
-            logger.info("Accounts: {}", accounts);
+            
 
-            String accountId = null;
-            if (CollectionUtils.isNotEmpty(accounts)) {
-                accountId = accounts.get(0).getAccountId();
+            for (Account account : accounts) {
+                acctNum = account.getAccountNumber();
+                if (acctNum.equals(Env.ACCOUNT)) {
+                    //Get account ID
+                    acctId = account.getAccountId();
+
+                    //Use AccoutnID to get balance information
+                    BalanceBase acctBalance = apiService.getAccountBalance(acctId, "");
+                    String totalMarketValue = acctBalance.getTotalMarketValue();
+                    String totalCashBalance = getStringValue(acctBalance, "getTotalCashBalance");
+
+                    //Get Total Account Value
+                    double TAV = 0;
+                    TAV = GetTotalAccountValue(totalMarketValue, totalCashBalance);
+
+                    //Get and count existing positions
+                    AccountPositions acctPositions = apiService.getAccountPositions(acctId,100, "");
+                    List<HoldingInfo> holdings = acctPositions.getHoldings();
+                    numPositions = holdings.toArray().length;
+                    //System.out.println("Account positions: " + numPositions);
+
+                    //Get count of positions to open
+                    String strOpen = System.console().readLine("Enter # of positions to OPEN: ");
+                    double numOpen = StringToDouble(strOpen);
+
+                    //Get count of positions to close
+                    String strClose = System.console().readLine("Enter # of positions to CLOSE: ");
+                    double numClose = StringToDouble(strClose);
+
+                    double positionSize = TAV / (numPositions + numOpen - numClose);
+                    System.out.println("Position Size: $" + positionSize);
+
+                    //Get holding actions
+                    holdingActions = DetermineHoldingActions(holdings, positionSize);
+                }
             }
-            if (StringUtils.isBlank(accountId)) {
-                logger.info("Account id is empty.");
-                return;
+            
+            //Sort by sell first, then buy prior to attempting to execute
+            holdingActions.sort((a, b) -> b.getAction().compareTo(a.getAction()));
+
+            //loop through actions for printout - DEBUG ONLY
+            for (HoldingAction action : holdingActions) {
+                System.out.println("Ticker: " + action.getTicker() + " " + action.getAction() + " " + action.getShares());
             }
-
-            // get account balance
-            BalanceBase accountBalance = apiService.getAccountBalance(accountId, "");
-            logger.info("Account balance: {}", accountBalance);
-
-            AccountDetail accountDetail = apiService.getAccountDetail(accountId);
-            logger.info("Account detail: {}", accountDetail);
-
-            // get account positions
-            AccountPositions accountPositions = apiService.getAccountPositions(accountId, 10, "");
-            logger.info("Account positions: {}", accountPositions);
-
-            // place order & replace order
-            String clientOrderId = GUID.get();
-            StockOrder stockOrder = new StockOrder();
-            stockOrder.setClientOrderId(clientOrderId);
-            stockOrder.setInstrumentId("913256135");
-            stockOrder.setSide(OrderSide.BUY.name());
-            stockOrder.setTif(OrderTIF.DAY.name());
-            stockOrder.setOrderType(OrderType.MARKET.name());
-            stockOrder.setQty("100");
-            stockOrder.setExtendedHoursTrading(false);
-
-            // This is an optional feature; you can still make a request without setting it.
-            Map<String,String> customHeadersMap = new HashMap<>();
-            customHeadersMap.put(CATEGORY_KEY, Category.US_STOCK.name());
-            apiService.addCustomHeaders(customHeadersMap);
-            OrderResponse placeOrderResponse = apiService.placeOrder(accountId, stockOrder);
-            apiService.removeCustomHeaders();
-            logger.info("Place order: {}", placeOrderResponse);
-
-            OrderResponse replaceOrderResponse = apiService.replaceOrder(accountId, stockOrder);
-            logger.info("Replace order: {}", replaceOrderResponse);
-
-            // cancel order
-            OrderResponse cancelOrderResponse = apiService.cancelOrder(accountId, clientOrderId);
-            logger.info("Cancel order: {}", cancelOrderResponse);
-
-            // day orders
-            Orders<? extends Order> dayOrders = apiService.getDayOrders(accountId, 10, "");
-            logger.info("Day orders: {}", dayOrders);
-
-            // opened orders
-            Orders<? extends Order> openedOrders = apiService.getOpenedOrders(accountId, 10, "");
-            logger.info("Opened orders: {}", openedOrders);
-
-            // order detail
-            Order orderDetail = apiService.getOrderDetails(accountId, clientOrderId);
-            logger.info("Order detail: {}", orderDetail);
-
-            // instrument info
-            InstrumentInfo instrumentInfo = apiService.getTradeInstrument("913256135");
-            logger.info("Instrument info: {}", instrumentInfo);
-
-            // trade calendar
-            List<TradeCalendar> tradeCalendars = apiService.getTradeCalendar(Markets.US.name(), "2023-01-01", "2023-01-10");
-            logger.info("Trade calendars: {}", tradeCalendars);
-
-            // security info
-            InstrumentInfo securityInfo = apiService.getSecurityInfo("SPX", Markets.US.name(), InstrumentSuperType.OPTION.name(), "CALL_OPTION", "3400", "2024-12-20" );
-            logger.info("Security info: {}", securityInfo);
-
-            // tradeable instruments
-            TradableInstruments tradeableInstruments = apiService.getTradeableInstruments("", 10);
-            logger.info("Tradeable instruments info: {}", tradeableInstruments);
-
-
-
-            // Options
-            // For option order inquiries, please use the V2 query interface: TradeHttpApiV2Service.getOrderDetails(accountId, clientOrderId).
-            OptionOrderItemLeg optionOrderItemLeg = new OptionOrderItemLeg();
-            optionOrderItemLeg.setSide(OrderSide.BUY.name());
-            optionOrderItemLeg.setQuantity("1");
-            optionOrderItemLeg.setSymbol("AAPL");
-            optionOrderItemLeg.setStrikePrice("250");
-            optionOrderItemLeg.setInitExpDate("2025-08-15");
-            optionOrderItemLeg.setInstrumentType(InstrumentSuperType.OPTION.name());
-            optionOrderItemLeg.setOptionType(OptionType.CALL.name());
-            optionOrderItemLeg.setMarket(Markets.US.name());
-            List<OptionOrderItemLeg> optionOrderItemLegList = new ArrayList<>();
-            optionOrderItemLegList.add(optionOrderItemLeg);
-            OptionOrderItem optionOrderItem = new OptionOrderItem();
-            optionOrderItem.setClientOrderId(GUID.get());
-            optionOrderItem.setComboType(ComboType.NORMAL.name());
-            optionOrderItem.setOptionStrategy(OptionStrategy.SINGLE.name());
-            optionOrderItem.setSide(OrderSide.BUY.name());
-            optionOrderItem.setOrderType(OrderType.LIMIT.name());
-            optionOrderItem.setTimeInForce(OrderTIF.GTC.name());
-            optionOrderItem.setLimitPrice("2");
-            optionOrderItem.setQuantity("1");
-            optionOrderItem.setEntrustType(EntrustType.QTY.name());
-            optionOrderItem.setOrders(optionOrderItemLegList);
-            List<OptionOrderItem> optionOrderItemList = new ArrayList<>();
-            optionOrderItemList.add(optionOrderItem);
-            OptionOrder optionOrder = new OptionOrder();
-            optionOrder.setNewOrders(optionOrderItemList);
-
-            logger.info("previewOptionRequest: {}", optionOrder);
-            PreviewOrderResponse previewOptionResponse = apiService.previewOption(accountId, optionOrder);
-            logger.info("previewOptionResponse: {}", previewOptionResponse);
-
-            logger.info("placeOptionRequest: {}", optionOrder);
-            // This is an optional feature; you can still make a request without setting it.
-            Map<String,String> optionCustomHeadersMap = new HashMap<>();
-            optionCustomHeadersMap.put(CATEGORY_KEY, Category.US_OPTION.name());
-            apiService.addCustomHeaders(optionCustomHeadersMap);
-            TradeOrderResponse placeOptionResponse = apiService.placeOption(accountId, optionOrder);
-            apiService.removeCustomHeaders();
-            logger.info("placeOptionResponse: {}", placeOptionResponse);
-            Thread.sleep(5000L);
-
-            // This code is only applicable for single-leg options modification operations.
-            OptionOrderItemLeg optionReplaceItemLeg = new OptionOrderItemLeg();
-            optionReplaceItemLeg.setQuantity("2");
-            optionReplaceItemLeg.setClientOrderId(optionOrderItem.getClientOrderId());
-            List<OptionOrderItemLeg> optionReplaceItemLegList = new ArrayList<>();
-            optionReplaceItemLegList.add(optionReplaceItemLeg);
-            OptionOrderItem optionReplaceItem = new OptionOrderItem();
-            optionReplaceItem.setClientOrderId(optionOrderItem.getClientOrderId());
-            optionReplaceItem.setLimitPrice("3");
-            optionReplaceItem.setQuantity("2");
-            optionReplaceItem.setOrders(optionReplaceItemLegList);
-            List<OptionOrderItem> optionReplaceItemList = new ArrayList<>();
-            optionReplaceItemList.add(optionReplaceItem);
-            OptionOrder optionReplace = new OptionOrder();
-            optionReplace.setModifyOrders(optionReplaceItemList);
-
-            logger.info("replaceOptionRequest: {}", optionReplace);
-            TradeOrderResponse replaceOptionResponse = apiService.replaceOption(accountId, optionReplace);
-            logger.info("replaceOptionResponse: {}", replaceOptionResponse);
-            Thread.sleep(5000L);
-
-            OptionOrder cancelTradeOption = new OptionOrder();
-            cancelTradeOption.setClientOrderId(optionOrderItem.getClientOrderId());
-
-            logger.info("cancelOptionRequest: {}", cancelTradeOption);
-            TradeOrderResponse cancelOptionResponse = apiService.cancelOption(accountId, cancelTradeOption);
-            logger.info("cancelOptionResponse: {}", cancelOptionResponse);
-
-            String tickerId = "", startId = "";
-            Integer size = 10;
-            OAuthCommonPositionContractVO contractVO = apiService.getCommonPositionDetail(accountId, tickerId, startId, size);
-            logger.info("OAuthCommonPositionContractVO: {}", contractVO);
         } catch (ClientException ex) {
             logger.error("Client error", ex);
         } catch (ServerException ex) {
             logger.error("Sever error", ex);
         } catch (Exception ex) {
             logger.error("Unknown error", ex);
+        }
+    }
+
+    private static List<HoldingAction> DetermineHoldingActions(List<HoldingInfo> holdings, double positionSize) {
+        //Use to get a list of all holding actions
+        List<HoldingAction> actionsList = new ArrayList<>();
+        HoldingAction action;
+        double shareChange;
+        String ticker;
+
+        //Loop through positions and determine next steps
+        for (HoldingInfo holding : holdings) {
+            //Determine holding action
+            shareChange = DetermineHoldingAction(holding, positionSize);
+            ticker = holding.getSymbol();
+            action = null; //reset
+
+            if (shareChange>0) {
+                action = new HoldingAction(ticker, shareChange, ActionType.BUY);
+                //System.out.println("Buy " + shareChange + ticker);
+
+                //Add the action to the list
+                actionsList.add(action);
+            }
+            else if (shareChange<0){
+                //change negative number to positive while setting action type to sell
+                action = new HoldingAction(ticker, shareChange*-1, ActionType.SELL);
+
+                //Add the action to the list
+                actionsList.add(action);
+            }
+        }
+
+        return actionsList;
+    }
+
+    private static double DetermineHoldingAction(HoldingInfo holding, double positionSize) {
+        double buySell = 0;
+        String strLastPrice = holding.getLastPrice();
+        String strCurHoldingSize = holding.getMarketValue();
+        double curHoldingSize = StringToDouble(strCurHoldingSize);
+        double lastPrice = StringToDouble(strLastPrice);
+        double workingVal = (positionSize-curHoldingSize)/lastPrice;
+
+        if (positionSize-curHoldingSize>0) {
+            buySell = roundDown(workingVal, 0); //numToBuy
+            //System.out.println("Buy: " + buySell);
+        }
+        else{
+            buySell = roundDown(workingVal, 0) + 1; //numToSell
+            //System.out.println("Sell: " + buySell);
+        }
+
+        return buySell;
+    }
+
+    private static Double GetTotalAccountValue(String totalMarketValue, String totalCashBalance) {
+        double tav = 0;
+        
+        double mrktVal = StringToDouble(totalMarketValue);
+        double ttlCash = StringToDouble(totalCashBalance);
+        
+        tav = mrktVal + ttlCash;
+
+        return tav;
+    }
+
+    private static Double StringToDouble(String val) {
+        double cur = 0;
+        if (val != null && !val.trim().isEmpty()) {
+            try {
+                cur = Double.parseDouble(val.trim());
+                return cur;
+            } catch (NumberFormatException e) {
+                System.err.println("❌ Failed to convert cash string to number: " + val);
+            }
+        } 
+        return cur;
+    }
+
+    private static double roundDown(double value, int decimalPlaces) {
+        if (decimalPlaces < 0) throw new IllegalArgumentException("Decimal places must be >= 0");
+        
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        return bd.setScale(decimalPlaces, RoundingMode.DOWN).doubleValue();
+    }
+
+    private static String getStringValue(Object obj, String methodName) {
+        try {
+            java.lang.reflect.Method method = obj.getClass().getMethod(methodName);
+            Object result = method.invoke(obj);
+            return result == null ? "null" : result.toString();
+        } catch (Exception e) {
+            return "No such method: " + methodName;
         }
     }
 }

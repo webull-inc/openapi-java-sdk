@@ -7,7 +7,8 @@ public final class Env {
     private Env() {
     }
 
-    public static final String APP_KEY = "<your_app_key>";
-    public static final String APP_SECRET = "<your_app_secret>";
+    public static final String APP_KEY = "e5b180ee67844ed24c41cc8c371d1a60";
+    public static final String APP_SECRET = "416e12a2abbe3908cbeba554b1ce983b";
     public static final String REGION_ID = Region.us.name(); // your region
+    public static final String ACCOUNT = "CVS7VE93";
 }
