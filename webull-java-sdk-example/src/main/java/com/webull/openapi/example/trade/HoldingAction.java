@@ -33,6 +33,24 @@ public class HoldingAction {
         this.action = action;
     }
 
+    /**
+     * Constructor
+     * @param ticker Stock symbol (e.g. "AAPL")
+     * @param action Whether to BUY or SELL
+     */
+    public HoldingAction(String ticker, ActionType action) {
+        if (ticker == null || ticker.trim().isEmpty()) {
+            throw new IllegalArgumentException("Ticker cannot be null or empty");
+        }
+        if (action == null) {
+            throw new IllegalArgumentException("Action cannot be null");
+        }
+
+        this.ticker = ticker.toUpperCase().trim();
+        this.shares = 0.0;
+        this.action = action;
+    }
+
     // Getters
     public String getTicker() {
         return ticker;
