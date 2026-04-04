@@ -9,11 +9,22 @@ public class Holdings {
     //Move to new holdings class
     public static double DetermineHoldingAction(HoldingInfo holding, double positionSize) {
         double buySell = 0;
-        String strLastPrice = holding.getLastPrice();
-        String strCurHoldingSize = holding.getMarketValue();
-        double curHoldingSize = Utils.StringToDouble(strCurHoldingSize);
-        double lastPrice = Utils.StringToDouble(strLastPrice);
-        double workingVal = (positionSize-curHoldingSize)/lastPrice;
+        String strLastPrice;
+        String strCurHoldingSize;
+        double curHoldingSize = 0;
+        double lastPrice = 0;
+        double workingVal = 0;
+
+        try{
+            strLastPrice = holding.getLastPrice();
+            strCurHoldingSize = holding.getMarketValue();
+            curHoldingSize = Utils.StringToDouble(strCurHoldingSize);
+            lastPrice = Utils.StringToDouble(strLastPrice);
+            workingVal = (positionSize-curHoldingSize)/lastPrice;
+        }
+        catch (Exception ex) {
+            System.out.print(ex);
+        }
 
         if (positionSize-curHoldingSize>0) {
             buySell = Utils.RoundDown(workingVal, 0); //numToBuy
