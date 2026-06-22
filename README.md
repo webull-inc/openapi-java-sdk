@@ -1,3 +1,14 @@
+# ⚠️ DEPRECATED — This project is no longer maintained
+
+> **This repository has been deprecated and will be archived soon.**
+>
+> All development has moved to the new repository: **[webull-openapi-java-sdk](https://github.com/webull-inc/webull-openapi-java-sdk)**
+>
+> Please migrate to the new project for continued support, bug fixes, and new features.
+> No further updates will be made to this repository.
+
+---
+
 # Webull OpenAPI Java SDK
 
 Webull OpenAPI aims to provide quantitative trading investors with convenient, fast and secure services. Webull aims to help every quant traders achieve flexible and changeable trading or market strategies.
